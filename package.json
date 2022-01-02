@@ -1,0 +1,23 @@
+{
+  "name": "cli-pride-flags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "bin": {
+    "cli-pride-flags": "./src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExperiBass/cli-pride-flags.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ExperiBass/cli-pride-flags/issues"
+  },
+  "homepage": "https://github.com/ExperiBass/cli-pride-flags#readme",
+  "dependencies": {
+    "chalk": "4.1.2"
+  }
+}

@@ -1,0 +1,205 @@
+{
+    "classic": [
+        {
+            "height": 2,
+            "code": "#E50000"
+        },
+        {
+            "height": 2,
+            "code": "#FF8D00"
+        },
+        {
+            "height": 2,
+            "code": "#FFEE00"
+        },
+        {
+            "height": 2,
+            "code": "#028121"
+        }, {
+            "height": 2,
+            "code": "#004CFF"
+        }, {
+            "height": 2,
+            "code": "#770088"
+        }
+    ],
+    "bi": [
+        {
+            "height": 4,
+            "code": "#D60270"
+        }, {
+            "height": 3,
+            "code": "#9B4F96"
+        }, {
+            "height": 4,
+            "code": "#0038A8"
+        }
+    ],
+    "trans": [
+        {
+            "height": 2,
+            "code": "5BCFFB"
+        },
+        {
+            "height": 2,
+            "code": "F5ABB9"
+        },
+        {
+            "height": 2,
+            "code": "FFFFFFF"
+        },
+        {
+            "height": 2,
+            "code": "F5ABB9"
+        }, {
+            "height": 2,
+            "code": "5BCFFB"
+        }
+    ],
+    "pan": [
+        {
+            "height": 4,
+            "code": "FF1C8D"
+        }, {
+            "height": 4,
+            "code": "FFD700"
+        }, {
+            "height": 4,
+            "code": "1AB3FF"
+        }
+    ],
+    "enby": [
+        {
+            "height": 2,
+            "code": "FCF431"
+        }, {
+            "height": 2,
+            "code": "FCFCFC"
+        }, {
+            "height": 2,
+            "code": "9D59D2"
+        }, {
+            "height": 2,
+            "code": "282828"
+        }
+    ],
+    "les": [
+        {
+            "height": 2,
+            "code": "D62800"
+        },
+        {
+            "height": 2,
+            "code": "FF9B56"
+        },
+        {
+            "height": 2,
+            "code": "FFFFFF"
+        },
+        {
+            "height": 2,
+            "code": "D462A6"
+        }, {
+            "height": 2,
+            "code": "A40062"
+        }
+    ],
+    "agen": [
+        {
+            "height": 1,
+            "code": "000000"
+        },
+        {
+            "height": 1,
+            "code": "BABABA"
+        },
+        {
+            "height": 1,
+            "code": "FFFFFF"
+        },
+        {
+            "height": 1,
+            "code": "BAF484"
+        }, {
+            "height": 1,
+            "code": "FFFFFF"
+        }, {
+            "height": 1,
+            "code": "BABABA"
+        }, {
+            "height": 1,
+            "code": "000000"
+        }
+    ],
+    "asex": [
+        {
+            "height": 2,
+            "code": "000000"
+        }, {
+            "height": 2,
+            "code": "A4A4A4"
+        }, {
+            "height": 2,
+            "code": "FFFFFF"
+        }, {
+            "height": 2,
+            "code": "810081"
+        }
+    ],
+    "queer": [
+        {
+            "height": 4,
+            "code": "B57FDD"
+        }, {
+            "height": 4,
+            "code": "FFFFFF"
+        }, {
+            "height": 4,
+            "code": "49821E"
+        }
+    ],
+    "fluid": [
+        {
+            "height": 2,
+            "code": "FE76A2"
+        },
+        {
+            "height": 2,
+            "code": "FFFFFF"
+        },
+        {
+            "height": 2,
+            "code": "BF12D7"
+        },
+        {
+            "height": 2,
+            "code": "000000"
+        },
+        {
+            "height": 2,
+            "code": "303CBE"
+        }
+    ],
+    "aro": [
+        {
+            "height": 2,
+            "code": "3BA740"
+        },
+        {
+            "height": 2,
+            "code": "A8D47A"
+        },
+        {
+            "height": 2,
+            "code": "FFFFFF"
+        },
+        {
+            "height": 2,
+            "code": "ABABAB"
+        },
+        {
+            "height": 2,
+            "code": "000000"
+        }
+    ]
+}
