@@ -31,7 +31,7 @@ const flag = Object.values(flags[ARGS[0].toLowerCase()])
 
 let mainString = ""
 for (let color of flag) {
-    for (let i = 0; i < (process.stdout.rows / 8 / color.height); i++) {
+    for (let i = 0; i < color.height; i++) {
         let string = ""
 
         for (let j = 0; j < STRING_LEN; j++) {
