@@ -38,168 +38,168 @@
     "trans": [
         {
             "height": 2,
-            "code": "5BCFFB"
+            "code": "#5BCFFB"
         },
         {
             "height": 2,
-            "code": "F5ABB9"
+            "code": "#F5ABB9"
         },
         {
             "height": 2,
-            "code": "FFFFFFF"
+            "code": "#FFFFFF"
         },
         {
             "height": 2,
-            "code": "F5ABB9"
+            "code": "#F5ABB9"
         }, {
             "height": 2,
-            "code": "5BCFFB"
+            "code": "#5BCFFB"
         }
     ],
     "pan": [
         {
             "height": 4,
-            "code": "FF1C8D"
+            "code": "#FF1C8D"
         }, {
             "height": 4,
-            "code": "FFD700"
+            "code": "#FFD700"
         }, {
             "height": 4,
-            "code": "1AB3FF"
+            "code": "#1AB3FF"
         }
     ],
     "enby": [
         {
             "height": 2,
-            "code": "FCF431"
+            "code": "#FCF431"
         }, {
             "height": 2,
-            "code": "FCFCFC"
+            "code": "#FCFCFC"
         }, {
             "height": 2,
-            "code": "9D59D2"
+            "code": "#9D59D2"
         }, {
             "height": 2,
-            "code": "282828"
+            "code": "#282828"
         }
     ],
     "les": [
         {
             "height": 2,
-            "code": "D62800"
+            "code": "#D62800"
         },
         {
             "height": 2,
-            "code": "FF9B56"
+            "code": "#FF9B56"
         },
         {
             "height": 2,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         },
         {
             "height": 2,
-            "code": "D462A6"
+            "code": "#D462A6"
         }, {
             "height": 2,
-            "code": "A40062"
+            "code": "#A40062"
         }
     ],
     "agen": [
         {
             "height": 1,
-            "code": "000000"
+            "code": "#000000"
         },
         {
             "height": 1,
-            "code": "BABABA"
+            "code": "#BABABA"
         },
         {
             "height": 1,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         },
         {
             "height": 1,
-            "code": "BAF484"
+            "code": "#BAF484"
         }, {
             "height": 1,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         }, {
             "height": 1,
-            "code": "BABABA"
+            "code": "#BABABA"
         }, {
             "height": 1,
-            "code": "000000"
+            "code": "#000000"
         }
     ],
     "asex": [
         {
             "height": 2,
-            "code": "000000"
+            "code": "#000000"
         }, {
             "height": 2,
-            "code": "A4A4A4"
+            "code": "#A4A4A4"
         }, {
             "height": 2,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         }, {
             "height": 2,
-            "code": "810081"
+            "code": "#810081"
         }
     ],
     "queer": [
         {
             "height": 4,
-            "code": "B57FDD"
+            "code": "#B57FDD"
         }, {
             "height": 4,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         }, {
             "height": 4,
-            "code": "49821E"
+            "code": "#49821E"
         }
     ],
     "fluid": [
         {
             "height": 2,
-            "code": "FE76A2"
+            "code": "#FE76A2"
         },
         {
             "height": 2,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         },
         {
             "height": 2,
-            "code": "BF12D7"
+            "code": "#BF12D7"
         },
         {
             "height": 2,
-            "code": "000000"
+            "code": "#000000"
         },
         {
             "height": 2,
-            "code": "303CBE"
+            "code": "#303CBE"
         }
     ],
     "aro": [
         {
             "height": 2,
-            "code": "3BA740"
+            "code": "#3BA740"
         },
         {
             "height": 2,
-            "code": "A8D47A"
+            "code": "#A8D47A"
         },
         {
             "height": 2,
-            "code": "FFFFFF"
+            "code": "#FFFFFF"
         },
         {
             "height": 2,
-            "code": "ABABAB"
+            "code": "#ABABAB"
         },
         {
             "height": 2,
-            "code": "000000"
+            "code": "#000000"
         }
     ]
 }
