@@ -11,7 +11,7 @@ function help() {
     console.log(`Usage: ${chalk.green(name)} ${chalk.yellow("[flag]")}`)
     console.log("Flags:")
     console.log("    " + chalk.green(Object.keys(flags).sort().join('\n    ')))
-    console.log(chalk.green(`${name} v${version}`))
+    console.log(chalk.green(`${name} v${version}\nFlag count: ${Object.keys(flags).length}`))
     process.exit()
 }
 

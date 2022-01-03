@@ -8,5 +8,7 @@ Displays pride flags in your terminal~
 # Screenshots
 ![agen, bi, fluid](screenies/1.png)
 
+![all](screenies/2.png)
+
 # Issues
 none, scales up properly, minimum flag height is hardcoded
