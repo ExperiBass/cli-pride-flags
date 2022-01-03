@@ -201,5 +201,35 @@
             "height": 2,
             "code": "#000000"
         }
+    ],
+    "bigen": [
+        {
+            "height": 2,
+            "code": "#C479A2"
+        },
+        {
+            "height": 2,
+            "code": "#EDA5CD"
+        },
+        {
+            "height": 2,
+            "code": "#D5C7E8"
+        },
+        {
+            "height": 2,
+            "code": "#FFFFFF"
+        },
+        {
+            "height": 2,
+            "code": "#D5C7E8"
+        },
+        {
+            "height": 2,
+            "code": "#9AC7E8"
+        },
+        {
+            "height": 2,
+            "code": "#6D82D1"
+        }
     ]
 }
