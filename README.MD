@@ -5,6 +5,5 @@ Displays pride flags in your terminal~
 # Install
 `npm i -g cli-pride-flags`
 
-# issues
-may not scale properly depending on terminal height
-
+# Issues
+none, scales up properly, minimum flag height is hardcoded

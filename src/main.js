@@ -5,6 +5,7 @@ const flags = require("./flags.json")
 const {name, version} = require('../package.json')
 const BLOCK = "█"
 const STRING_LEN = process.stdout.columns
+const TERMINAL_HEIGHT = process.stdout.rows
 
 function help() {
     console.log(`Usage: ${chalk.green(name)} ${chalk.yellow("[flag]")}`)
@@ -29,15 +30,30 @@ if (!ARGS[0] || !Object.keys(flags).includes(ARGS[0].toLowerCase())) {
 
 const flag = Object.values(flags[ARGS[0].toLowerCase()])
 
-let mainString = ""
+// determine if the terminal is larger or smaller than the flag
+let FLAG_HEIGHT = 0
 for (let color of flag) {
-    for (let i = 0; i < color.height; i++) {
-        let string = ""
-
-        for (let j = 0; j < STRING_LEN; j++) {
-            string += `${BLOCK}`
-        }
-        mainString += chalk.hex(color.code)(string) // no newline at the end, makes for better blending if the terminal is resized
-    }
+    FLAG_HEIGHT += color.height
 }
-console.log(mainString)
+if (TERMINAL_HEIGHT > FLAG_HEIGHT) {
+    const flag = createFlag(Math.floor(TERMINAL_HEIGHT / FLAG_HEIGHT))
+    console.log(flag)
+} else {
+    // just gonna leave this here, might implement scaling down in the future
+    console.log(createFlag())
+}
+
+
+function createFlag(multiplier = 1) {
+    let flagColor = ""
+    for (let color of flag) {
+        for (let i = 0; i < color.height * multiplier; i++) {
+            let string = ""
+            for (let j = 0; j < STRING_LEN; j++) {
+                string += `${BLOCK}`
+            }
+            flagColor += chalk.hex(color.code)(string) // no newline at the end, makes for better blending if the terminal is resized
+        }
+    }
+    return flagColor
+}
