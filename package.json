@@ -1,18 +1,18 @@
 {
   "name": "cli-pride-flags",
   "version": "1.0.2",
-  "description": "",
+  "description": "Displays pride flags in your terminal~",
   "main": "src/main.js",
   "bin": {
-    "cli-pride-flags": "./src/main.js"
+    "cli-pride-flags": "src/main.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ExperiBass/cli-pride-flags.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ExperiBass",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/ExperiBass/cli-pride-flags/issues"
   },
