@@ -15,4 +15,4 @@ none, scales up properly, minimum flag height is hardcoded
 
 # TODO
 - Vertical flags? (most likely requires a rewrite)
-- Gradient? (I don't think chalk supports gradients...)
+- Gradient? (I don't think chalk supports gradients, and that leaves the issue of vertical gradients unsolved)
