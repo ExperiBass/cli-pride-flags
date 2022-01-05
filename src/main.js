@@ -39,7 +39,7 @@ if (TERMINAL_HEIGHT > FLAG_HEIGHT) {
     const flag = createFlag(Math.floor(TERMINAL_HEIGHT / FLAG_HEIGHT))
     console.log(flag)
 } else {
-    // just gonna leave this here, might implement scaling down in the future
+    // terminal smol, use the hardcoded minimum height
     console.log(createFlag())
 }
 
