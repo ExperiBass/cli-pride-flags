@@ -12,3 +12,7 @@ Displays pride flags in your terminal~
 
 # Issues
 none, scales up properly, minimum flag height is hardcoded
+
+# TODO
+- Vertical flags? (most likely requires a rewrite)
+- Gradient? (I don't think chalk supports gradients...)
