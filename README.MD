@@ -5,6 +5,10 @@ Displays pride flags in your terminal~
 # Install
 `npm i -g cli-pride-flags`
 
+There's also a package in the AUR, maintained by u/rhysperry111!
+
+`yay -S cli-pride-flags`
+
 # Screenshots
 ![agen, bi, fluid](screenies/1.png)
 
