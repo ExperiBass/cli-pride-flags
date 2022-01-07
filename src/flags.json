@@ -1,4 +1,26 @@
 {
+    "abro": [
+        {
+            "code": "#75ca92",
+            "height": 2
+        },
+	{
+            "code": "#b2e4c5",
+            "height": 2
+        },
+	{
+            "code": "#FFFFFF",
+            "height": 2
+        },
+	{
+            "code": "#e695b5",
+            "height": 2
+        },
+	{
+	    "code": "#da446c",
+	    "height": 2
+	}
+    ],
     "agen": [
         {
             "code": "#000000",
@@ -161,6 +183,66 @@
             "height": 2
         }
     ],
+    "demiboy": [
+        {
+	    "code": "#7f7f7f",
+	    "height": 2
+	},
+	{
+	    "code": "#c4c4c4",
+            "height": 2
+	},
+	{
+	    "code": "#9fd9eb",
+            "height": 2
+	},
+	{
+	    "code": "#FFFFFF",
+            "height": 2
+	},
+	{
+	    "code": "#9fd9eb",
+            "height": 2
+	},
+	{
+	    "code": "#c4c4c4",
+            "height": 2
+	},
+	{
+	    "code": "#7f7f7f",
+            "height": 2
+	}
+    ],
+    "demigirl": [
+        {
+            "code": "#7f7f7f",
+            "height": 2
+        },
+        {
+            "code": "#c4c4c4",
+            "height": 2
+        },
+        {
+            "code": "#fcadc9",
+            "height": 2
+        },
+        {
+            "code": "#FFFFFF",
+            "height": 2
+        },
+        {
+            "code": "#fcadc9",
+            "height": 2
+        },
+        {
+            "code": "#c4c4c4",
+            "height": 2
+        },
+        {
+            "code": "#7f7f7f",
+            "height": 2
+        }
+    ],
     "enby": [
         {
             "code": "#FCF431",
@@ -201,6 +283,36 @@
             "height": 2
         }
     ],
+    "gay": [
+        {
+	    "code": "#238d70",
+	    "height": 2
+	},
+	{
+	    "code": "#3ecea9",
+	    "height": 2
+	},
+	{
+	    "code": "#9be8c0",
+	    "height": 2
+	},
+	{
+	    "code": "#FFFFFF",
+	    "height": 2
+	},
+	{
+	    "code": "#7faae0",
+	    "height": 2
+	},
+	{
+	    "code": "#5643c9",
+	    "height": 2
+	},
+	{
+	    "code": "#411876",
+	    "height": 2
+	}
+    ],
     "les": [
         {
             "code": "#D62800",
@@ -223,6 +335,20 @@
             "height": 2
         }
     ],
+    "neutrois": [
+        {
+            "code": "#FFFFFF",
+            "height": 4
+        },
+	{
+            "code": "#2f9d1d",
+            "height": 4
+        },
+	{
+	    "code": "#000000",
+	    "height": 4
+	}
+    ],
     "pan": [
         {
             "code": "#FF1C8D",
@@ -236,6 +362,20 @@
             "code": "#1AB3FF",
             "height": 4
         }
+    ],
+    "polysex": [
+        {
+	    "code": "#f200b8",
+	    "height": 4
+	},
+	{
+	    "code": "#2dd76b",
+	    "height": 4
+	},
+	{
+	    "code": "#398ef5",
+	    "height": 4
+	}
     ],
     "queer": [
         {
@@ -272,5 +412,27 @@
             "code": "#5BCFFB",
             "height": 2
         }
+    ],
+    "trigen": [
+        {
+            "code": "#ff95c4",
+            "height": 2
+        },
+	{
+            "code": "#9581fe",
+            "height": 2
+        },
+	{
+            "code": "#67d965",
+            "height": 2
+        },
+	{
+            "code": "#9581fe",
+            "height": 2
+        },
+	{
+	    "code": "#ff95c4",
+	    "height": 2
+	}
     ]
 }
