@@ -434,5 +434,35 @@
 	    "code": "#ff95c4",
 	    "height": 2
 	}
+    ],
+    "xeno": [
+	{
+	    "code": "#ff6690",
+	    "height": 2
+	},
+	{
+	    "code": "#ff9897",
+	    "height": 2
+	},
+	{
+	    "code": "#ffb783",
+	    "height": 2
+	},
+	{
+	    "code": "#fbfea7",
+	    "height": 2
+	},
+	{
+	    "code": "#84bbff",
+	    "height": 2
+	},
+	{
+	    "code": "#9d84ff",
+	    "height": 2
+	},
+	{
+	    "code": "#a316fe",
+	    "height": 2
+	}
     ]
 }
