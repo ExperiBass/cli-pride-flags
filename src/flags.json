@@ -391,6 +391,28 @@
             "height": 4
         }
     ],
+  "qp":  [
+    {
+      "code": "#fff87d",
+      "height": 2
+    },
+    {
+      "code": "#ffaede",
+      "height": 2
+    },
+    {
+      "code": "#ffffff",
+      "height": 2
+    },
+    {
+      "code": "#7f7f7f",
+      "height": 2
+    },
+    {
+      "code": "#0f0f0f",
+      "height": 2
+    }
+  ],
     "trans": [
         {
             "code": "#5BCFFB",
