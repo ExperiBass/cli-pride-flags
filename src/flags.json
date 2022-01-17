@@ -36,12 +36,10 @@
         {
             "code": "#9FFD7C",
             "height": 2
-        },
-        {
+        }, {
             "code": "#7BA1FB",
             "height": 2
-        },
-        {
+        }, {
             "code": "#AC7CFA",
             "height": 2
         }
@@ -379,6 +377,27 @@
             "height": 4
         }
     ],
+    "qp": [
+        {
+            "code": "#fff87d",
+            "height": 2
+        },
+        {
+            "code": "#ffaede",
+            "height": 2
+        },
+        {
+            "code": "#ffffff",
+            "height": 2
+        },
+        {
+            "code": "#7f7f7f",
+            "height": 2
+        }, {
+            "code": "#0f0f0f",
+            "height": 2
+        }
+    ],
     "trans": [
         {
             "code": "#5BCFFB",
@@ -418,6 +437,33 @@
             "height": 2
         }, {
             "code": "#ff95c4",
+            "height": 2
+        }
+    ],
+    "xeno": [
+        {
+            "code": "#ff6690",
+            "height": 2
+        },
+        {
+            "code": "#ff9897",
+            "height": 2
+        },
+        {
+            "code": "#ffb783",
+            "height": 2
+        },
+        {
+            "code": "#fbfea7",
+            "height": 2
+        }, {
+            "code": "#84bbff",
+            "height": 2
+        }, {
+            "code": "#9d84ff",
+            "height": 2
+        }, {
+            "code": "#a316fe",
             "height": 2
         }
     ]
