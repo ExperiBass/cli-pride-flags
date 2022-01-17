@@ -4,22 +4,47 @@
             "code": "#75ca92",
             "height": 2
         },
-	{
+        {
             "code": "#b2e4c5",
             "height": 2
         },
-	{
+        {
             "code": "#FFFFFF",
             "height": 2
         },
-	{
+        {
             "code": "#e695b5",
             "height": 2
+        }, {
+            "code": "#da446c",
+            "height": 2
+        }
+    ],
+    "pastel": [
+        {
+            "code": "#F59679",
+            "height": 2
         },
-	{
-	    "code": "#da446c",
-	    "height": 2
-	}
+        {
+            "code": "#F9CE7B",
+            "height": 2
+        },
+        {
+            "code": "#FCF37C",
+            "height": 2
+        },
+        {
+            "code": "#9FFD7C",
+            "height": 2
+        },
+        {
+            "code": "#7BA1FB",
+            "height": 2
+        },
+        {
+            "code": "#AC7CFA",
+            "height": 2
+        }
     ],
     "agen": [
         {
@@ -37,16 +62,13 @@
         {
             "code": "#BAF484",
             "height": 1
-        },
-        {
+        }, {
             "code": "#FFFFFF",
             "height": 1
-        },
-        {
+        }, {
             "code": "#BABABA",
             "height": 1
-        },
-        {
+        }, {
             "code": "#000000",
             "height": 1
         }
@@ -67,8 +89,7 @@
         {
             "code": "#ABABAB",
             "height": 2
-        },
-        {
+        }, {
             "code": "#000000",
             "height": 2
         }
@@ -89,8 +110,7 @@
         {
             "code": "#63addc",
             "height": 2
-        },
-        {
+        }, {
             "code": "#213555",
             "height": 2
         }
@@ -99,16 +119,13 @@
         {
             "code": "#000000",
             "height": 2
-        },
-        {
+        }, {
             "code": "#A4A4A4",
             "height": 2
-        },
-        {
+        }, {
             "code": "#FFFFFF",
             "height": 2
-        },
-        {
+        }, {
             "code": "#810081",
             "height": 2
         }
@@ -117,12 +134,10 @@
         {
             "code": "#D60270",
             "height": 4
-        },
-        {
+        }, {
             "code": "#9B4F96",
             "height": 3
-        },
-        {
+        }, {
             "code": "#0038A8",
             "height": 4
         }
@@ -143,16 +158,13 @@
         {
             "code": "#FFFFFF",
             "height": 2
-        },
-        {
+        }, {
             "code": "#D5C7E8",
             "height": 2
-        },
-        {
+        }, {
             "code": "#9AC7E8",
             "height": 2
-        },
-        {
+        }, {
             "code": "#6D82D1",
             "height": 2
         }
@@ -173,45 +185,40 @@
         {
             "code": "#028121",
             "height": 2
-        },
-        {
+        }, {
             "code": "#004CFF",
             "height": 2
-        },
-        {
+        }, {
             "code": "#770088",
             "height": 2
         }
     ],
     "demiboy": [
         {
-	    "code": "#7f7f7f",
-	    "height": 2
-	},
-	{
-	    "code": "#c4c4c4",
+            "code": "#7f7f7f",
             "height": 2
-	},
-	{
-	    "code": "#9fd9eb",
+        },
+        {
+            "code": "#c4c4c4",
             "height": 2
-	},
-	{
-	    "code": "#FFFFFF",
+        },
+        {
+            "code": "#9fd9eb",
             "height": 2
-	},
-	{
-	    "code": "#9fd9eb",
+        },
+        {
+            "code": "#FFFFFF",
             "height": 2
-	},
-	{
-	    "code": "#c4c4c4",
+        }, {
+            "code": "#9fd9eb",
             "height": 2
-	},
-	{
-	    "code": "#7f7f7f",
+        }, {
+            "code": "#c4c4c4",
             "height": 2
-	}
+        }, {
+            "code": "#7f7f7f",
+            "height": 2
+        }
     ],
     "demigirl": [
         {
@@ -229,16 +236,13 @@
         {
             "code": "#FFFFFF",
             "height": 2
-        },
-        {
+        }, {
             "code": "#fcadc9",
             "height": 2
-        },
-        {
+        }, {
             "code": "#c4c4c4",
             "height": 2
-        },
-        {
+        }, {
             "code": "#7f7f7f",
             "height": 2
         }
@@ -247,16 +251,13 @@
         {
             "code": "#FCF431",
             "height": 2
-        },
-        {
+        }, {
             "code": "#FCFCFC",
             "height": 2
-        },
-        {
+        }, {
             "code": "#9D59D2",
             "height": 2
-        },
-        {
+        }, {
             "code": "#282828",
             "height": 2
         }
@@ -277,41 +278,37 @@
         {
             "code": "#000000",
             "height": 2
-        },
-        {
+        }, {
             "code": "#303CBE",
             "height": 2
         }
     ],
     "gay": [
         {
-	    "code": "#238d70",
-	    "height": 2
-	},
-	{
-	    "code": "#3ecea9",
-	    "height": 2
-	},
-	{
-	    "code": "#9be8c0",
-	    "height": 2
-	},
-	{
-	    "code": "#FFFFFF",
-	    "height": 2
-	},
-	{
-	    "code": "#7faae0",
-	    "height": 2
-	},
-	{
-	    "code": "#5643c9",
-	    "height": 2
-	},
-	{
-	    "code": "#411876",
-	    "height": 2
-	}
+            "code": "#238d70",
+            "height": 2
+        },
+        {
+            "code": "#3ecea9",
+            "height": 2
+        },
+        {
+            "code": "#9be8c0",
+            "height": 2
+        },
+        {
+            "code": "#FFFFFF",
+            "height": 2
+        }, {
+            "code": "#7faae0",
+            "height": 2
+        }, {
+            "code": "#5643c9",
+            "height": 2
+        }, {
+            "code": "#411876",
+            "height": 2
+        }
     ],
     "les": [
         {
@@ -329,8 +326,7 @@
         {
             "code": "#D462A6",
             "height": 2
-        },
-        {
+        }, {
             "code": "#A40062",
             "height": 2
         }
@@ -339,54 +335,46 @@
         {
             "code": "#FFFFFF",
             "height": 4
-        },
-	{
+        }, {
             "code": "#2f9d1d",
             "height": 4
-        },
-	{
-	    "code": "#000000",
-	    "height": 4
-	}
+        }, {
+            "code": "#000000",
+            "height": 4
+        }
     ],
     "pan": [
         {
             "code": "#FF1C8D",
             "height": 4
-        },
-        {
+        }, {
             "code": "#FFD700",
             "height": 4
-        },
-        {
+        }, {
             "code": "#1AB3FF",
             "height": 4
         }
     ],
     "polysex": [
         {
-	    "code": "#f200b8",
-	    "height": 4
-	},
-	{
-	    "code": "#2dd76b",
-	    "height": 4
-	},
-	{
-	    "code": "#398ef5",
-	    "height": 4
-	}
+            "code": "#f200b8",
+            "height": 4
+        }, {
+            "code": "#2dd76b",
+            "height": 4
+        }, {
+            "code": "#398ef5",
+            "height": 4
+        }
     ],
     "queer": [
         {
             "code": "#B57FDD",
             "height": 4
-        },
-        {
+        }, {
             "code": "#FFFFFF",
             "height": 4
-        },
-        {
+        }, {
             "code": "#49821E",
             "height": 4
         }
@@ -407,8 +395,7 @@
         {
             "code": "#F5ABB9",
             "height": 2
-        },
-        {
+        }, {
             "code": "#5BCFFB",
             "height": 2
         }
@@ -418,21 +405,20 @@
             "code": "#ff95c4",
             "height": 2
         },
-	{
+        {
             "code": "#9581fe",
             "height": 2
         },
-	{
+        {
             "code": "#67d965",
             "height": 2
         },
-	{
+        {
             "code": "#9581fe",
             "height": 2
-        },
-	{
-	    "code": "#ff95c4",
-	    "height": 2
-	}
+        }, {
+            "code": "#ff95c4",
+            "height": 2
+        }
     ]
 }

@@ -6,12 +6,26 @@ const {name, version} = require('../package.json')
 const BLOCK = "█"
 const STRING_LEN = process.stdout.columns
 const TERMINAL_HEIGHT = process.stdout.rows
+const MINI_FLAG_DISTANCE = 10
 
 function help() {
     console.log(`Usage: ${chalk.green(name)} ${chalk.yellow("[flag]")}`)
     console.log("Flags:")
-    console.log("    " + chalk.green(Object.keys(flags).sort().join('\n    ')))
-    console.log(chalk.green(`${name} v${version}\nFlag count: ${Object.keys(flags).length}`))
+    let flagList = ""
+    const flagKeys = Object.keys(flags).sort()
+    for (const flag of flagKeys) {
+        // we want all the mini-flags to be at the same distance,
+        // so figure out how many spaces we need to add
+        const spaces = MINI_FLAG_DISTANCE - flag.length
+        let s = `    ${flag}`
+        s = s.padEnd(s.length + spaces, " ")
+        for (color of flags[flag]) {
+            s += chalk.hex(color.code)(BLOCK)
+        }
+        flagList += `${s}\n`
+    }
+    console.log(chalk.green(flagList))
+    console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagKeys.length)}`))
     process.exit()
 }
 
