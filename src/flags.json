@@ -308,6 +308,20 @@
             "height": 2
         }
     ],
+    "swastika": [
+    	{
+		"code": "#dd0000",
+		"height": 0
+	},
+	{
+		"code": "#ffffff",
+		"height": 0
+	},
+	{
+		"code": "#000000",
+		"height": 0
+	}
+    ],
     "les": [
         {
             "code": "#D62800",
