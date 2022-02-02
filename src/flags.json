@@ -341,6 +341,28 @@
             "height": 4
         }
     ],
+    "omni": [
+	{
+            "code": "#fc98cb",
+            "height": 3
+        },
+	{
+            "code": "#fb4dbc",
+            "height": 3
+        },
+	{
+            "code": "#2b0047",
+            "height": 3
+        },
+	{
+            "code": "#6c54fd",
+            "height": 3
+        },
+    	{
+	    "code": "#90a1fe",
+	    "height": 3
+	}
+    ],
     "pan": [
         {
             "code": "#FF1C8D",
@@ -397,6 +419,28 @@
             "code": "#0f0f0f",
             "height": 2
         }
+    ],
+    "sapph": [
+    	{
+            "code": "#fa6a6b",
+            "height": 3
+        },
+	{
+            "code": "#fde79b",
+            "height": 3
+        },
+	{
+            "code": "#ffffff",
+            "height": 3
+        },
+	{
+            "code": "#8bd2c8",
+            "height": 3
+        },
+	{
+	    "code": "#8b6ecc",
+	    "height": 3
+	}
     ],
     "trans": [
         {

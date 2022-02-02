@@ -21,6 +21,9 @@ node_modules/
 # VSCode stuff
 .vscode
 
+# JetBrains project sh!t
+.idea
+
 # other
 .DS_Store
 ._*
