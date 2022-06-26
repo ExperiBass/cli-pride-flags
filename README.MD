@@ -2,6 +2,8 @@
 
 Displays pride flags in your terminal~
 
+[Click me for a preview!](https://experibass.github.io/flags.html)
+
 # Install
 `npm i -g cli-pride-flags`
 
