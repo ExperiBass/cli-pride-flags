@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/ExperiBass/cli-pride-flags.git"
   },
-  "keywords": ['pride', 'cli'],
+  "keywords": ["pride", "cli"],
   "author": "ExperiBass",
   "license": "GPL-3.0-or-later",
   "bugs": {
