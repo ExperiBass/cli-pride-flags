@@ -505,6 +505,66 @@
       "height": 2
     }
   ],
+  "transfem": [
+    {
+      "code": "#74deff",
+      "height": 2
+    },
+    {
+      "code": "#ffe1ed",
+      "height": 2
+    },
+    {
+      "code": "#ffb5d6",
+      "height": 2
+    },
+    {
+      "code": "#fe8cbf",
+      "height": 2
+    },
+    {
+      "code": "#ffb5d6",
+      "height": 2
+    },
+    {
+      "code": "#ffe1ed",
+      "height": 2
+    },
+    {
+      "code": "#74deff",
+      "height": 2
+    }
+  ],
+  "transmasc": [
+    {
+      "code": "#ff8bbf",
+      "height": 2
+    },
+    {
+      "code": "#cdf5ff",
+      "height": 2
+    },
+    {
+      "code": "#9aedff",
+      "height": 2
+    },
+    {
+      "code": "#76e0ff",
+      "height": 2
+    },
+    {
+      "code": "#9aedff",
+      "height": 2
+    },
+    {
+      "code": "#cdf5ff",
+      "height": 2
+    },
+    {
+      "code": "#ff8bbf",
+      "height": 2
+    }
+  ],
   "trigen": [
     {
       "code": "#ff95c4",
