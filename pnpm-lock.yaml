@@ -1,10 +1,12 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
-  chalk: 4.1.2
+  chalk: ^4.1.2
+  cli-pride-flags: 'link:'
 
 dependencies:
   chalk: 4.1.2
+  cli-pride-flags: 'link:'
 
 packages:
 
