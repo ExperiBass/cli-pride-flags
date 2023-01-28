@@ -47,6 +47,28 @@
       "height": 2
     }
   ],
+  "poly": [
+    {
+      "code": "#0000FF",
+      "height": 2
+    },
+    {
+      "code": "#FF0000",
+      "height": 1
+    },
+    {
+      "code": "#FFFF00",
+      "height": 0.5
+    },
+    {
+      "code": "#FF0000",
+      "height": 1
+    },
+    {
+      "code": "#000000",
+      "height": 2
+    }
+  ],
   "agen": [
     {
       "code": "#000000",
@@ -258,6 +280,66 @@
     },
     {
       "code": "#fcadc9",
+      "height": 2
+    },
+    {
+      "code": "#c4c4c4",
+      "height": 2
+    },
+    {
+      "code": "#7f7f7f",
+      "height": 2
+    }
+  ],
+  "demienby": [
+    {
+      "code": "#7f7f7f",
+      "height": 2
+    },
+    {
+      "code": "#c4c4c4",
+      "height": 2
+    },
+    {
+      "code": "#fbff75",
+      "height": 2
+    },
+    {
+      "code": "#FFFFFF",
+      "height": 2
+    },
+    {
+      "code": "#fbff75",
+      "height": 2
+    },
+    {
+      "code": "#c4c4c4",
+      "height": 2
+    },
+    {
+      "code": "#7f7f7f",
+      "height": 2
+    }
+  ],
+  "demigender": [
+    {
+      "code": "#7f7f7f",
+      "height": 2
+    },
+    {
+      "code": "#c4c4c4",
+      "height": 2
+    },
+    {
+      "code": "#cdc5dc",
+      "height": 2
+    },
+    {
+      "code": "#FFFFFF",
+      "height": 2
+    },
+    {
+      "code": "#cdc5dc",
       "height": 2
     },
     {
