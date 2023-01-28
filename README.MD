@@ -20,13 +20,17 @@ There's also a package in the AUR, maintained by `u/rhysperry111`! Install it wi
 
 # Screenshots
 
-![agen, bi, fluid](screenies/1.png)
+Theres a page displaying all the flags on my site [here :3](https://experibass.github.io/flags.html)
 
-![all](screenies/2.png)
+Some screenshots in my terminal are below!
+
+![agen, bi, fluid](./screenies/1.png)
+
+![some](./screenies/2.png)
 
 # Issues
 
-none :3
+none :D
 
 # TODO (maybe)
 - Vertical flags? (most likely requires a rewrite)
