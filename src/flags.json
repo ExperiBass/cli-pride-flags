@@ -421,6 +421,158 @@
       "height": 2
     }
   ],
+  "inter": [
+    {
+      "code": "#ffd900",
+      "height": 3
+    },
+    {
+      "code": "#7a00ab",
+      "height": 1.5
+    },
+    {
+      "code": "#ffd900",
+      "height": 3
+    }
+  ],
+  "pro-inter": [
+    {
+      "code": "#ffd900",
+      "height": 1
+    },
+    {
+      "code": "#7a00ab",
+      "height": 0.5
+    },
+    {
+      "code": "#ffd900",
+      "height": 1
+    },
+    {
+      "code": "#ffffff",
+      "height": 1
+    },
+    {
+      "code": "#ffb1c9",
+      "height": 1
+    },
+    {
+      "code": "#75d8ef",
+      "height": 1
+    },
+    {
+      "code": "#61360d",
+      "height": 1
+    },
+    {
+      "code": "#000000",
+      "height": 1
+    },
+    {
+      "code": "#e50000",
+      "height": 2
+    },
+    {
+      "code": "#ff8d00",
+      "height": 2
+    },
+    {
+      "code": "#ffee00",
+      "height": 2
+    },
+    {
+      "code": "#008121",
+      "height": 2
+    },
+    {
+      "code": "#004cff",
+      "height": 2
+    },
+    {
+      "code": "#760188",
+      "height": 2
+    }
+  ],
+  "pro": [
+    {
+      "code": "#ffffff",
+      "height": 1
+    },
+    {
+      "code": "#ffb1c9",
+      "height": 1
+    },
+    {
+      "code": "#75d8ef",
+      "height": 1
+    },
+    {
+      "code": "#61360d",
+      "height": 1
+    },
+    {
+      "code": "#000000",
+      "height": 1
+    },
+    {
+      "code": "#e50000",
+      "height": 2
+    },
+    {
+      "code": "#ff8d00",
+      "height": 2
+    },
+    {
+      "code": "#ffee00",
+      "height": 2
+    },
+    {
+      "code": "#008121",
+      "height": 2
+    },
+    {
+      "code": "#004cff",
+      "height": 2
+    },
+    {
+      "code": "#760188",
+      "height": 2
+    }
+  ],
+  "poc": [
+    {
+      "code": "#61360d",
+      "height": 2
+    },
+    {
+      "code": "#000000",
+      "height": 2
+    },
+    {
+      "code": "#e50000",
+      "height": 2
+    },
+    {
+      "code": "#ff8d00",
+      "height": 2
+    },
+    {
+      "code": "#ffee00",
+      "height": 2
+    },
+    {
+      "code": "#008121",
+      "height": 2
+    },
+    {
+      "code": "#004cff",
+      "height": 2
+    },
+    {
+      "code": "#760188",
+      "height": 2
+    }
+  ],
   "les": [
     {
       "code": "#D62800",
