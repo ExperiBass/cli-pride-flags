@@ -12,6 +12,7 @@
   },
   "keywords": [
     "pride",
+    "pride-flags",
     "cli"
   ],
   "author": "ExperiBass",
@@ -21,7 +22,6 @@
   },
   "homepage": "https://github.com/ExperiBass/cli-pride-flags#readme",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "cli-pride-flags": "link:"
+    "chalk": "^4.1.2"
   }
 }
