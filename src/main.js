@@ -25,7 +25,7 @@ function parseArgs(args) {
                     result.options.help = true
                     break
                 }
-                case '-d': {
+                case '-l': {
                     result.options.keepalive = true
                     break
                 }
@@ -45,7 +45,7 @@ function help() {
     console.log("Options:")
     // honestly ill just hardcode these
     console.log("  -h    Display this help text")
-    console.log("  -d    Hold the terminal open and redraw upon resize")
+    console.log("  -l    Hold the terminal open and redraw the flag upon resize, closing when any key is pressed")
     console.log("Flags:")
     let flagList = ""
     const flagKeys = Object.keys(flags).sort()
@@ -62,7 +62,6 @@ function help() {
     }
     console.log(chalk.green(flagList))
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagKeys.length)}`))
-    process.exit()
 }
 
 function createFlag(scale = 1) {
@@ -115,6 +114,7 @@ chalk.level = 3 // try to use truecolor
 // run
 if (options.help || CHOSEN_FLAG === undefined || !Object.keys(flags).includes(CHOSEN_FLAG.toLowerCase())) {
     help()
+    process.exit()
 }
 
 const flag = flags[CHOSEN_FLAG.toLowerCase()]
