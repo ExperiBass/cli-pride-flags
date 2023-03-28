@@ -2,6 +2,7 @@
 
 const chalk = require("chalk")
 const flags = require("./flags.json")
+console.log(flags);
 const { name, version } = require('../package.json')
 const BLOCK = "█"
 let STRING_LEN = process.stdout.columns
@@ -21,8 +22,7 @@ function help() {
         const spaces = MINI_FLAG_DISTANCE - flag.length
         let s = `    ${flag}` // indent flag...
         s = s.padEnd(s.length + spaces, " ") // ...add calculated spaces...
-        for (const color of flags[flag]) {
-	    if(typeof color === "number") break; // Last item in array is flag height
+        for (const color of flags[flag].stripes) {
             s += chalk.hex(color.code)(BLOCK) // and then make the flag
         }
         flagList += `${s}\n`
@@ -41,16 +41,16 @@ chalk.level = 3 // try to use truecolor
 
 
 // run
-if (FLAG_TYPE === undefined || !Object.keys(flags).includes(ARGS[0].toLowerCase())) {
+if (FLAG_TYPE === undefined || !Object.keys(flags).includes(FLAG_TYPE.toLowerCase())) {
     help()
 }
 
-const flag = Object.values(flags[ARGS[0].toLowerCase()])
+const flag = flags[FLAG_TYPE.toLowerCase()]
 
 function draw() {
     let termHeight = process.stdout.rows;
     STRING_LEN = process.stdout.columns
-    let FLAG_HEIGHT = flag[flag.length - 1]
+    let FLAG_HEIGHT = flag.height
     // if the terminal is larger, scale the flag up
     if(FILL_TERM) {
         // Go to 0,0, clear screen, and hide cursor
@@ -84,9 +84,9 @@ draw();
 // woo, build the flag!
 function createFlag(scale = 1) {
     let finishedFlag = ""
-    for (const color of flag) {
+    let stripes = flag.stripes;
+    for (const color of stripes) {
         // for each color, create its rows
-	if(!(color instanceof Object)) break // Last item in array is flag height
         for (let i = 0; i < color.height * scale; i++) {
             // instead of creating each row and putting it on its own line,
             // we string every row together. this keeps the flag from
