@@ -96,9 +96,10 @@ function createVerticalFlag(scale = 1, height) {
     // outer loop fills the screen
     for (let i = 0; i < height; i++) {
         for (const stripe of flag.stripes) {
-            for (let j = 0; j < stripe.height * scale; j++) {
+            for (let j = 0; j < (stripe.height * scale); j++) {
                 finishedFlag += chalk.hex(stripe.code)(BLOCK)
             }
+            console.log(process.stdout.columns - (stripe.height * scale))
         }
         finishedFlag += "\n" // here we append a newline instead, to keep the flag vertical
     }
