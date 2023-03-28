@@ -48,7 +48,7 @@ if (FLAG_TYPE === undefined || !Object.keys(flags).includes(ARGS[0].toLowerCase(
 const flag = Object.values(flags[ARGS[0].toLowerCase()])
 
 function draw() {
-    let termHeight = process.stdout.rows + (FILL_TERM ? 2 : 0);
+    let termHeight = process.stdout.rows;
     STRING_LEN = process.stdout.columns
     let FLAG_HEIGHT = flag[flag.length - 1]
     // if the terminal is larger, scale the flag up
@@ -86,7 +86,7 @@ function createFlag(scale = 1) {
     let finishedFlag = ""
     for (const color of flag) {
         // for each color, create its rows
-	if(!color instanceof Object) break // Last item in array is flag height
+	if(!(color instanceof Object)) break // Last item in array is flag height
         for (let i = 0; i < color.height * scale; i++) {
             // instead of creating each row and putting it on its own line,
             // we string every row together. this keeps the flag from
