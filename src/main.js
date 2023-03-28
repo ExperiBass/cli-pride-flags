@@ -9,7 +9,7 @@ const MINI_FLAG_DISTANCE = 12 // spaces from the left
 const { args, options } = parseArgs(process.argv.slice(2))
 const CHOSEN_FLAG = args[0]
 
-// takes the input array of strings and parses the flags
+// basic cli arg parser
 function parseArgs(args) {
     let result = {
         args: [],

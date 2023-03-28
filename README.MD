@@ -20,9 +20,8 @@ There's also a package in the AUR, maintained by `u/rhysperry111`! Install it wi
 Options:
   -h    Display the help text
   -l    Hold the terminal open and redraw the flag upon resize, closing when any key is pressed
-- Flag is the name of the flag-- for example, you could input bi, trans, transfem, etc.
-- Fill an optional setting, which makes the flag fill the terminal window and close on keypress, as well as redrawing when the window resizes.
 
+- Flag is the name of the flag-- for example, you could input bi, trans, transfem, etc.
 Example: `cli-pride-flags -d trans` would display the trans flag and hold the terminal.
 
 # Screenshots
