@@ -4,7 +4,7 @@ const chalk = require("chalk")
 const flags = require("./flags.json")
 const { name, version } = require('../package.json')
 const BLOCK = "█"
-let STRING_LEN = process.stdout.columns
+let FLAG_WIDTH = process.stdout.columns
 const MINI_FLAG_DISTANCE = 12 // spaces from the left
 const { args, options } = parseArgs(process.argv.slice(2))
 const CHOSEN_FLAG = args[0]
@@ -16,6 +16,7 @@ function parseArgs(args) {
         options: {
             help: false,
             keepalive: false,
+            vertical: false
         }
     }
     for (const arg of args) {
@@ -28,6 +29,9 @@ function parseArgs(args) {
                 case '-l': {
                     result.options.keepalive = true
                     break
+                }
+                case '-v': {
+                    result.options.vertical = true
                 }
                 default: {
                     break
@@ -72,19 +76,42 @@ function createFlag(scale = 1) {
             // instead of creating each row and putting it on its own line,
             // we string every row together. this keeps the flag from
             // looking like a jumbled mess when the terminal is resized.
-            let string = ""
-            for (let j = 0; j < STRING_LEN; j++) {
-                string += BLOCK
+            for (let j = 0; j < FLAG_WIDTH; j++) {
+                finishedFlag += chalk.hex(color.code)(BLOCK)
             }
-            finishedFlag += chalk.hex(color.code)(string)
         }
     }
     return finishedFlag
 }
+function createVerticalFlag(scale = 1) {
+    // just createFlag but v
+    //                     e
+    //                     r
+    //                     t
+    //                     i
+    //                     c
+    //                     a
+    //                     l
+    // (and also diagonal if you skip the newline?)
+    let finishedFlag = ""
+    // outer loop fills the screen
+    for (let i = 0; i < FLAG_WIDTH; i++) {
+        for (const stripe of flag.stripes) {
+            for (let j = 0; j < stripe.height * scale; j++) {
+                finishedFlag += chalk.hex(stripe.code)(BLOCK)
+            }
+        }
+        finishedFlag += "\n" // here we append a newline instead, to keep the flag vertical
+    }
+    return finishedFlag.trim()
+}
+
 
 function draw() {
     const termHeight = process.stdout.rows
-    STRING_LEN = process.stdout.columns
+    FLAG_WIDTH = process.stdout.columns
+    //termHeight = process.stdout.columns
+    //STRING_LEN = process.stdout.rows
     const FLAG_HEIGHT = flag.height
     // if the terminal is larger, scale the flag up
     if (options.keepalive) {
