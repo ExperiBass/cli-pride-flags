@@ -16,8 +16,11 @@ There's also a package in the AUR, maintained by `u/rhysperry111`! Install it wi
 
 # Usage
 
-`cli-pride-flags [flag]`
+`cli-pride-flags [flag] [fill?]`
+- Flag is the name of the flag-- for example, you could input bi, trans, transfem, etc.
+- Fill an optional setting, which makes the flag fill the terminal window and close on keypress, as well as redrawing when the window resizes.
 
+Example: `cli-pride-flags trans true` would dispaly the trans flag, filling the terminal.
 # Screenshots
 
 Theres a page displaying all the flags on my site [here :3](https://experibass.github.io/flags.html)
