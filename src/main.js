@@ -125,6 +125,7 @@ function draw() {
     // since || triggers on a fals*y* value, if Math.floor returns a 0,
     // it'll trigger and snap the value back to 1. nifty!
     const flagScale = Math.floor(termHeight / flag.height) || 1
+    // TODO: maybe scale better? vertical leaves a gap...
     const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag(flagScale, FLAG_WIDTH)
     process.stdout.write(builtFlag)
 
