@@ -5,10 +5,9 @@ const flags = require("./flags.json")
 const { name, version } = require('../package.json')
 const BLOCK = "█"
 let STRING_LEN = process.stdout.columns
-const MINI_FLAG_DISTANCE = 10 // spaces from the left
+const MINI_FLAG_DISTANCE = 12 // spaces from the left
 const { args, options } = parseArgs(process.argv.slice(2))
-const FLAG_TYPE = args[0]
-const FILL_TERM = options.keepalive
+const CHOSEN_FLAG = args[0]
 
 // takes the input array of strings and parses the flags
 function parseArgs(args) {
@@ -42,7 +41,11 @@ function parseArgs(args) {
 }
 
 function help() {
-    console.log(`Usage: ${chalk.green(name)} ${chalk.yellow("[flag]")} ${chalk.blue("[fill]")}`)
+    console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("[flag]")}`)
+    console.log("Options:")
+    // honestly ill just hardcode these
+    console.log("  -h    Display this help text")
+    console.log("  -d    Hold the terminal open and redraw upon resize")
     console.log("Flags:")
     let flagList = ""
     const flagKeys = Object.keys(flags).sort()
@@ -61,21 +64,6 @@ function help() {
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagKeys.length)}`))
     process.exit()
 }
-
-// Check terminal environment
-if (!chalk.supportsColor) {
-    console.log("Your terminal doesn't support color!")
-    process.exit(1)
-}
-chalk.level = 3 // try to use truecolor
-
-
-// run
-if (options.help || FLAG_TYPE === undefined || !Object.keys(flags).includes(FLAG_TYPE.toLowerCase())) {
-    help()
-}
-
-const flag = flags[FLAG_TYPE.toLowerCase()]
 
 function createFlag(scale = 1) {
     let finishedFlag = ""
@@ -100,8 +88,8 @@ function draw() {
     STRING_LEN = process.stdout.columns
     const FLAG_HEIGHT = flag.height
     // if the terminal is larger, scale the flag up
-    if (FILL_TERM) {
-        // Go to 0,0, clear screen, and hide cursor
+    if (options.keepalive) {
+        // Go to (0,0), clear screen, and hide cursor
         process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
     }
     if (termHeight > FLAG_HEIGHT) {
@@ -111,12 +99,27 @@ function draw() {
         // terminal smol, use the hardcoded minimum height
         process.stdout.write(createFlag())
     }
-    if (!FILL_TERM) {
+    if (!options.keepalive) {
         process.stdout.write("\n")
     }
 }
 
-if (FILL_TERM) {
+// Check terminal environment
+if (!chalk.supportsColor) {
+    console.log("Your terminal doesn't support color!")
+    process.exit(1)
+}
+chalk.level = 3 // try to use truecolor
+
+
+// run
+if (options.help || CHOSEN_FLAG === undefined || !Object.keys(flags).includes(CHOSEN_FLAG.toLowerCase())) {
+    help()
+}
+
+const flag = flags[CHOSEN_FLAG.toLowerCase()]
+
+if (options.keepalive) {
     // Ensure any keypress will close program
     process.stdin.setRawMode(true)
     // Make sure process doesn't exit when finished
