@@ -38,5 +38,6 @@ Some screenshots in my terminal are below!
 
 none :D
 
-# TODO (maybe)
+# TODO
+- Scale the vertical flag better (need to figure out how to scale with more precision)
 - Gradient? (I don't think chalk supports gradients, id need a alternative...)

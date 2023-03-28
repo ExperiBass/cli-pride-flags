@@ -99,7 +99,6 @@ function createVerticalFlag(scale = 1, height) {
             for (let j = 0; j < (stripe.height * scale); j++) {
                 finishedFlag += chalk.hex(stripe.code)(BLOCK)
             }
-            console.log(process.stdout.columns - (stripe.height * scale))
         }
         finishedFlag += "\n" // here we append a newline instead, to keep the flag vertical
     }
@@ -126,6 +125,7 @@ function draw() {
     // it'll trigger and snap the value back to 1. nifty!
     const flagScale = Math.floor(termHeight / flag.height) || 1
     // TODO: maybe scale better? vertical leaves a gap...
+    // how will i add precision?
     const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag(flagScale, FLAG_WIDTH)
     process.stdout.write(builtFlag)
 
