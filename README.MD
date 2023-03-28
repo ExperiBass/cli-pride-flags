@@ -39,5 +39,4 @@ Some screenshots in my terminal are below!
 none :D
 
 # TODO (maybe)
-- Vertical flags? (most likely requires a rewrite)
-- Gradient? (I don't think chalk supports gradients, and that leaves the issue of vertical gradients unsolved)
+- Gradient? (I don't think chalk supports gradients, id need a alternative...)

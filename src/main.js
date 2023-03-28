@@ -92,7 +92,6 @@ function createVerticalFlag(scale = 1, height) {
     //                     c
     //                     a
     //                     l
-    // (and also diagonal if you skip the newline?)
     let finishedFlag = ""
     // outer loop fills the screen
     for (let i = 0; i < height; i++) {
