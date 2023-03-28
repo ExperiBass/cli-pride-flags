@@ -2,14 +2,44 @@
 
 const chalk = require("chalk")
 const flags = require("./flags.json")
-console.log(flags);
 const { name, version } = require('../package.json')
 const BLOCK = "█"
 let STRING_LEN = process.stdout.columns
 const MINI_FLAG_DISTANCE = 10 // spaces from the left
-const ARGS = process.argv.slice(2)
-const FLAG_TYPE = ARGS[0]
-const FILL_TERM = ARGS[1] === "true" || ARGS[1] === "True"
+const { args, options } = parseArgs(process.argv.slice(2))
+const FLAG_TYPE = args[0]
+const FILL_TERM = options.keepalive
+
+// takes the input array of strings and parses the flags
+function parseArgs(args) {
+    let result = {
+        args: [],
+        options: {
+            help: false,
+            keepalive: false,
+        }
+    }
+    for (const arg of args) {
+        if (arg.startsWith('-')) {
+            switch (arg) {
+                case '-h': {
+                    result.options.help = true
+                    break
+                }
+                case '-d': {
+                    result.options.keepalive = true
+                    break
+                }
+                default: {
+                    break
+                }
+            }
+        } else {
+            result.args.push(arg)
+        }
+    }
+    return result
+}
 
 function help() {
     console.log(`Usage: ${chalk.green(name)} ${chalk.yellow("[flag]")} ${chalk.blue("[fill]")}`)
@@ -41,51 +71,15 @@ chalk.level = 3 // try to use truecolor
 
 
 // run
-if (FLAG_TYPE === undefined || !Object.keys(flags).includes(FLAG_TYPE.toLowerCase())) {
+if (options.help || FLAG_TYPE === undefined || !Object.keys(flags).includes(FLAG_TYPE.toLowerCase())) {
     help()
 }
 
 const flag = flags[FLAG_TYPE.toLowerCase()]
 
-function draw() {
-    let termHeight = process.stdout.rows;
-    STRING_LEN = process.stdout.columns
-    let FLAG_HEIGHT = flag.height
-    // if the terminal is larger, scale the flag up
-    if(FILL_TERM) {
-        // Go to 0,0, clear screen, and hide cursor
-        process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
-    }
-    if (termHeight > FLAG_HEIGHT) {
-        const flag = createFlag(Math.floor(termHeight / FLAG_HEIGHT))
-        process.stdout.write(flag)
-    } else {
-        // terminal smol, use the hardcoded minimum height
-        process.stdout.write(createFlag())
-    }
-    if(!FILL_TERM) process.stdout.write("\n")
-}
-
-if(FILL_TERM) {
-    // Ensure any keypress will close program
-    process.stdin.setRawMode(true);
-    // Make sure process doesn't exit when finished
-    process.stdout.once("data", () => {
-	process.stdout.write("\x1b[?25h") // Show cursor
-	process.exit()
-    });
-    // Redraw if dimensions change
-    process.stdout.on("resize", () => {
-        draw()
-    });
-}
-draw();
-
-// woo, build the flag!
 function createFlag(scale = 1) {
     let finishedFlag = ""
-    let stripes = flag.stripes;
-    for (const color of stripes) {
+    for (const color of flag.stripes) {
         // for each color, create its rows
         for (let i = 0; i < color.height * scale; i++) {
             // instead of creating each row and putting it on its own line,
@@ -100,3 +94,40 @@ function createFlag(scale = 1) {
     }
     return finishedFlag
 }
+
+function draw() {
+    const termHeight = process.stdout.rows
+    STRING_LEN = process.stdout.columns
+    const FLAG_HEIGHT = flag.height
+    // if the terminal is larger, scale the flag up
+    if (FILL_TERM) {
+        // Go to 0,0, clear screen, and hide cursor
+        process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
+    }
+    if (termHeight > FLAG_HEIGHT) {
+        const flag = createFlag(Math.floor(termHeight / FLAG_HEIGHT))
+        process.stdout.write(flag)
+    } else {
+        // terminal smol, use the hardcoded minimum height
+        process.stdout.write(createFlag())
+    }
+    if (!FILL_TERM) {
+        process.stdout.write("\n")
+    }
+}
+
+if (FILL_TERM) {
+    // Ensure any keypress will close program
+    process.stdin.setRawMode(true)
+    // Make sure process doesn't exit when finished
+    process.stdout.once("data", () => {
+        process.stdout.write("\x1b[?25h") // Show cursor
+        process.exit()
+    })
+    // Redraw if dimensions change
+    process.stdout.on("resize", () => {
+        draw()
+    })
+}
+// woo, build the flag!
+draw()
