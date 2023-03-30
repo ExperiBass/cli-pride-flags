@@ -15,7 +15,8 @@ function parseArgs(args) {
         options: {
             help: false,
             keepalive: false,
-            vertical: false
+            vertical: false,
+            gradient: false
         }
     }
     for (const arg of args) {
@@ -31,6 +32,11 @@ function parseArgs(args) {
                 }
                 case '-v': {
                     result.options.vertical = true
+                    break
+                }
+                case '-g': {
+                    result.options.gradient = true
+                    break
                 }
                 default: {
                     break
@@ -67,22 +73,94 @@ function help() {
     console.log(chalk.green(flagList))
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagKeys.length)}`))
 }
+function interpolateColor(color1, color2, percentage) {
+    // Convert colors to RGB
+    let color1RGB = hexToRGB(color1);
+    let color2RGB = hexToRGB(color2);
 
-function createFlag(scale = 1, width) {
+    // Determine which color is lighter and adjust the percentage
+    const lightness1 = (color1RGB.r * 0.299 + color1RGB.g * 0.587 + color1RGB.b * 0.114);
+    const lightness2 = (color2RGB.r * 0.299 + color2RGB.g * 0.587 + color2RGB.b * 0.114);
+    if (lightness1 > lightness2) {
+        percentage = 1 - percentage;
+        const temp = color1RGB;
+        color1RGB = color2RGB;
+        color2RGB = temp;
+    }
+
+    // Interpolate colors using the adjusted percentage
+    const r = Math.round(color1RGB.r + (color2RGB.r - color1RGB.r) * percentage);
+    const g = Math.round(color1RGB.g + (color2RGB.g - color1RGB.g) * percentage);
+    const b = Math.round(color1RGB.b + (color2RGB.b - color1RGB.b) * percentage);
+    return RGBToHex(...[r,
+        g,
+        b].map(v => {
+            if (v > 255) {
+                v = 255
+            }
+            if (v < 0) {
+                v = 0
+            }
+            return v
+        }));
+}
+
+
+function hexToRGB(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return { r: r, g: g, b: b };
+}
+
+function RGBToHex(r, g, b) {
+    const hexR = r.toString(16).padStart(2, "0");
+    const hexG = g.toString(16).padStart(2, "0");
+    const hexB = b.toString(16).padStart(2, "0");
+    return "#" + hexR + hexG + hexB;
+}
+
+
+function createFlag(width) {
+    const flagHeight = flag.height
+    const rowsPerStripe = Math.floor(process.stdout.rows / flagHeight) || 1
+    // TODO: mm yes i sure do love broken scaling
+    if (!options.keepalive) {
+        rowsPerStripe - 2 // leave space for prompts
+    }
     let finishedFlag = ""
-    for (const color of flag.stripes) {
+    for (let i = 0; i < flag.stripes.length; i++) {
+        const stripe = flag.stripes[i]
+        const nextStripe = flag.stripes[i + 1] ?? stripe
         // for each color, create its rows
-        for (let i = 0; i < color.height * scale; i++) {
-            // instead of creating each row and putting it on its own line,
-            // we string every row together. this keeps the flag from
-            // looking like a jumbled mess when the terminal is resized.
-            for (let j = 0; j < width; j++) {
-                finishedFlag += chalk.hex(color.code)(BLOCK)
+        const stripeHeight = Math.floor(stripe.height * rowsPerStripe)
+
+        for (let j = 0; j < stripeHeight; j++) {
+            let currColor;
+            if (options.gradient) {
+                // figure out how far along we are in the stripe
+                const position = (j / stripeHeight)
+                // now figure out the color at that position
+                currColor = interpolateColor(stripe.code, nextStripe.code, position)
+                if (i === flag.stripes.length - 1) {
+                    // skip the last stripe since its color will have
+                    // already been painted in the last iteration
+                    continue
+                }
+            } else {
+                currColor = stripe.code
+            }
+            for (let k = 0; k < process.stdout.columns; k++) {
+                // instead of creating each row and putting it on its own line,
+                // we string every row together. this keeps the flag from
+                // looking like a jumbled mess when the terminal is resized.
+                finishedFlag += chalk.hex(currColor)(BLOCK)
             }
         }
     }
     return finishedFlag
 }
+
 function createVerticalFlag(scale = 1, height) {
     // just createFlag but v
     //                     e
@@ -126,7 +204,7 @@ function draw() {
     const flagScale = Math.floor(termHeight / flag.height) || 1
     // TODO: maybe scale better? vertical leaves a gap...
     // how will i add precision?
-    const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag(flagScale, FLAG_WIDTH)
+    const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag(flagScale)
     process.stdout.write(builtFlag)
 
     if (!options.keepalive) {
