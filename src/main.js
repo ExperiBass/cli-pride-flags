@@ -82,10 +82,10 @@ function createFlag() {
     const availableWidth = process.stdout.columns
     const availableHeight = options.keepalive ? flagHeight * maxScale : process.stdout.rows - 2
     const stripeHeights = flag.stripes.map(stripe => stripe.height)
-    const stripeRowNumbers = toCumulativeWeights(stripeHeights)
-                                .map(weight => weight * availableHeight)
-                                .map(Math.floor)
-    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e)
+    const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
+                                .map(weight => weight * availableHeight) // ...map back to line numbers in the available space...
+                                .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
+    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
 
     let finishedFlag = ""
 
@@ -97,7 +97,6 @@ function createFlag() {
         for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
             let color = stripe.code
             // TODO: add gradient logic
-
             finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
         }
     }
@@ -144,7 +143,7 @@ function draw() {
     }
     // since || triggers on a fals*y* value, if Math.floor returns a 0,
     // it'll trigger and snap the value back to 1. nifty!
-    const flagScale = Math.floor(termHeight / flag.height) || 1
+    const flagScale = Math.floor(flag.height / termHeight) || 1
     // TODO: maybe scale better? vertical leaves a gap...
     // how will i add precision?
     const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag(flagScale)
