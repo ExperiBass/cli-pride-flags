@@ -3,6 +3,7 @@
 const chalk = require("chalk")
 const flags = require("./flags.json")
 const { name, version } = require('../package.json')
+const { toCumulativeWeights, FlagColors } = require('./util')
 const BLOCK = "█"
 const MINI_FLAG_DISTANCE = 12 // spaces from the left
 const { args, options } = parseArgs(process.argv.slice(2))
@@ -73,98 +74,34 @@ function help() {
     console.log(chalk.green(flagList))
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagKeys.length)}`))
 }
-function interpolateColor(color1, color2, percentage) {
-    // Convert colors to RGB
-    let color1RGB = hexToRGB(color1);
-    let color2RGB = hexToRGB(color2);
-
-    // Determine which color is lighter and adjust the percentage
-    const lightness1 = (color1RGB.r * 0.299 + color1RGB.g * 0.587 + color1RGB.b * 0.114);
-    const lightness2 = (color2RGB.r * 0.299 + color2RGB.g * 0.587 + color2RGB.b * 0.114);
-    if (lightness1 > lightness2) {
-        percentage = 1 - percentage;
-        const temp = color1RGB;
-        color1RGB = color2RGB;
-        color2RGB = temp;
-    }
-
-    // Interpolate colors using the adjusted percentage
-    const r = Math.round(color1RGB.r + (color2RGB.r - color1RGB.r) * percentage);
-    const g = Math.round(color1RGB.g + (color2RGB.g - color1RGB.g) * percentage);
-    const b = Math.round(color1RGB.b + (color2RGB.b - color1RGB.b) * percentage);
-    return RGBToHex(...[r,
-        g,
-        b].map(v => {
-            if (v > 255) {
-                v = 255
-            }
-            if (v < 0) {
-                v = 0
-            }
-            return v
-        }));
-}
 
 
-function hexToRGB(hex) {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return { r: r, g: g, b: b };
-}
-
-function RGBToHex(r, g, b) {
-    const hexR = r.toString(16).padStart(2, "0");
-    const hexG = g.toString(16).padStart(2, "0");
-    const hexB = b.toString(16).padStart(2, "0");
-    return "#" + hexR + hexG + hexB;
-}
-
-
-function createFlag(width) {
-    
+function createFlag() {
     const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
-    const stripeHeights = flag.stripes.map(stripe => stripe.height)
-    const stripeWeights = toCumulativeWeights(stripeHeights)
+    const maxScale = Math.floor(flagHeight / process.stdout.rows)
     const availableWidth = process.stdout.columns
-    const availableHeight = options.keepalive ? process.stdout.rows : process.stdout.rows - 2
-    const stripeRowNumbers = stripeWeights.map(weight => weight * availableHeight)
-        .map(Math.round)
-    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i-1] || e)
-    
+    const availableHeight = options.keepalive ? flagHeight * maxScale : process.stdout.rows - 2
+    const stripeHeights = flag.stripes.map(stripe => stripe.height)
+    const stripeRowNumbers = toCumulativeWeights(stripeHeights)
+                                .map(weight => weight * availableHeight)
+                                .map(Math.floor)
+    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e)
+
     let finishedFlag = ""
-    
-    for (let i = 0; i < stripeHeightsFinal.length; i++) {
-        const stripe = flag.stripes[i]
-        const nextStripe = flag.stripes[i+1] || stripe
-        const stripeHeight = stripeHeightsFinal[i]
-        
-        for (let j = 0; j < stripeHeight; j++) {
+
+    for (const stripeIndex in flag.stripes) {
+        const stripe = flag.stripes[stripeIndex]
+        const nextStripe = flag.stripes[stripeIndex + 1] || stripe
+        const stripeHeight = stripeHeightsFinal[stripeIndex]
+
+        for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
             let color = stripe.code
             // TODO: add gradient logic
-            
-            finishedFlag += chalk.hex(color)(BLOCK).repeat(availableWidth)
+
+            finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
         }
     }
-    
     return finishedFlag
-}
-
-
-// Turn an input array of Numbers into an array of cumulative weights
-function toCumulativeWeights(inputArray) {
-    
-    let result = []
-    
-    let accumulator = 0
-    const sum = inputArray.reduce((a, x) => a + x)
-    
-    for (x of inputArray) {
-        accumulator += x
-        result.push(accumulator / sum)
-    }
-        
-    return result
 }
 
 function createVerticalFlag(scale = 1, height) {
