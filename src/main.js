@@ -122,43 +122,49 @@ function RGBToHex(r, g, b) {
 
 
 function createFlag(width) {
-    const flagHeight = flag.height
-    const rowsPerStripe = Math.floor(process.stdout.rows / flagHeight) || 1
-    // TODO: mm yes i sure do love broken scaling
-    if (!options.keepalive) {
-        rowsPerStripe - 2 // leave space for prompts
-    }
+    
+    const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
+    const stripeHeights = flag.stripes.map(stripe => stripe.height)
+    const stripeWeights = toCumulativeWeights(stripeHeights)
+    const availableWidth = process.stdout.columns
+    const availableHeight = options.keepalive ? process.stdout.rows : process.stdout.rows - 2
+    const stripeRowNumbers = stripeWeights.map(weight => weight * availableHeight)
+        .map(Math.round)
+    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i-1] || e)
+    
     let finishedFlag = ""
-    for (let i = 0; i < flag.stripes.length; i++) {
+    
+    for (let i = 0; i < stripeHeightsFinal.length; i++) {
         const stripe = flag.stripes[i]
-        const nextStripe = flag.stripes[i + 1] ?? stripe
-        // for each color, create its rows
-        const stripeHeight = Math.floor(stripe.height * rowsPerStripe)
-
+        const nextStripe = flag.stripes[i+1] || stripe
+        const stripeHeight = stripeHeightsFinal[i]
+        
         for (let j = 0; j < stripeHeight; j++) {
-            let currColor;
-            if (options.gradient) {
-                // figure out how far along we are in the stripe
-                const position = (j / stripeHeight)
-                // now figure out the color at that position
-                currColor = interpolateColor(stripe.code, nextStripe.code, position)
-                if (i === flag.stripes.length - 1) {
-                    // skip the last stripe since its color will have
-                    // already been painted in the last iteration
-                    continue
-                }
-            } else {
-                currColor = stripe.code
-            }
-            for (let k = 0; k < process.stdout.columns; k++) {
-                // instead of creating each row and putting it on its own line,
-                // we string every row together. this keeps the flag from
-                // looking like a jumbled mess when the terminal is resized.
-                finishedFlag += chalk.hex(currColor)(BLOCK)
-            }
+            let color = stripe.code
+            // TODO: add gradient logic
+            
+            finishedFlag += chalk.hex(color)(BLOCK).repeat(availableWidth)
         }
     }
+    
     return finishedFlag
+}
+
+
+// Turn an input array of Numbers into an array of cumulative weights
+function toCumulativeWeights(inputArray) {
+    
+    let result = []
+    
+    let accumulator = 0
+    const sum = inputArray.reduce((a, x) => a + x)
+    
+    for (x of inputArray) {
+        accumulator += x
+        result.push(accumulator / sum)
+    }
+        
+    return result
 }
 
 function createVerticalFlag(scale = 1, height) {
