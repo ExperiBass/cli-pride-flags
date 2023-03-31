@@ -96,7 +96,7 @@ function createFlag() {
         const stripeHeight = stripeHeightsFinal[stripeIndex]
 
         for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
-            const position = (currLine / 10)
+            const position = (currLine / availableHeight).toFixed(3)
             let color;
             if (options.gradient) {
                 color = colors.getColor(position, 'gradient')
