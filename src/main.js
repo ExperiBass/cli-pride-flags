@@ -97,8 +97,12 @@ function createFlag() {
 
         for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
             const position = (currLine / 10)
-            let color = colors.getColor(position)
-            // TODO: add gradient logic
+            let color;
+            if (options.gradient) {
+                color = colors.getColor(position, 'gradient')
+            } else {
+                color = colors.getColor(position)
+            }
             finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
             currLine++
             console.log(currLine, position)
