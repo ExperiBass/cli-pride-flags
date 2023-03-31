@@ -77,6 +77,7 @@ function help() {
 
 
 function createFlag() {
+    const colors = new FlagColors(flag)
     const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
     const maxScale = Math.floor(flagHeight / process.stdout.rows)
     const availableWidth = process.stdout.columns
@@ -88,16 +89,19 @@ function createFlag() {
     const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
 
     let finishedFlag = ""
-
+    let currLine = 0
     for (const stripeIndex in flag.stripes) {
         const stripe = flag.stripes[stripeIndex]
         const nextStripe = flag.stripes[stripeIndex + 1] || stripe
         const stripeHeight = stripeHeightsFinal[stripeIndex]
 
         for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
-            let color = stripe.code
+            const position = (currLine / 10)
+            let color = colors.getColor(position)
             // TODO: add gradient logic
             finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
+            currLine++
+            console.log(currLine, position)
         }
     }
     return finishedFlag
