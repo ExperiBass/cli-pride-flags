@@ -5,7 +5,7 @@ const chalk = require("chalk")
 // import local files
 const flags = require("./flags.json")
 const { name, version } = require('../package.json')
-const { scaleFlag, stripDashes, FlagColors, ArgParser } = require('./util')
+const { scaleFlag, FlagColors, ArgParser } = require('./util')
 const BLOCK = "█"
 const argparser = new ArgParser({
     'help': { aliases: ['h'], description: 'Display this help text'},
@@ -39,7 +39,6 @@ function help() {
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagNames.length)}`))
 }
 
-
 function createFlag() {
     const colors = new FlagColors(flag)
     const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag, options)
@@ -62,7 +61,6 @@ function createFlag() {
     }
     return finishedFlag
 }
-
 function createVerticalFlag() {
     // just createFlag but v
     //                     e
@@ -93,7 +91,6 @@ function createVerticalFlag() {
     }
     return finishedFlag.repeat(availableHeight)
 }
-
 
 function draw() {
     if (options.live) {
@@ -137,5 +134,6 @@ if (options.live) {
         draw()
     })
 }
+
 // woo, build the flag!
 draw()

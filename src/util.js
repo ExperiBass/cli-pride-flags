@@ -67,14 +67,6 @@ function RGBToHex(r, g, b) {
     const hexB = b.toString(16).padStart(2, "0")
     return "#" + hexR + hexG + hexB
 }
-function stripDashes(obj) {
-    // strip the dashes from the options object since `arg` is weird
-    const stripped = {}
-    for (const [name, value] of Object.entries(obj)) {
-        stripped[name.replace(/-/g, '')] = value
-    }
-    return stripped
-}
 function scaleFlag(flag, options, vertical = false) {
     const direction = (vertical ? process.stdout.columns : process.stdout.rows)
     const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
@@ -138,6 +130,7 @@ class FlagColors {
 
 }
 
+// tfw nobody has what you need so you roll your own
 class ArgParser {
     #options = {}
     #singleHyphenArgSplitter = /-(\w{2,})/ig
@@ -168,15 +161,16 @@ class ArgParser {
                 output.push(str)
             }
         }
-        return output.join('\n')
+        return output.join('\n').trim()
     }
     parse() {
         let inputArray = [...process.argv.slice(2)] // copy
 
         // expand any grouped args ("-abc" -> ["-a", "-b", "-c"])
+        // tbh its more like ["a", "b", "c"] but who cares? not this code
         for (const index in inputArray) {
             const arg = inputArray[index]
-            const matches = [...arg.matchAll(this.#singleHyphenArgSplitter)][0]
+            const matches = [...arg.matchAll(this.#singleHyphenArgSplitter)][0] // matchAll is annoying...
             if (!matches || !matches[1]) {
                 continue
             }
@@ -185,6 +179,7 @@ class ArgParser {
         }
         let args = []
         let options = {}
+        // now start actually parsing
         for (const input of inputArray) {
             if (!input) {
                 continue
@@ -201,4 +196,4 @@ class ArgParser {
     }
 }
 
-module.exports = { scaleFlag, stripDashes, FlagColors, ArgParser }
+module.exports = { scaleFlag, FlagColors, ArgParser }
