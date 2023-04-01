@@ -1,3 +1,5 @@
+const chalk = require("chalk")
+
 // Turn an input array of Numbers into an array of cumulative weights
 function toCumulativeWeights(inputArray, mode = null) {
     // copy the input
@@ -65,6 +67,33 @@ function RGBToHex(r, g, b) {
     const hexB = b.toString(16).padStart(2, "0")
     return "#" + hexR + hexG + hexB
 }
+function stripDashes(obj) {
+    // strip the dashes from the options object since `arg` is weird
+    const stripped = {}
+    for (const [name, value] of Object.entries(obj)) {
+        stripped[name.replace(/-/g, '')] = value
+    }
+    return stripped
+}
+function scaleFlag(flag, options, vertical = false) {
+    const direction = (vertical ? process.stdout.columns : process.stdout.rows)
+    const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
+    const maxScale = Math.floor(direction / flagHeight)
+    const availableHeight = (options.live ? flagHeight * maxScale : process.stdout.rows)
+    const availableWidth = process.stdout.columns
+    const stripeHeights = flag.stripes.map(stripe => stripe.height)
+    const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
+        .map(weight => { // i tried to make this a ternary but it wouldnt work :<
+            if (vertical) {
+                return weight * availableWidth
+            } else {
+                return weight * availableHeight
+            }
+        }) // ...map back to line numbers in the available space...
+        .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
+    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
+    return { flagHeight, maxScale, stripeHeightsFinal, availableHeight, availableWidth }
+}
 
 class ColorStop {
     constructor(data) {
@@ -109,4 +138,67 @@ class FlagColors {
 
 }
 
-module.exports = { toCumulativeWeights, FlagColors }
+class ArgParser {
+    #options = {}
+    #singleHyphenArgSplitter = /-(\w{2,})/ig
+    constructor(options) {
+        this.#options = options
+    }
+    #stripDashes(str) {
+        return str.replace(/-/g, '')
+    }
+    #findOpt(potentialOption) {
+        for (const [name, value] of Object.entries(this.#options)) {
+            if (name === potentialOption || (value.aliases && value.aliases.includes(potentialOption))) {
+                return name
+            }
+        }
+        return null
+    }
+    listOptions() {
+        let output = []
+        const SPACES = 10
+        for (const [name, value] of Object.entries(this.#options)) {
+            let str = `  --${name}`
+            if (value.aliases) {
+                str += `, -${value.aliases.join(', -')}`
+                str = chalk.blueBright(str) // make the options blue before continuing
+                str = str.padEnd(str.length + (SPACES - name.length), " ")
+                str += `  ${value.description}`
+                output.push(str)
+            }
+        }
+        return output.join('\n')
+    }
+    parse() {
+        let inputArray = [...process.argv.slice(2)] // copy
+
+        // expand any grouped args ("-abc" -> ["-a", "-b", "-c"])
+        for (const index in inputArray) {
+            const arg = inputArray[index]
+            const matches = [...arg.matchAll(this.#singleHyphenArgSplitter)][0]
+            if (!matches || !matches[1]) {
+                continue
+            }
+            const options = matches[1].split('')
+            inputArray.splice(index, 1, ...options)
+        }
+        let args = []
+        let options = {}
+        for (const input of inputArray) {
+            if (!input) {
+                continue
+            }
+            const lowerCasedInput = input.toLowerCase()
+            const potentialOption = this.#findOpt(this.#stripDashes(lowerCasedInput))
+            if (potentialOption) {
+                options[potentialOption] = true
+            } else {
+                args.push(lowerCasedInput)
+            }
+        }
+        return {args, options}
+    }
+}
+
+module.exports = { scaleFlag, stripDashes, FlagColors, ArgParser }
