@@ -23,7 +23,7 @@ Options:
   `-g`  -  Make the flag a smooth gradient  
   `-l`  -  Hold the terminal open and redraw the flag upon resize, closing when any key is pressed  
 
-- Flag is the name of the flag-- for example, you could input bi, trans, transfem, etc.  
+- Flag is the name of the flag-- for example, you could input `bi`, `trans`, `transfem`, etc.  
 Example: `cli-pride-flags -l trans` would display the trans flag and hold the terminal.
 
 # Screenshots
