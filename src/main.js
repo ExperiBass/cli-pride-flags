@@ -87,12 +87,9 @@ function createFlag() {
                                 .map(weight => weight * availableHeight) // ...map back to line numbers in the available space...
                                 .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
     const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
-
     let finishedFlag = ""
     let currLine = 0
     for (const stripeIndex in flag.stripes) {
-        const stripe = flag.stripes[stripeIndex]
-        const nextStripe = flag.stripes[stripeIndex + 1] || stripe
         const stripeHeight = stripeHeightsFinal[stripeIndex]
 
         for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
@@ -105,7 +102,6 @@ function createFlag() {
             }
             finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
             currLine++
-            console.log(currLine, position)
         }
     }
     return finishedFlag
