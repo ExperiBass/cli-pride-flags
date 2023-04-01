@@ -8,6 +8,9 @@ const BLOCK = "█"
 const MINI_FLAG_DISTANCE = 12 // spaces from the left
 const { args, options } = parseArgs(process.argv.slice(2))
 const CHOSEN_FLAG = args[0]
+const horizontalFunc = (row, col) => row / stripeHeight;
+const verticalFunc = (row, col) => col / stripeWidth;
+const funcToUse = options.vertical ? verticalFunc : horizontalFunc;
 
 // basic cli arg parser
 function parseArgs(args) {
@@ -78,21 +81,13 @@ function help() {
 
 function createFlag() {
     const colors = new FlagColors(flag)
-    const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
-    const maxScale = Math.floor(process.stdout.rows / flagHeight)
-    const availableWidth = process.stdout.columns
-    const availableHeight = (options.keepalive ? flagHeight * maxScale : process.stdout.rows)
-    const stripeHeights = flag.stripes.map(stripe => stripe.height)
-    const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
-    .map(weight => weight * availableHeight) // ...map back to line numbers in the available space...
-    .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
-    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
+    const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag)
     let finishedFlag = ""
     let currLine = 0
     for (const stripeIndex in flag.stripes) {
         const stripeHeight = stripeHeightsFinal[stripeIndex]
 
-        for (let stripeLine = 0; stripeLine < stripeHeight; stripeLine++) {
+        for (let i = 0; i < stripeHeight; i++) {
             const position = (currLine / availableHeight).toFixed(3)
             let color;
             if (options.gradient) {
@@ -107,7 +102,27 @@ function createFlag() {
     return finishedFlag
 }
 
-function createVerticalFlag(scale = 1, height) {
+function scaleFlag(flag, vertical = false) {
+    const direction = (vertical ? process.stdout.columns : process.stdout.rows)
+    const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
+    const maxScale = Math.floor(direction / flagHeight)
+    const availableHeight = (options.keepalive ? flagHeight * maxScale : process.stdout.rows)
+    const availableWidth = process.stdout.columns
+    const stripeHeights = flag.stripes.map(stripe => stripe.height)
+    const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
+        .map(weight => { // i tried to make this a ternary but it wouldnt work :<
+            if (vertical) {
+                return weight * availableWidth
+            } else {
+                return weight * availableHeight
+            }
+        }) // ...map back to line numbers in the available space...
+        .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
+    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
+    return { flagHeight, maxScale, stripeHeightsFinal, availableHeight, availableWidth }
+}
+
+function createVerticalFlag() {
     // just createFlag but v
     //                     e
     //                     r
@@ -116,35 +131,36 @@ function createVerticalFlag(scale = 1, height) {
     //                     c
     //                     a
     //                     l
+    const colors = new FlagColors(flag)
+    const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag, true)
     let finishedFlag = ""
     // outer loop fills the screen
-    for (let i = 0; i < height; i++) {
-        for (const stripe of flag.stripes) {
-            for (let j = 0; j < (stripe.height * scale); j++) {
-                finishedFlag += chalk.hex(stripe.code)(BLOCK)
+    let currPos = 0
+    for (const stripeIndex in flag.stripes) {
+        const stripeWidth = stripeHeightsFinal[stripeIndex]
+        for (let j = 0; j < stripeWidth; j++) {
+            //const position = (currPos / availableWidth).toFixed(3)
+            const position = funcToUse(i, j)
+            let color;
+            if (options.gradient) {
+                color = colors.getColor(position, 'gradient')
+            } else {
+                color = colors.getColor(position)
             }
+            finishedFlag += chalk.hex(color)(BLOCK)
+            currPos++
         }
-        finishedFlag += "\n" // here we append a newline instead, to keep the flag vertical
     }
-    return finishedFlag.trim()
+    return finishedFlag.repeat(availableHeight).trim()
 }
 
 
 function draw() {
-    let termHeight;
-    let FLAG_WIDTH;
-    if (options.vertical) {
-        termHeight = process.stdout.columns
-        FLAG_WIDTH = process.stdout.rows
-    } else {
-        termHeight = process.stdout.rows
-        FLAG_WIDTH = process.stdout.columns
-    }
     if (options.keepalive) {
         // Go to (0,0), clear screen, and hide cursor
         process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
     }
-    const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag()
+    const builtFlag = options.vertical ? createVerticalFlag() : createFlag()
     process.stdout.write(builtFlag)
 
     if (!options.keepalive) {
