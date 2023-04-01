@@ -76,16 +76,16 @@ function help() {
 }
 
 
-function createFlag() {
+function createFlag(givenHeight) {
     const colors = new FlagColors(flag)
     const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
-    const maxScale = Math.floor(flagHeight / process.stdout.rows)
+    const maxScale = Math.floor(process.stdout.rows / flagHeight)
     const availableWidth = process.stdout.columns
-    const availableHeight = options.keepalive ? flagHeight * maxScale : process.stdout.rows - 2
+    const availableHeight = givenHeight || (options.keepalive ? flagHeight * maxScale : process.stdout.rows)
     const stripeHeights = flag.stripes.map(stripe => stripe.height)
     const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
-                                .map(weight => weight * availableHeight) // ...map back to line numbers in the available space...
-                                .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
+    .map(weight => weight * availableHeight) // ...map back to line numbers in the available space...
+    .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
     const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
     let finishedFlag = ""
     let currLine = 0
@@ -140,17 +140,13 @@ function draw() {
         termHeight = process.stdout.rows
         FLAG_WIDTH = process.stdout.columns
     }
-    // if the terminal is larger, scale the flag up
     if (options.keepalive) {
         // Go to (0,0), clear screen, and hide cursor
         process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
     }
-    // since || triggers on a fals*y* value, if Math.floor returns a 0,
-    // it'll trigger and snap the value back to 1. nifty!
-    const flagScale = Math.floor(flag.height / termHeight) || 1
+    const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag()
     // TODO: maybe scale better? vertical leaves a gap...
     // how will i add precision?
-    const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag(flagScale)
     process.stdout.write(builtFlag)
 
     if (!options.keepalive) {
