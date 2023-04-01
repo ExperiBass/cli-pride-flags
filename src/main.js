@@ -71,7 +71,7 @@ function createVerticalFlag() {
     //                     a
     //                     l
     const colors = new FlagColors(flag)
-    const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag, options, true)
+    const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag, options)
     let finishedFlag = ""
     // outer loop fills the screen
     let currPos = 0

@@ -67,16 +67,16 @@ function RGBToHex(r, g, b) {
     const hexB = b.toString(16).padStart(2, "0")
     return "#" + hexR + hexG + hexB
 }
-function scaleFlag(flag, options, vertical = false) {
-    const direction = (vertical ? process.stdout.columns : process.stdout.rows)
+function scaleFlag(flag, options) {
+    const direction = (options.vertical ? process.stdout.columns : process.stdout.rows)
     const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
     const maxScale = Math.floor(direction / flagHeight)
-    const availableHeight = (options.live ? flagHeight * maxScale : process.stdout.rows)
+    const availableHeight = process.stdout.rows
     const availableWidth = process.stdout.columns
     const stripeHeights = flag.stripes.map(stripe => stripe.height)
     const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
         .map(weight => { // i tried to make this a ternary but it wouldnt work :<
-            if (vertical) {
+            if (options.vertical) {
                 return weight * availableWidth
             } else {
                 return weight * availableHeight
