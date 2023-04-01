@@ -76,12 +76,12 @@ function help() {
 }
 
 
-function createFlag(givenHeight) {
+function createFlag() {
     const colors = new FlagColors(flag)
     const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
     const maxScale = Math.floor(process.stdout.rows / flagHeight)
     const availableWidth = process.stdout.columns
-    const availableHeight = givenHeight || (options.keepalive ? flagHeight * maxScale : process.stdout.rows)
+    const availableHeight = (options.keepalive ? flagHeight * maxScale : process.stdout.rows)
     const stripeHeights = flag.stripes.map(stripe => stripe.height)
     const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
     .map(weight => weight * availableHeight) // ...map back to line numbers in the available space...
@@ -145,8 +145,6 @@ function draw() {
         process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
     }
     const builtFlag = options.vertical ? createVerticalFlag(flagScale, FLAG_WIDTH) : createFlag()
-    // TODO: maybe scale better? vertical leaves a gap...
-    // how will i add precision?
     process.stdout.write(builtFlag)
 
     if (!options.keepalive) {
