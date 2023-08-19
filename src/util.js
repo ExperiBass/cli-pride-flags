@@ -142,7 +142,7 @@ class ArgParser {
         this.#options = options
     }
     #stripDashes(str) {
-        return str.replace(/-/g, '')
+        return str.replace(/^-+/g, '')
     }
     #findOpt(potentialOption) {
         for (const [name, value] of Object.entries(this.#options)) {
