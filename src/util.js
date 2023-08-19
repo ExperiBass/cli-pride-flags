@@ -8,12 +8,15 @@ function toCumulativeWeights(inputArray, mode = null) {
 
     let accumulator = 0
     if (mode === 'gradient') {
+        // needs to start at 0 and lose the last stripe,
+        // or you lose the first and have a w i d e last
         input.unshift(0)
         input.pop()
     }
     const sum = input.reduce((a, x) => a + x)
 
     for (const x of input) {
+        // likewise, order matters here for block and gradient modes
         if (mode === 'block') {
             result.push((accumulator / sum).toFixed(2))
             accumulator += x
@@ -33,19 +36,18 @@ function interpolateColor(color1, color2, percentage) {
     const lightness1 = (color1RGB.r * 0.299 + color1RGB.g * 0.587 + color1RGB.b * 0.114)
     const lightness2 = (color2RGB.r * 0.299 + color2RGB.g * 0.587 + color2RGB.b * 0.114)
     if (lightness1 > lightness2) {
+        // flip
+        [color2RGB, color1RGB] = [color1RGB, color2RGB]
         percentage = 1 - percentage
-        const temp = color1RGB
-        color1RGB = color2RGB
-        color2RGB = temp
     }
 
     // Interpolate colors using the adjusted percentage
     const r = Math.round(color1RGB.r + (color2RGB.r - color1RGB.r) * percentage)
     const g = Math.round(color1RGB.g + (color2RGB.g - color1RGB.g) * percentage)
     const b = Math.round(color1RGB.b + (color2RGB.b - color1RGB.b) * percentage)
-    return RGBToHex(...[r,
-        g,
-        b].map(v => {
+    return RGBToHex(
+        ...[r, g, b].map(v => {
+            // clamp dem numbers!
             if (v > 255) {
                 v = 255
             }
@@ -53,7 +55,8 @@ function interpolateColor(color1, color2, percentage) {
                 v = 0
             }
             return v
-        }))
+        })
+    )
 }
 function hexToRGB(hex) {
     const r = parseInt(hex.slice(1, 3), 16)
@@ -65,14 +68,15 @@ function RGBToHex(r, g, b) {
     const hexR = r.toString(16).padStart(2, "0")
     const hexG = g.toString(16).padStart(2, "0")
     const hexB = b.toString(16).padStart(2, "0")
-    return "#" + hexR + hexG + hexB
+    return `#${hexR}${hexG}${hexB}`
 }
 function scaleFlag(flag, options) {
-    const direction = (options.vertical ? process.stdout.columns : process.stdout.rows)
-    const flagHeight = flag.stripes.reduce((a, stripe) => a + stripe.height, 0)
-    const maxScale = Math.floor(direction / flagHeight)
     const availableHeight = process.stdout.rows
     const availableWidth = process.stdout.columns
+
+    const direction = (options.vertical ? availableWidth : availableHeight)
+    const flagHeight = flag.stripes.reduce((a, stripe) => {return a + stripe.height}, 0)
+    const maxScale = Math.floor(direction / flagHeight)
     const stripeHeights = flag.stripes.map(stripe => stripe.height)
     const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
         .map(weight => { // i tried to make this a ternary but it wouldnt work :<
@@ -83,45 +87,45 @@ function scaleFlag(flag, options) {
             }
         }) // ...map back to line numbers in the available space...
         .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
-    const stripeHeightsFinal = stripeRowNumbers.map((e, i, a) => e - a[i - 1] || e) // now squash to the screen
+    const stripeHeightsFinal = stripeRowNumbers.map((r, i, a) => r - a[i - 1] || r) // now squash to the screen
     return { flagHeight, maxScale, stripeHeightsFinal, availableHeight, availableWidth }
 }
 
 class ColorStop {
     constructor(data) {
-        this.pos = data[0];
-        this.colorCode = data[1];
+        this.pos = data[0]
+        this.colorCode = data[1]
     }
 }
 class FlagColors {
     constructor(flag) {
-        this.blockColors = toCumulativeWeights(flag.stripes.map(stripe => stripe.height), 'block').map((x, i) => new ColorStop([x, flag.stripes[i].code]));
+        this.blockColors = toCumulativeWeights(flag.stripes.map(stripe => stripe.height), 'block').map((x, i) => new ColorStop([x, flag.stripes[i].code]))
         this.gradientColors = toCumulativeWeights(flag.stripes.map(stripe => stripe.height), 'gradient').map((x, i) => new ColorStop([x, flag.stripes[i].code]))
         // Sort color stops in reverse order, so getColor checks for the highest value that the input is "to the right" of.
-        this.blockColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0);
-        this.gradientColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0);
+        this.blockColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0)
+        this.gradientColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0)
     }
     getColor(pos, mode = 'block') {
         if (mode === 'block') {
             for (const stop of this.blockColors) {
                 if (pos >= stop.pos) {
-                    return stop.colorCode;
+                    return stop.colorCode
                 }
             }
         }
         else if (mode === 'gradient') {
             for (const i in this.gradientColors) {
                 if (pos === this.gradientColors[i].pos) {
-                    return this.gradientColors[i].colorCode;
+                    return this.gradientColors[i].colorCode
                 }
                 else if (pos >= this.gradientColors[i].pos) {
-                    const leftColorStop = this.gradientColors[i];
-                    const rightColorStop = this.gradientColors[i - 1] ?? leftColorStop;
+                    const leftColorStop = this.gradientColors[i]
+                    const rightColorStop = this.gradientColors[i - 1] ?? leftColorStop
 
-                    const dPos = rightColorStop.pos - leftColorStop.pos;
-                    const percentage = ((pos - leftColorStop.pos) / dPos);
+                    const dPos = rightColorStop.pos - leftColorStop.pos
+                    const percentage = ((pos - leftColorStop.pos) / dPos)
 
-                    return interpolateColor(leftColorStop.colorCode, rightColorStop.colorCode, percentage);
+                    return interpolateColor(leftColorStop.colorCode, rightColorStop.colorCode, percentage)
                 }
             }
         }
@@ -166,7 +170,7 @@ class ArgParser {
     parse() {
         let inputArray = [...process.argv.slice(2)] // copy
 
-        // expand any grouped args ("-abc" -> ["-a", "-b", "-c"])
+        // expand any grouped options ("-abc" -> ["-a", "-b", "-c"])
         // tbh its more like ["a", "b", "c"] but who cares? not this code
         for (const index in inputArray) {
             const arg = inputArray[index]
@@ -177,6 +181,7 @@ class ArgParser {
             const options = matches[1].split('')
             inputArray.splice(index, 1, ...options)
         }
+
         let args = []
         let options = {}
         // now start actually parsing
@@ -192,7 +197,7 @@ class ArgParser {
                 args.push(lowerCasedInput)
             }
         }
-        return {args, options}
+        return { args, options }
     }
 }
 
