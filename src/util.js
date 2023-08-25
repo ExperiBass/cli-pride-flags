@@ -45,6 +45,7 @@ function interpolateColor(color1, color2, percentage) {
     const r = Math.round(color1RGB.r + (color2RGB.r - color1RGB.r) * percentage)
     const g = Math.round(color1RGB.g + (color2RGB.g - color1RGB.g) * percentage)
     const b = Math.round(color1RGB.b + (color2RGB.b - color1RGB.b) * percentage)
+
     return RGBToHex(
         ...[r, g, b].map(v => {
             // clamp dem numbers!

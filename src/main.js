@@ -14,8 +14,12 @@ const argparser = new ArgParser({
     'vertical': { aliases: ['v'], description: 'Display the flag, but vertically' },
     'blend': { aliases: ['b'], hasArg: true, description: 'Blend two flags together' }
 })
+
+// setup
 const { args, options } = argparser.parse()
 const CHOSEN_FLAG = args[0]
+const availableHeight = process.stdout.rows
+const availableWidth = process.stdout.columns
 
 function help() {
     console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("[flag]")}`)
@@ -42,23 +46,20 @@ function help() {
 
 function createFlag() {
     const colors = new FlagColors(flag)
-    const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag, options)
     let finishedFlag = ""
     let currLine = 0
-    for (const stripeIndex in flag.stripes) {
-        const stripeHeight = stripeHeightsFinal[stripeIndex]
 
-        for (let i = 0; i < stripeHeight; i++) {
-            const position = (currLine / availableHeight).toFixed(3)
-            let color
-            if (options.gradient) {
-                color = colors.getColor(position, 'gradient')
-            } else {
-                color = colors.getColor(position)
-            }
-            finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
-            currLine++
+    let position = (currLine / availableHeight).toFixed(3)
+    while (position < 1) {
+        position = (currLine / availableHeight).toFixed(3)
+        let color
+        if (options.gradient) {
+            color = colors.getColor(position, 'gradient')
+        } else {
+            color = colors.getColor(position)
         }
+        finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
+        currLine++
     }
     return finishedFlag
 }
@@ -72,23 +73,22 @@ function createVerticalFlag() {
     //                     a
     //                     l
     const colors = new FlagColors(flag)
-    const { availableHeight, stripeHeightsFinal, availableWidth } = scaleFlag(flag, options)
     let finishedFlag = ""
-    // outer loop fills the screen
     let currPos = 0
-    for (const stripeIndex in flag.stripes) {
-        const stripeWidth = stripeHeightsFinal[stripeIndex]
-        for (let j = 0; j < stripeWidth; j++) {
-            const position = (currPos / availableWidth).toFixed(3)
-            let color
-            if (options.gradient) {
-                color = colors.getColor(position, 'gradient')
-            } else {
-                color = colors.getColor(position)
-            }
-            finishedFlag += chalk.hex(color)(BLOCK)
-            currPos++
+    let position = 0
+
+    // building a single stripe this time
+    while (position < 1) {
+        currPos++ // need to increment first for vertical flags, ig the offset is wonky?
+        position = (currPos / availableWidth).toFixed(3)
+
+        let color
+        if (options.gradient) {
+            color = colors.getColor(position, 'gradient')
+        } else {
+            color = colors.getColor(position)
         }
+        finishedFlag += chalk.hex(color)(BLOCK)
     }
     return finishedFlag.repeat(availableHeight)
 }
@@ -116,9 +116,6 @@ if (!chalk.supportsColor) {
 }
 chalk.level = 3 // try to use truecolor
 
-console.log(args)
-console.log(options)
-process.exit()
 // run
 if (options.help || CHOSEN_FLAG === undefined || !Object.keys(flags).includes(CHOSEN_FLAG.toLowerCase())) {
     help()
