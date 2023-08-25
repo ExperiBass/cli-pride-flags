@@ -71,26 +71,6 @@ function RGBToHex(r, g, b) {
     const hexB = b.toString(16).padStart(2, "0")
     return `#${hexR}${hexG}${hexB}`
 }
-function scaleFlag(flag, options) {
-    const availableHeight = process.stdout.rows
-    const availableWidth = process.stdout.columns
-
-    const direction = (options.vertical ? availableWidth : availableHeight)
-    const flagHeight = flag.stripes.reduce((a, stripe) => { return a + stripe.height }, 0)
-    const maxScale = Math.floor(direction / flagHeight)
-    const stripeHeights = flag.stripes.map(stripe => stripe.height)
-    const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
-        .map(weight => { // i tried to make this a ternary but it wouldnt work :<
-            if (options.vertical) {
-                return weight * availableWidth
-            } else {
-                return weight * availableHeight
-            }
-        }) // ...map back to line numbers in the available space...
-        .map(Math.floor) // ...and err on the side of caution, floor it to whole numbers (unless you have a fancy terminal that has half-lines?)
-    const stripeHeightsFinal = stripeRowNumbers.map((r, i, a) => r - a[i - 1] || r) // now squash to the screen
-    return { flagHeight, maxScale, stripeHeightsFinal, availableHeight, availableWidth }
-}
 
 class ColorStop {
     constructor(data) {
@@ -215,4 +195,4 @@ class ArgParser {
     }
 }
 
-module.exports = { scaleFlag, FlagColors, ArgParser }
+module.exports = { interpolateColor, FlagColors, ArgParser }

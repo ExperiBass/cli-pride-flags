@@ -5,7 +5,7 @@ const chalk = require("chalk")
 // import local files
 const flags = require("./flags.json")
 const { name, version } = require('../package.json')
-const { FlagColors, ArgParser } = require('./util')
+const { interpolateColor, FlagColors, ArgParser } = require('./util')
 const BLOCK = "█"
 const argparser = new ArgParser({
     'help': { aliases: ['h'], description: 'Display this help text' },
@@ -46,8 +46,22 @@ function help() {
 
 function createFlag() {
     const colors = new FlagColors(flag)
+    let blendColors = null
+    let blendPercentage = 0
     let finishedFlag = ""
     let currLine = 0
+
+    if (options.blend) {
+        const [flag, percentage] = options.blend.split(',')
+        if (flag && percentage
+            && Object.keys(flags).includes(flag)
+            && !isNaN(parseFloat(percentage))) {
+
+                // todo: maybe dont ignore if fails?
+            blendColors = new FlagColors(flags[flag])
+            blendPercentage = parseFloat(percentage)
+        }
+    }
 
     let position = (currLine / availableHeight).toFixed(3)
     while (position < 1) {
@@ -56,7 +70,13 @@ function createFlag() {
         if (options.gradient) {
             color = colors.getColor(position, 'gradient')
         } else {
-            color = colors.getColor(position)
+            const color1 = colors.getColor(position)
+            if (blendColors) {
+                const color2 = blendColors.getColor(position)
+                color = interpolateColor(color1, color2, blendPercentage)
+            } else {
+                color = color1
+            }
         }
         finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
         currLine++
