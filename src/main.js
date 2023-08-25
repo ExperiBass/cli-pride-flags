@@ -8,12 +8,13 @@ const { name, version } = require('../package.json')
 const { scaleFlag, FlagColors, ArgParser } = require('./util')
 const BLOCK = "█"
 const argparser = new ArgParser({
-    'help': { aliases: ['h'], description: 'Display this help text'},
-    'gradient': { aliases: ['g'], description: 'Make the flag a smooth gradient'},
-    'live': { aliases: ['l'], description: 'Hold the terminal open and redraw the flag upon resize, closing when any key is pressed'},
-    'vertical': { aliases: ['v'], description: 'Display the flag, but vertically'}
+    'help': { aliases: ['h'], description: 'Display this help text' },
+    'gradient': { aliases: ['g'], description: 'Make the flag a smooth gradient' },
+    'live': { aliases: ['l'], description: 'Hold the terminal open and redraw the flag upon resize, closing when any key is pressed' },
+    'vertical': { aliases: ['v'], description: 'Display the flag, but vertically' },
+    'blend': { aliases: ['b'], hasArg: true, description: 'Blend two flags together' }
 })
-const {args, options} = argparser.parse()
+const { args, options } = argparser.parse()
 const CHOSEN_FLAG = args[0]
 
 function help() {
@@ -49,7 +50,7 @@ function createFlag() {
 
         for (let i = 0; i < stripeHeight; i++) {
             const position = (currLine / availableHeight).toFixed(3)
-            let color;
+            let color
             if (options.gradient) {
                 color = colors.getColor(position, 'gradient')
             } else {
@@ -79,7 +80,7 @@ function createVerticalFlag() {
         const stripeWidth = stripeHeightsFinal[stripeIndex]
         for (let j = 0; j < stripeWidth; j++) {
             const position = (currPos / availableWidth).toFixed(3)
-            let color;
+            let color
             if (options.gradient) {
                 color = colors.getColor(position, 'gradient')
             } else {
@@ -105,6 +106,9 @@ function draw() {
     }
 }
 
+
+//
+
 // Check terminal environment
 if (!chalk.supportsColor) {
     console.log("Your terminal doesn't support color!")
@@ -112,7 +116,9 @@ if (!chalk.supportsColor) {
 }
 chalk.level = 3 // try to use truecolor
 
-
+console.log(args)
+console.log(options)
+process.exit()
 // run
 if (options.help || CHOSEN_FLAG === undefined || !Object.keys(flags).includes(CHOSEN_FLAG.toLowerCase())) {
     help()

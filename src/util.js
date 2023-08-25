@@ -75,7 +75,7 @@ function scaleFlag(flag, options) {
     const availableWidth = process.stdout.columns
 
     const direction = (options.vertical ? availableWidth : availableHeight)
-    const flagHeight = flag.stripes.reduce((a, stripe) => {return a + stripe.height}, 0)
+    const flagHeight = flag.stripes.reduce((a, stripe) => { return a + stripe.height }, 0)
     const maxScale = Math.floor(direction / flagHeight)
     const stripeHeights = flag.stripes.map(stripe => stripe.height)
     const stripeRowNumbers = toCumulativeWeights(stripeHeights) // map each stripe height to a percentage...
@@ -147,7 +147,7 @@ class ArgParser {
     #findOpt(potentialOption) {
         for (const [name, value] of Object.entries(this.#options)) {
             if (name === potentialOption || (value.aliases && value.aliases.includes(potentialOption))) {
-                return name
+                return { name: name, ...value }
             }
         }
         return null
@@ -185,14 +185,26 @@ class ArgParser {
         let args = []
         let options = {}
         // now start actually parsing
-        for (const input of inputArray) {
+        for (const key in inputArray) {
+            const index = parseInt(key)
+            const input = inputArray[index]
             if (!input) {
                 continue
             }
             const lowerCasedInput = input.toLowerCase()
             const potentialOption = this.#findOpt(this.#stripDashes(lowerCasedInput))
             if (potentialOption) {
-                options[potentialOption] = true
+                if (potentialOption.hasArg) {
+                    // look forward
+                    const optionArg = inputArray[index + 1]
+                    if (optionArg && !optionArg.startsWith('-')) {
+                        options[potentialOption.name] = optionArg.toLowerCase()
+                    } else {
+                        throw Error("Arg is missing option")
+                    }
+                } else {
+                    options[potentialOption.name] = true
+                }
             } else {
                 args.push(lowerCasedInput)
             }
