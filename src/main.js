@@ -5,7 +5,7 @@ const chalk = require("chalk")
 // import local files
 const flags = require("./flags.json")
 const { name, version } = require('../package.json')
-const { scaleFlag, FlagColors, ArgParser } = require('./util')
+const { FlagColors, ArgParser } = require('./util')
 const BLOCK = "█"
 const argparser = new ArgParser({
     'help': { aliases: ['h'], description: 'Display this help text' },

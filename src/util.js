@@ -201,7 +201,8 @@ class ArgParser {
                     if (optionArg && !optionArg.startsWith('-')) {
                         options[potentialOption.name] = optionArg.toLowerCase()
                     } else {
-                        throw Error("Arg is missing option")
+                        console.log(`--${potentialOption.name} is missing a value!`)
+                        process.exit(1)
                     }
                 } else {
                     options[potentialOption.name] = true
