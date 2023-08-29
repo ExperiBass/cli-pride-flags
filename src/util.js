@@ -132,7 +132,7 @@ class ArgParser {
                 str += `, -${value.short}`
                 str = chalk.blueBright(str) // make the options blue before continuing
                 if (value.type !== 'boolean') {
-                    str += chalk.yellow(` [${value.argName}]`)
+                    str += chalk.yellow(` ${value.argName}`)
                 }
                 str = str.padEnd(str.length + (SPACES - name.length), " ")
                 str += `  ${value.description}`

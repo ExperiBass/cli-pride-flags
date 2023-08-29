@@ -13,7 +13,7 @@ const argparser = new ArgParser({
     'gradient': { type: 'boolean', short: 'g', description: 'Make the flag a smooth gradient' },
     'live': { type: 'boolean', short: 'l', description: 'Hold the terminal open and redraw the flag upon resize, closing when any key is pressed' },
     'vertical': { type: 'boolean', short: 'v', description: 'Display the flag, but vertically' },
-    'blend': { type: 'string', short: 'b', description: 'Blend two flags together', argName: 'flag,factor' }
+    'blend': { type: 'string', short: 'b', description: 'Blend two flags together', argName: 'flag[,factor]' }
 })
 
 // setup
@@ -23,7 +23,7 @@ const availableHeight = process.stdout.rows
 const availableWidth = process.stdout.columns
 
 function help() {
-    console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("[flag]")}`)
+    console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("flag")}`)
     console.log("Options:")
     console.log(argparser.listOptions())
     console.log("Flags:")
