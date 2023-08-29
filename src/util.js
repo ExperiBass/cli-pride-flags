@@ -103,7 +103,8 @@ class FlagColors {
                     const leftColorStop = this.gradientColors[i]
                     const rightColorStop = this.gradientColors[i - 1] ?? leftColorStop
 
-                    const dPos = rightColorStop.pos - leftColorStop.pos
+                    // + 0.01 cause dPos = 0 at the end if the flag
+                    const dPos = 0.01 + (rightColorStop.pos - leftColorStop.pos)
                     const percentage = ((pos - leftColorStop.pos) / dPos)
 
                     return interpolateColor(leftColorStop.colorCode, rightColorStop.colorCode, percentage)
