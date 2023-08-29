@@ -1,4 +1,5 @@
 const chalk = require("chalk")
+const { parseArgs } = require('node:util')
 
 // Turn an input array of Numbers into an array of cumulative weights
 function toCumulativeWeights(inputArray, mode = null) {
@@ -119,29 +120,20 @@ class FlagColors {
 // tfw nobody has what you need so you roll your own
 class ArgParser {
     #options = {}
-    #singleHyphenArgSplitter = /-(\w{2,})/ig
     constructor(options) {
         this.#options = options
-    }
-    #stripDashes(str) {
-        return str.replace(/^-+/g, '')
-    }
-    #findOpt(potentialOption) {
-        for (const [name, value] of Object.entries(this.#options)) {
-            if (name === potentialOption || (value.aliases && value.aliases.includes(potentialOption))) {
-                return { name: name, ...value }
-            }
-        }
-        return null
     }
     listOptions() {
         let output = []
         const SPACES = 10
         for (const [name, value] of Object.entries(this.#options)) {
             let str = `  --${name}`
-            if (value.aliases) {
-                str += `, -${value.aliases.join(', -')}`
+            if (value.short) {
+                str += `, -${value.short}`
                 str = chalk.blueBright(str) // make the options blue before continuing
+                if (value.type !== 'boolean') {
+                    str += chalk.yellow(` [${value.argName}]`)
+                }
                 str = str.padEnd(str.length + (SPACES - name.length), " ")
                 str += `  ${value.description}`
                 output.push(str)
@@ -150,49 +142,9 @@ class ArgParser {
         return output.join('\n').trim()
     }
     parse() {
-        let inputArray = [...process.argv.slice(2)] // copy
-
-        // expand any grouped options ("-abc" -> ["-a", "-b", "-c"])
-        // tbh its more like ["a", "b", "c"] but who cares? not this code
-        for (const index in inputArray) {
-            const arg = inputArray[index]
-            const matches = [...arg.matchAll(this.#singleHyphenArgSplitter)][0] // matchAll is annoying...
-            if (!matches || !matches[1]) {
-                continue
-            }
-            const options = matches[1].split('')
-            inputArray.splice(index, 1, ...options)
-        }
-
-        let args = []
-        let options = {}
-        // now start actually parsing
-        for (const key in inputArray) {
-            const index = parseInt(key)
-            const input = inputArray[index]
-            if (!input) {
-                continue
-            }
-            const lowerCasedInput = input.toLowerCase()
-            const potentialOption = this.#findOpt(this.#stripDashes(lowerCasedInput))
-            if (potentialOption) {
-                if (potentialOption.hasArg) {
-                    // look forward
-                    const optionArg = inputArray[index + 1]
-                    if (optionArg && !optionArg.startsWith('-')) {
-                        options[potentialOption.name] = optionArg.toLowerCase()
-                    } else {
-                        console.log(`--${potentialOption.name} is missing a value!`)
-                        process.exit(1)
-                    }
-                } else {
-                    options[potentialOption.name] = true
-                }
-            } else {
-                args.push(lowerCasedInput)
-            }
-        }
-        return { args, options }
+        const inputArray = [...process.argv.slice(2)] // copy
+        const { values, positionals } = parseArgs({ args: inputArray, options: this.#options, strict: false })
+        return { args: positionals, options: values }
     }
 }
 

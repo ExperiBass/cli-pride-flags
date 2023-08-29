@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ExperiBass/cli-pride-flags#readme",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "cli-columns": "^4.0.0"
   }
 }

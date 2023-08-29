@@ -2,17 +2,18 @@
 
 // import deps
 const chalk = require("chalk")
+const columns = require('cli-columns')
 // import local files
 const flags = require("./flags.json")
 const { name, version } = require('../package.json')
 const { interpolateColor, FlagColors, ArgParser } = require('./util')
 const BLOCK = "█"
 const argparser = new ArgParser({
-    'help': { aliases: ['h'], description: 'Display this help text' },
-    'gradient': { aliases: ['g'], description: 'Make the flag a smooth gradient' },
-    'live': { aliases: ['l'], description: 'Hold the terminal open and redraw the flag upon resize, closing when any key is pressed' },
-    'vertical': { aliases: ['v'], description: 'Display the flag, but vertically' },
-    'blend': { aliases: ['b'], hasArg: true, description: 'Blend two flags together' }
+    'help': { type: 'boolean', short: 'h', description: 'Display this help text' },
+    'gradient': { type: 'boolean', short: 'g', description: 'Make the flag a smooth gradient' },
+    'live': { type: 'boolean', short: 'l', description: 'Hold the terminal open and redraw the flag upon resize, closing when any key is pressed' },
+    'vertical': { type: 'boolean', short: 'v', description: 'Display the flag, but vertically' },
+    'blend': { type: 'string', short: 'b', description: 'Blend two flags together', argName: 'flag,factor' }
 })
 
 // setup
@@ -33,14 +34,14 @@ function help() {
         // we want all the mini-flags to be at the same starting distance from the left,
         // so figure out how many spaces we need to add after the flags name
         const spaces = MINI_FLAG_DISTANCE - flagName.length
-        let flagLine = `  ${flagName}` // indent the line...
+        let flagLine = `${flagName}` // indent the line...
         flagLine = flagLine.padEnd(flagLine.length + spaces, " ") // ...add calculated spaces...
         for (const color of flags[flagName].stripes) {
             flagLine += chalk.hex(color.code)(BLOCK) // ..and then add the miniflag
         }
         flagList.push(flagLine)
     }
-    console.log(chalk.greenBright(flagList.join('\n')))
+    console.log(chalk.greenBright(columns(flagList)))
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagNames.length)}`))
 }
 
