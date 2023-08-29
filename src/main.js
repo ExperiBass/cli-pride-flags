@@ -23,9 +23,6 @@ const availableHeight = process.stdout.rows
 const availableWidth = process.stdout.columns
 
 function help() {
-    console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("flag")}`)
-    console.log(`Options:\n${argparser.listOptions()}`)
-    console.log("Flags:")
     let flagList = []
     const flagNames = Object.keys(flags).sort()
     const MINI_FLAG_DISTANCE = 12
@@ -40,7 +37,10 @@ function help() {
         }
         flagList.push(flagLine)
     }
-    console.log(chalk.greenBright(columns(flagList, { padding: 1 })))
+
+    console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("flag")}`)
+    console.log(`Options:\n${argparser.listOptions()}`)
+    console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 2 }))}`)
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagNames.length)}`))
 }
 
