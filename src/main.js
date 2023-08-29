@@ -40,7 +40,7 @@ function help() {
 
     console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("flag")}`)
     console.log(`Options:\n${argparser.listOptions()}`)
-    console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 2 }))}`)
+    console.log(`Flags:\n${chalk.greenBright(columns(flagList))}`)
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagNames.length)}`))
 }
 
@@ -53,13 +53,15 @@ function createFlag(availableWidth, availableHeight, options) {
 
     if (options.blend) {
         const [flag, factor] = options.blend.split(',')
-        if (flag && Object.keys(flags).includes(flag)) {
-            blendFactor = parseFloat(factor)
-            if (isNaN(blendFactor)) {
-                blendFactor = 0.5
-            }
-            blendColors = new FlagColors(flags[flag])
+        if (!flag || !Object.keys(flags).includes(flag)) {
+            console.log(`The flag "${flag}" doesn't exist!`)
+            process.exit(1)
         }
+        blendFactor = parseFloat(factor)
+        if (isNaN(blendFactor)) {
+            blendFactor = 0.5
+        }
+        blendColors = new FlagColors(flags[flag])
     }
 
     if (options.vertical) {
