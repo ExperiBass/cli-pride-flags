@@ -48,19 +48,18 @@ function help() {
 function createFlag() {
     const colors = new FlagColors(flag)
     let blendColors = null
-    let blendPercentage = 0
+    let blendFactor = 0
     let finishedFlag = ""
     let currLine = 0
 
     if (options.blend) {
-        const [flag, percentage] = options.blend.split(',')
-        if (flag && percentage
-            && Object.keys(flags).includes(flag)
-            && !isNaN(parseFloat(percentage))) {
-
-                // todo: maybe dont ignore if fails?
+        const [flag, factor] = options.blend.split(',')
+        if (flag && Object.keys(flags).includes(flag)) {
+            blendFactor = parseFloat(factor)
+            if (isNaN(blendFactor)) {
+                blendFactor = 0.5
+            }
             blendColors = new FlagColors(flags[flag])
-            blendPercentage = parseFloat(percentage)
         }
     }
 
@@ -74,7 +73,7 @@ function createFlag() {
             const color1 = colors.getColor(position)
             if (blendColors) {
                 const color2 = blendColors.getColor(position)
-                color = interpolateColor(color1, color2, blendPercentage)
+                color = interpolateColor(color1, color2, blendFactor)
             } else {
                 color = color1
             }
