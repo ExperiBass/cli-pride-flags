@@ -11,7 +11,7 @@ const BLOCK = "█"
 const argparser = new ArgParser({
     'help': { type: 'boolean', short: 'h', description: 'Display this help text' },
     'gradient': { type: 'boolean', short: 'g', description: 'Make the flag a smooth gradient' },
-    'live': { type: 'boolean', short: 'l', description: 'Hold the terminal open and redraw the flag upon resize, closing when any key is pressed' },
+    'live': { type: 'boolean', short: 'l', description: 'Hold the terminal and redraw the flag upon resize, closing when any key is pressed' },
     'vertical': { type: 'boolean', short: 'v', description: 'Display the flag, but vertically' },
     'blend': { type: 'string', short: 'b', description: 'Blend two flags together', argName: 'flag[,factor]' }
 })
@@ -24,8 +24,7 @@ const availableWidth = process.stdout.columns
 
 function help() {
     console.log(`Usage: ${chalk.green(name)} ${chalk.blue("[options...]")} ${chalk.yellow("flag")}`)
-    console.log("Options:")
-    console.log(argparser.listOptions())
+    console.log(`Options:\n${argparser.listOptions()}`)
     console.log("Flags:")
     let flagList = []
     const flagNames = Object.keys(flags).sort()
@@ -41,16 +40,16 @@ function help() {
         }
         flagList.push(flagLine)
     }
-    console.log(chalk.greenBright(columns(flagList)))
+    console.log(chalk.greenBright(columns(flagList, { padding: 1 })))
     console.log(chalk.green(`${name} ${chalk.yellow(`v${version}`)}\n${chalk.reset("Flag count:")} ${chalk.blue(flagNames.length)}`))
 }
 
-function createFlag() {
+function createFlag(availableWidth, availableHeight, options) {
     const colors = new FlagColors(flag)
     let blendColors = null
     let blendFactor = 0
     let finishedFlag = ""
-    let currLine = 0
+    let position = 0
 
     if (options.blend) {
         const [flag, factor] = options.blend.split(',')
@@ -63,54 +62,48 @@ function createFlag() {
         }
     }
 
-    let position = (currLine / availableHeight).toFixed(3)
-    while (position < 1) {
-        position = (currLine / availableHeight).toFixed(3)
-        let color
-        if (options.gradient) {
-            color = colors.getColor(position, 'gradient')
-        } else {
-            const color1 = colors.getColor(position)
+    if (options.vertical) {
+        // building a single row :3
+        let currPos = 0 // position in line
+        while (position < 1) {
+            currPos++ // need to increment first for vertical flags, ig the offset is wonky?
+            position = (currPos / availableWidth).toFixed(3)
+            let color
+            if (options.gradient) {
+                color = colors.getColor(position, 'gradient')
+            } else {
+                color = colors.getColor(position)
+            }
+
             if (blendColors) {
                 const color2 = blendColors.getColor(position)
-                color = interpolateColor(color1, color2, blendFactor)
-            } else {
-                color = color1
+                color = interpolateColor(color, color2, blendFactor)
             }
+            finishedFlag += chalk.hex(color)(BLOCK)
         }
-        finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
-        currLine++
+        return finishedFlag.repeat(availableHeight)
     }
-    return finishedFlag
-}
-function createVerticalFlag() {
-    // just createFlag but v
-    //                     e
-    //                     r
-    //                     t
-    //                     i
-    //                     c
-    //                     a
-    //                     l
-    const colors = new FlagColors(flag)
-    let finishedFlag = ""
-    let currPos = 0
-    let position = 0
 
-    // building a single stripe this time
+    // clearly its not a vertical flag, proceed with horizontal
+    let currLine = 0
     while (position < 1) {
-        currPos++ // need to increment first for vertical flags, ig the offset is wonky?
-        position = (currPos / availableWidth).toFixed(3)
-
+        //console.log(position)
+        position = (currLine / availableHeight).toFixed(3)
         let color
         if (options.gradient) {
             color = colors.getColor(position, 'gradient')
         } else {
             color = colors.getColor(position)
         }
-        finishedFlag += chalk.hex(color)(BLOCK)
+
+        if (blendColors) {
+            const color2 = blendColors.getColor(position)
+            color = interpolateColor(color, color2, blendFactor)
+        }
+        finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
+        currLine++
     }
-    return finishedFlag.repeat(availableHeight)
+    return finishedFlag
 }
 
 function draw() {
@@ -118,7 +111,7 @@ function draw() {
         // Go to (0,0), clear screen, and hide cursor
         process.stdout.write("\x1b[0;0f\x1b[2J\x1b[?25l")
     }
-    const builtFlag = options.vertical ? createVerticalFlag() : createFlag()
+    const builtFlag = createFlag(availableWidth, availableHeight, options)
     process.stdout.write(builtFlag)
 
     if (!options.live) {
@@ -147,9 +140,12 @@ const flag = flags[CHOSEN_FLAG.toLowerCase()]
 if (options.live) {
     // Ensure any keypress will close program
     process.stdin.setRawMode(true)
+    // clear screen and scrollback
+    process.stdout.write("\x1b[2J\x1b[3J\x1b[1;1H")
     // Make sure process doesn't exit when finished
     process.stdout.once("data", () => {
         process.stdout.write("\x1b[?25h") // Show cursor
+        process.stdout.write("\x1b[2J\x1b[1;1H") // MAYBE: clear scrollback with [3J?
         process.exit()
     })
     // Redraw if dimensions change

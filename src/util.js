@@ -125,7 +125,7 @@ class ArgParser {
     }
     listOptions() {
         let output = []
-        const SPACES = 10
+        const SPACES = 22
         for (const [name, value] of Object.entries(this.#options)) {
             let str = `  --${name}`
             if (value.short) {
@@ -134,12 +134,12 @@ class ArgParser {
                 if (value.type !== 'boolean') {
                     str += chalk.yellow(` ${value.argName}`)
                 }
-                str = str.padEnd(str.length + (SPACES - name.length), " ")
-                str += `  ${value.description}`
+                str = str.padEnd(str.length + (SPACES - (name.length + (value.argName ? value.argName.length + 1 : 0))), " ")
+                str += `${value.description}`
                 output.push(str)
             }
         }
-        return output.join('\n').trim()
+        return output.sort().join('\n').trim()
     }
     parse() {
         const inputArray = [...process.argv.slice(2)] // copy
