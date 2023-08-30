@@ -13,7 +13,7 @@ const argparser = new ArgParser({
     'gradient': { type: 'boolean', short: 'g', description: 'Make the flag a smooth gradient' },
     'live': { type: 'boolean', short: 'l', description: 'Hold the terminal and redraw the flag upon resize, closing when any key is pressed' },
     'vertical': { type: 'boolean', short: 'v', description: 'Display the flag, but vertically' },
-    'blend': { type: 'string', short: 'b', description: 'Blend two flags together', argName: 'flag[,factor]' }
+    'blend': { type: 'string', short: 'b', description: 'Blend two flags together, with an optional decimal factor', argName: 'flag[,factor]' }
 })
 
 // setup
