@@ -70,15 +70,10 @@ function createFlag(availableWidth, availableHeight, options) {
         while (position < 1) {
             currPos++ // need to increment first for vertical flags, ig the offset is wonky?
             position = (currPos / availableWidth).toFixed(3)
-            let color
-            if (options.gradient) {
-                color = colors.getColor(position, 'gradient')
-            } else {
-                color = colors.getColor(position)
-            }
+            let color = colors.getColor(position, options.gradient ? 'gradient' : null)
 
             if (blendColors) {
-                const color2 = blendColors.getColor(position)
+                const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
                 color = interpolateColor(color, color2, blendFactor)
             }
             finishedFlag += chalk.hex(color)(BLOCK)
@@ -91,15 +86,10 @@ function createFlag(availableWidth, availableHeight, options) {
     while (position < 1) {
         //console.log(position)
         position = (currLine / availableHeight).toFixed(3)
-        let color
-        if (options.gradient) {
-            color = colors.getColor(position, 'gradient')
-        } else {
-            color = colors.getColor(position)
-        }
+        let color = colors.getColor(position, options.gradient ? 'gradient' : null)
 
         if (blendColors) {
-            const color2 = blendColors.getColor(position)
+            const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
         finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
