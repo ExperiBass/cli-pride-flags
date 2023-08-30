@@ -132,12 +132,11 @@ const flag = flags[CHOSEN_FLAG.toLowerCase()]
 if (options.live) {
     // Ensure any keypress will close program
     process.stdin.setRawMode(true)
-    // clear screen and scrollback
-    process.stdout.write("\x1b[2J\x1b[3J\x1b[1;1H")
     // Make sure process doesn't exit when finished
     process.stdout.once("data", () => {
+        process.stdout.write("\x1b[2J\x1b[1;1H") // clear screen
         process.stdout.write("\x1b[?25h") // Show cursor
-        process.stdout.write("\x1b[2J\x1b[1;1H") // MAYBE: clear scrollback with [3J?
+        // MAYBE: clear scrollback with [3J?
         process.exit()
     })
     // Redraw if dimensions change
