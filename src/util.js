@@ -88,14 +88,7 @@ class FlagColors {
         this.gradientColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0)
     }
     getColor(pos, mode = 'block') {
-        if (mode === 'block') {
-            for (const stop of this.blockColors) {
-                if (pos >= stop.pos) {
-                    return stop.colorCode
-                }
-            }
-        }
-        else if (mode === 'gradient') {
+        if (mode === 'gradient') {
             for (const i in this.gradientColors) {
                 if (pos === this.gradientColors[i].pos) {
                     return this.gradientColors[i].colorCode
@@ -104,12 +97,18 @@ class FlagColors {
                     const leftColorStop = this.gradientColors[i]
                     const rightColorStop = this.gradientColors[i - 1] ?? leftColorStop
 
-                    // + 0.01 cause dPos = 0 at the end if the flag
+                    // + 0.01 cause dPos = 0 at the end of the flag
                     const dPos = 0.01 + (rightColorStop.pos - leftColorStop.pos)
                     const percentage = ((pos - leftColorStop.pos) / dPos)
 
                     return interpolateColor(leftColorStop.colorCode, rightColorStop.colorCode, percentage)
                 }
+            }
+        }
+        // not a gradient, default to blocc
+        for (const stop of this.blockColors) {
+            if (pos >= stop.pos) {
+                return stop.colorCode
             }
         }
         return null
