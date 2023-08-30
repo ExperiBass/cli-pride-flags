@@ -2,8 +2,6 @@
 
 Displays pride flags in your terminal~
 
-[Click me for a preview!](https://experibass.github.io/flags.html)
-
 # Install
 ## NPM
 `npm i -g cli-pride-flags`
@@ -16,19 +14,20 @@ There's also a package in the AUR, maintained by `u/rhysperry111`! Install it wi
 
 # Usage
 
-`cli-pride-flags [options...] [flag]`  
-Options:  
-  `-h`  -  Display the help text  
-  `-v`  -  Display the flag, but vertically  
-  `-g`  -  Make the flag a smooth gradient  
-  `-l`  -  Hold the terminal open and redraw the flag upon resize, closing when any key is pressed  
+`cli-pride-flags [options...] flag`  
+Options:
+  --blend, -b flag[,factor]   Blend two flags together, with an optional decimal factor
+  --gradient, -g              Make the flag a smooth gradient
+  --help, -h                  Display this help text
+  --live, -l                  Hold the terminal and redraw the flag upon resize, closing when any key is pressed
+  --vertical, -v              Display the flag, but vertically
 
 - Flag is the name of the flag-- for example, you could input `bi`, `trans`, `transfem`, etc.  
 Example: `cli-pride-flags -l trans` would display the trans flag and hold the terminal.
 
 # Screenshots
 
-Theres a page displaying all the flags on my site [here :3](https://experibass.github.io/flags.html)
+Theres a page previewing all the flags on my site [here :3](https://experibassmusic.eth.limo/flags.html)
 
 Some screenshots are below!
 
