@@ -17,6 +17,7 @@ There's also a package in the AUR, maintained by `u/rhysperry111`! Install it wi
 `cli-pride-flags [options...] flag`  
 Options:
   --blend, -b flag[,factor]   Blend two flags together, with an optional decimal factor
+  --character, -c char        Character to use to draw the flag
   --gradient, -g              Make the flag a smooth gradient
   --help, -h                  Display this help text
   --live, -l                  Hold the terminal and redraw the flag upon resize, closing when any key is pressed
