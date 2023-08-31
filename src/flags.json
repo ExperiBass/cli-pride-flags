@@ -23,55 +23,23 @@
             }
         ]
     },
-    "pastel": {
+    "ace": {
         "stripes": [
-            {
-                "code": "#F59679",
-                "height": 2
-            },
-            {
-                "code": "#F9CE7B",
-                "height": 2
-            },
-            {
-                "code": "#FCF37C",
-                "height": 2
-            },
-            {
-                "code": "#9FFD7C",
-                "height": 2
-            },
-            {
-                "code": "#7BA1FB",
-                "height": 2
-            },
-            {
-                "code": "#AC7CFA",
-                "height": 2
-            }
-        ]
-    },
-    "poly": {
-        "stripes": [
-            {
-                "code": "#0000FF",
-                "height": 4
-            },
-            {
-                "code": "#FF0000",
-                "height": 2
-            },
-            {
-                "code": "#FFFF00",
-                "height": 1
-            },
-            {
-                "code": "#FF0000",
-                "height": 2
-            },
             {
                 "code": "#000000",
-                "height": 4
+                "height": 2
+            },
+            {
+                "code": "#A4A4A4",
+                "height": 2
+            },
+            {
+                "code": "#FFFFFF",
+                "height": 2
+            },
+            {
+                "code": "#810081",
+                "height": 2
             }
         ]
     },
@@ -151,26 +119,6 @@
             },
             {
                 "code": "#213555",
-                "height": 2
-            }
-        ]
-    },
-    "ace": {
-        "stripes": [
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#A4A4A4",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#810081",
                 "height": 2
             }
         ]
@@ -283,38 +231,6 @@
             }
         ]
     },
-    "demigirl": {
-        "stripes": [
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#fcadc9",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#fcadc9",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            }
-        ]
-    },
     "demienby": {
         "stripes": [
             {
@@ -367,6 +283,38 @@
             },
             {
                 "code": "#cdc5dc",
+                "height": 2
+            },
+            {
+                "code": "#c4c4c4",
+                "height": 2
+            },
+            {
+                "code": "#7f7f7f",
+                "height": 2
+            }
+        ]
+    },
+    "demigirl": {
+        "stripes": [
+            {
+                "code": "#7f7f7f",
+                "height": 2
+            },
+            {
+                "code": "#c4c4c4",
+                "height": 2
+            },
+            {
+                "code": "#fcadc9",
+                "height": 2
+            },
+            {
+                "code": "#FFFFFF",
+                "height": 2
+            },
+            {
+                "code": "#fcadc9",
                 "height": 2
             },
             {
@@ -471,150 +419,6 @@
             }
         ]
     },
-    "pro-inter": {
-        "stripes": [
-            {
-                "code": "#ffd900",
-                "height": 2
-            },
-            {
-                "code": "#7a00ab",
-                "height": 1
-            },
-            {
-                "code": "#ffd900",
-                "height": 2
-            },
-            {
-                "code": "#ffffff",
-                "height": 2
-            },
-            {
-                "code": "#ffb1c9",
-                "height": 2
-            },
-            {
-                "code": "#75d8ef",
-                "height": 2
-            },
-            {
-                "code": "#61360d",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#e50000",
-                "height": 3
-            },
-            {
-                "code": "#ff8d00",
-                "height": 3
-            },
-            {
-                "code": "#ffee00",
-                "height": 3
-            },
-            {
-                "code": "#008121",
-                "height": 3
-            },
-            {
-                "code": "#004cff",
-                "height": 3
-            },
-            {
-                "code": "#760188",
-                "height": 3
-            }
-        ]
-    },
-    "pro": {
-        "stripes": [
-            {
-                "code": "#ffffff",
-                "height": 1
-            },
-            {
-                "code": "#ffb1c9",
-                "height": 1
-            },
-            {
-                "code": "#75d8ef",
-                "height": 1
-            },
-            {
-                "code": "#61360d",
-                "height": 1
-            },
-            {
-                "code": "#000000",
-                "height": 1
-            },
-            {
-                "code": "#e50000",
-                "height": 2
-            },
-            {
-                "code": "#ff8d00",
-                "height": 2
-            },
-            {
-                "code": "#ffee00",
-                "height": 2
-            },
-            {
-                "code": "#008121",
-                "height": 2
-            },
-            {
-                "code": "#004cff",
-                "height": 2
-            },
-            {
-                "code": "#760188",
-                "height": 2
-            }
-        ]
-    },
-    "poc": {
-        "stripes": [
-            {
-                "code": "#61360d",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#e50000",
-                "height": 2
-            },
-            {
-                "code": "#ff8d00",
-                "height": 2
-            },
-            {
-                "code": "#ffee00",
-                "height": 2
-            },
-            {
-                "code": "#008121",
-                "height": 2
-            },
-            {
-                "code": "#004cff",
-                "height": 2
-            },
-            {
-                "code": "#760188",
-                "height": 2
-            }
-        ]
-    },
     "les": {
         "stripes": [
             {
@@ -695,6 +499,94 @@
             }
         ]
     },
+    "pastel": {
+        "stripes": [
+            {
+                "code": "#F59679",
+                "height": 2
+            },
+            {
+                "code": "#F9CE7B",
+                "height": 2
+            },
+            {
+                "code": "#FCF37C",
+                "height": 2
+            },
+            {
+                "code": "#9FFD7C",
+                "height": 2
+            },
+            {
+                "code": "#7BA1FB",
+                "height": 2
+            },
+            {
+                "code": "#AC7CFA",
+                "height": 2
+            }
+        ]
+    },
+    "poc": {
+        "stripes": [
+            {
+                "code": "#61360d",
+                "height": 2
+            },
+            {
+                "code": "#000000",
+                "height": 2
+            },
+            {
+                "code": "#e50000",
+                "height": 2
+            },
+            {
+                "code": "#ff8d00",
+                "height": 2
+            },
+            {
+                "code": "#ffee00",
+                "height": 2
+            },
+            {
+                "code": "#008121",
+                "height": 2
+            },
+            {
+                "code": "#004cff",
+                "height": 2
+            },
+            {
+                "code": "#760188",
+                "height": 2
+            }
+        ]
+    },
+    "poly": {
+        "stripes": [
+            {
+                "code": "#0000FF",
+                "height": 4
+            },
+            {
+                "code": "#FF0000",
+                "height": 2
+            },
+            {
+                "code": "#FFFF00",
+                "height": 1
+            },
+            {
+                "code": "#FF0000",
+                "height": 2
+            },
+            {
+                "code": "#000000",
+                "height": 4
+            }
+        ]
+    },
     "polysex": {
         "stripes": [
             {
@@ -708,6 +600,114 @@
             {
                 "code": "#398ef5",
                 "height": 4
+            }
+        ]
+    },
+    "pro": {
+        "stripes": [
+            {
+                "code": "#ffffff",
+                "height": 1
+            },
+            {
+                "code": "#ffb1c9",
+                "height": 1
+            },
+            {
+                "code": "#75d8ef",
+                "height": 1
+            },
+            {
+                "code": "#61360d",
+                "height": 1
+            },
+            {
+                "code": "#000000",
+                "height": 1
+            },
+            {
+                "code": "#e50000",
+                "height": 2
+            },
+            {
+                "code": "#ff8d00",
+                "height": 2
+            },
+            {
+                "code": "#ffee00",
+                "height": 2
+            },
+            {
+                "code": "#008121",
+                "height": 2
+            },
+            {
+                "code": "#004cff",
+                "height": 2
+            },
+            {
+                "code": "#760188",
+                "height": 2
+            }
+        ]
+    },
+    "pro-inter": {
+        "stripes": [
+            {
+                "code": "#ffd900",
+                "height": 2
+            },
+            {
+                "code": "#7a00ab",
+                "height": 1
+            },
+            {
+                "code": "#ffd900",
+                "height": 2
+            },
+            {
+                "code": "#ffffff",
+                "height": 2
+            },
+            {
+                "code": "#ffb1c9",
+                "height": 2
+            },
+            {
+                "code": "#75d8ef",
+                "height": 2
+            },
+            {
+                "code": "#61360d",
+                "height": 2
+            },
+            {
+                "code": "#000000",
+                "height": 2
+            },
+            {
+                "code": "#e50000",
+                "height": 3
+            },
+            {
+                "code": "#ff8d00",
+                "height": 3
+            },
+            {
+                "code": "#ffee00",
+                "height": 3
+            },
+            {
+                "code": "#008121",
+                "height": 3
+            },
+            {
+                "code": "#004cff",
+                "height": 3
+            },
+            {
+                "code": "#760188",
+                "height": 3
             }
         ]
     },
