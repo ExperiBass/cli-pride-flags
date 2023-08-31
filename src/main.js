@@ -14,12 +14,12 @@ const argparser = new ArgParser({
     'live': { type: 'boolean', short: 'l', description: 'Hold the terminal and redraw the flag upon resize, closing when any key is pressed' },
     'vertical': { type: 'boolean', short: 'v', description: 'Display the flag, but vertically' },
     'blend': { type: 'string', short: 'b', description: 'Blend two flags together, with an optional decimal factor', argName: 'flag[,factor]' },
-    'character': {type: 'string', short: 'c', description: 'Character to use to draw the flag', argName: 'char'}
+    'character': { type: 'string', short: 'c', description: 'Character to use to draw the flag', argName: 'char' }
 })
 
 // setup
 const { args, options } = argparser.parse()
-const BLOCK = options.character?.substring(0, 1) || "█"
+const CHAR = options.character?.trim().substring(0, 1) || "█"
 const CHOSEN_FLAG = args[0]
 const availableHeight = process.stdout.rows
 const availableWidth = process.stdout.columns
@@ -35,7 +35,7 @@ function help() {
         let flagLine = `${flagName}` // indent the line...
         flagLine = flagLine.padEnd(flagLine.length + spaces, " ") // ...add calculated spaces...
         for (const color of flags[flagName].stripes) {
-            flagLine += chalk.hex(color.code)(BLOCK) // ..and then add the miniflag
+            flagLine += chalk.hex(color.code)(CHAR) // ..and then add the miniflag
         }
         flagList.push(flagLine)
     }
@@ -78,7 +78,7 @@ function createFlag(availableWidth, availableHeight, options) {
                 const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
                 color = interpolateColor(color, color2, blendFactor)
             }
-            finishedFlag += chalk.hex(color)(BLOCK)
+            finishedFlag += chalk.hex(color)(CHAR)
         }
         return finishedFlag.repeat(availableHeight)
     }
@@ -94,7 +94,7 @@ function createFlag(availableWidth, availableHeight, options) {
             const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
-        finishedFlag += chalk.hex(color)(BLOCK.repeat(availableWidth))
+        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth))
         currLine++
     }
     return finishedFlag

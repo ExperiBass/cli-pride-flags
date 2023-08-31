@@ -145,7 +145,7 @@ class ArgParser {
         try {
             const { values, positionals } = parseArgs({ args: inputArray, options: this.#options, allowPositionals: true })
             return { args: positionals, options: values }
-        } catch(e) {
+        } catch (e) {
             console.log(e.message)
             process.exit(1)
         }

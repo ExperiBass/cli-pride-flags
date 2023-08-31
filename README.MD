@@ -14,7 +14,8 @@ There's also a package in the AUR, maintained by `u/rhysperry111`! Install it wi
 
 # Usage
 
-`cli-pride-flags [options...] flag`  
+```
+cli-pride-flags [options...] flag
 Options:
   --blend, -b flag[,factor]   Blend two flags together, with an optional decimal factor
   --character, -c char        Character to use to draw the flag
@@ -22,8 +23,7 @@ Options:
   --help, -h                  Display this help text
   --live, -l                  Hold the terminal and redraw the flag upon resize, closing when any key is pressed
   --vertical, -v              Display the flag, but vertically
-
-- Flag is the name of the flag-- for example, you could input `bi`, `trans`, `transfem`, etc.  
+```
 Example: `cli-pride-flags -l trans` would display the trans flag and hold the terminal.
 
 # Screenshots
@@ -34,11 +34,11 @@ Some screenshots are below!
 
 ![agen, bi, fluid](./screenies/1.png)
 
-![some more flags](./screenies/2.png)
+![bunch of flags and help menu :D](./screenies/2.png)
 
 # Issues
 
-none :D
+none, hopefully uwu
 
 # TODO
 - commit more crimes, but queerly

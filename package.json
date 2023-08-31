@@ -1,28 +1,29 @@
 {
-  "name": "cli-pride-flags",
-  "version": "1.4.0",
-  "description": "Displays pride flags in your terminal~",
-  "main": "src/main.js",
-  "bin": {
-    "cli-pride-flags": "src/main.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ExperiBass/cli-pride-flags.git"
-  },
-  "keywords": [
-    "pride",
-    "pride-flags",
-    "cli"
-  ],
-  "author": "ExperiBass",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/ExperiBass/cli-pride-flags/issues"
-  },
-  "homepage": "https://github.com/ExperiBass/cli-pride-flags#readme",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "cli-columns": "^4.0.0"
-  }
+    "name": "cli-pride-flags",
+    "version": "1.4.0",
+    "description": "Displays pride flags in your terminal~",
+    "main": "src/main.js",
+    "bin": {
+        "cli-pride-flags": "src/main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ExperiBass/cli-pride-flags.git"
+    },
+    "keywords": [
+        "pride",
+        "pride-flags",
+        "cli",
+        "terminal"
+    ],
+    "author": "ExperiBass",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/ExperiBass/cli-pride-flags/issues"
+    },
+    "homepage": "https://github.com/ExperiBass/cli-pride-flags#readme",
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "cli-columns": "^4.0.0"
+    }
 }
