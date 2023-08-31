@@ -142,8 +142,13 @@ class ArgParser {
     }
     parse() {
         const inputArray = [...process.argv.slice(2)] // copy
-        const { values, positionals } = parseArgs({ args: inputArray, options: this.#options, strict: false })
-        return { args: positionals, options: values }
+        try {
+            const { values, positionals } = parseArgs({ args: inputArray, options: this.#options, allowPositionals: true })
+            return { args: positionals, options: values }
+        } catch(e) {
+            console.log(e.message)
+            process.exit(1)
+        }
     }
 }
 
