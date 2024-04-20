@@ -73,6 +73,10 @@ function RGBToHex(r, g, b) {
     return `#${hexR}${hexG}${hexB}`
 }
 
+function randNum(max) {
+    return (Math.floor(Math.random() * Math.floor(max++)))
+}
+
 class ColorStop {
     constructor(data) {
         this.pos = data[0]
@@ -152,4 +156,4 @@ class ArgParser {
     }
 }
 
-module.exports = { interpolateColor, FlagColors, ArgParser }
+module.exports = { randNum, interpolateColor, FlagColors, ArgParser }
