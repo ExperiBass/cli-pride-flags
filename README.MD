@@ -10,7 +10,7 @@ Displays pride flags in your terminal~
 There's also a package in the AUR, maintained by `u/rhysperry111`! Install it with your favorite AUR helper: `cli-pride-flags`
 
 ## From cloned repo
-`npm i .`
+`npm link --global`
 
 # Usage
 
@@ -42,5 +42,6 @@ Some screenshots are below!
 none, hopefully uwu
 
 # TODO
+- `tabtab` completion? it seems overly complex for such a little program...
 - commit more crimes, but queerly
 - conquer the world with the queer agenda
