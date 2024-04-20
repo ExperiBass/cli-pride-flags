@@ -35,7 +35,7 @@ Some screenshots are below!
 
 ![agen, bi, fluid](./screenies/1.png)
 
-![bunch of flags and help menu :D](./screenies/2.png)
+![bunch of flags and help text :D](./screenies/2.png)
 
 # Issues
 
