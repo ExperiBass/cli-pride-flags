@@ -1,23 +1,23 @@
-const chalk = require("chalk")
+const chalk = require('chalk')
 const { parseArgs } = require('node:util')
 
 // Turn an input array of Numbers into an array of cumulative weights
 function toCumulativeWeights(inputArray, mode = null) {
-    // copy the input
+    /// copy the input
     let input = [...inputArray]
     let result = []
 
     let accumulator = 0
     if (mode === 'gradient') {
-        // needs to start at 0 and lose the last stripe,
-        // or you lose the first and have a w i d e last
+        /// needs to start at 0 and lose the last weight,
+        /// or you lose the first and have a w i d e last
         input.unshift(0)
         input.pop()
     }
     const sum = input.reduce((a, x) => a + x)
 
     for (const x of input) {
-        // likewise, order matters here for block and gradient modes
+        /// likewise, order matters here for block and gradient modes
         if (mode === 'block') {
             result.push((accumulator / sum).toFixed(2))
             accumulator += x
@@ -34,11 +34,11 @@ function interpolateColor(color1, color2, percentage) {
     let color2RGB = hexToRGB(color2)
 
     // Determine which color is lighter and adjust the percentage
-    const lightness1 = (color1RGB.r * 0.299 + color1RGB.g * 0.587 + color1RGB.b * 0.114)
-    const lightness2 = (color2RGB.r * 0.299 + color2RGB.g * 0.587 + color2RGB.b * 0.114)
+    const lightness1 = color1RGB.r * 0.299 + color1RGB.g * 0.587 + color1RGB.b * 0.114
+    const lightness2 = color2RGB.r * 0.299 + color2RGB.g * 0.587 + color2RGB.b * 0.114
     if (lightness1 > lightness2) {
         // flip
-        [color2RGB, color1RGB] = [color1RGB, color2RGB]
+        ;[color2RGB, color1RGB] = [color1RGB, color2RGB]
         percentage = 1 - percentage
     }
 
@@ -48,14 +48,15 @@ function interpolateColor(color1, color2, percentage) {
     const b = Math.round(color1RGB.b + (color2RGB.b - color1RGB.b) * percentage)
 
     return RGBToHex(
-        ...[r, g, b].map(v => {
-            // clamp dem numbers!
-            if (v > 255) {
+        ...[r, g, b].map((v) => {
+            /// clamp dem numbers!
+            v = Math.max(0, Math.min(255, v))
+            /*if (v > 255) {
                 v = 255
             }
             if (v < 0) {
                 v = 0
-            }
+            }*/
             return v
         })
     )
@@ -67,14 +68,14 @@ function hexToRGB(hex) {
     return { r: r, g: g, b: b }
 }
 function RGBToHex(r, g, b) {
-    const hexR = r.toString(16).padStart(2, "0")
-    const hexG = g.toString(16).padStart(2, "0")
-    const hexB = b.toString(16).padStart(2, "0")
+    const hexR = r.toString(16).padStart(2, '0')
+    const hexG = g.toString(16).padStart(2, '0')
+    const hexB = b.toString(16).padStart(2, '0')
     return `#${hexR}${hexG}${hexB}`
 }
 
 function randNum(max) {
-    return (Math.floor(Math.random() * Math.floor(max++)))
+    return Math.floor(Math.random() * Math.floor(max++))
 }
 
 class ColorStop {
@@ -85,25 +86,35 @@ class ColorStop {
 }
 class FlagColors {
     constructor(flag) {
-        this.blockColors = toCumulativeWeights(flag.stripes.map(stripe => stripe.height), 'block').map((x, i) => new ColorStop([x, flag.stripes[i].code]))
-        this.gradientColors = toCumulativeWeights(flag.stripes.map(stripe => stripe.height), 'gradient').map((x, i) => new ColorStop([x, flag.stripes[i].code]))
-        // Sort color stops in reverse order, so getColor checks for the highest value that the input is "to the right" of.
-        this.blockColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0)
-        this.gradientColors.sort((a, b) => a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0)
+        /// grab the weights furst
+        let weights = flag.weights
+        if (!weights) {
+            /// no weights? its a uniform flag!
+            weights = Array(flag.stripes.length).fill(1, -flag.stripes.length)
+        }
+
+        /// create the cumulative weights~
+        this.blockColors = toCumulativeWeights(weights, 'block').map((x, i) => new ColorStop([x, flag.stripes[i]]))
+        this.gradientColors = toCumulativeWeights(weights, 'gradient').map(
+            (x, i) => new ColorStop([x, flag.stripes[i]])
+        )
+
+        /// Sort color stops in reverse order, so getColor checks for the highest value that the input is "to the right" of.
+        this.blockColors.sort((a, b) => (a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0))
+        this.gradientColors.sort((a, b) => (a.pos > b.pos ? -1 : a.pos < b.pos ? 1 : 0))
     }
     getColor(pos, mode = 'block') {
         if (mode === 'gradient') {
             for (const i in this.gradientColors) {
                 if (pos === this.gradientColors[i].pos) {
                     return this.gradientColors[i].colorCode
-                }
-                else if (pos >= this.gradientColors[i].pos) {
+                } else if (pos >= this.gradientColors[i].pos) {
                     const leftColorStop = this.gradientColors[i]
                     const rightColorStop = this.gradientColors[i - 1] ?? leftColorStop
 
                     // + 0.01 cause dPos = 0 at the end of the flag
                     const dPos = 0.01 + (rightColorStop.pos - leftColorStop.pos)
-                    const percentage = ((pos - leftColorStop.pos) / dPos)
+                    const percentage = (pos - leftColorStop.pos) / dPos
 
                     return interpolateColor(leftColorStop.colorCode, rightColorStop.colorCode, percentage)
                 }
@@ -117,10 +128,9 @@ class FlagColors {
         }
         return null
     }
-
 }
 
-// tfw nobody has what you need so you roll your own
+/// tfw nobody has what you need so you roll your own
 class ArgParser {
     #options = {}
     constructor(options) {
@@ -137,7 +147,10 @@ class ArgParser {
                 if (value.type !== 'boolean') {
                     str += chalk.yellow(` ${value.argName}`)
                 }
-                str = str.padEnd(str.length + (SPACES - (name.length + (value.argName ? value.argName.length + 1 : 0))), " ")
+                str = str.padEnd(
+                    str.length + (SPACES - (name.length + (value.argName ? value.argName.length + 1 : 0))),
+                    ' '
+                )
                 str += `${value.description}`
                 output.push(str)
             }
@@ -145,9 +158,13 @@ class ArgParser {
         return output.sort().join('\n').trim()
     }
     parse() {
-        const inputArray = [...process.argv.slice(2)] // copy
+        const inputArgs = process.argv.slice(2)
         try {
-            const { values, positionals } = parseArgs({ args: inputArray, options: this.#options, allowPositionals: true })
+            const { values, positionals } = parseArgs({
+                args: inputArgs,
+                options: this.#options,
+                allowPositionals: true,
+            })
             return { args: positionals, options: values }
         } catch (e) {
             console.log(e.message)

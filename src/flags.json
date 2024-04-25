@@ -1,922 +1,380 @@
 {
     "abro": {
         "stripes": [
-            {
-                "code": "#75ca92",
-                "height": 2
-            },
-            {
-                "code": "#b2e4c5",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#e695b5",
-                "height": 2
-            },
-            {
-                "code": "#da446c",
-                "height": 2
-            }
+            "#75ca92",
+            "#b2e4c5",
+            "#FFFFFF",
+            "#e695b5",
+            "#da446c"
         ]
     },
     "ace": {
         "stripes": [
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#A4A4A4",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#810081",
-                "height": 2
-            }
+            "#000000",
+            "#A4A4A4",
+            "#FFFFFF",
+            "#810081"
         ]
     },
     "agen": {
         "stripes": [
-            {
-                "code": "#000000",
-                "height": 1
-            },
-            {
-                "code": "#BABABA",
-                "height": 1
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 1
-            },
-            {
-                "code": "#BAF484",
-                "height": 1
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 1
-            },
-            {
-                "code": "#BABABA",
-                "height": 1
-            },
-            {
-                "code": "#000000",
-                "height": 1
-            }
+            "#000000",
+            "#BABABA",
+            "#FFFFFF",
+            "#BAF484",
+            "#FFFFFF",
+            "#BABABA",
+            "#000000"
         ]
     },
     "aro": {
         "stripes": [
-            {
-                "code": "#3BA740",
-                "height": 2
-            },
-            {
-                "code": "#A8D47A",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#ABABAB",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 2
-            }
+            "#3BA740",
+            "#A8D47A",
+            "#FFFFFF",
+            "#ABABAB",
+            "#000000"
         ]
     },
     "aroace": {
         "stripes": [
-            {
-                "code": "#e28b00",
-                "height": 2
-            },
-            {
-                "code": "#eaca00",
-                "height": 2
-            },
-            {
-                "code": "#ffffff",
-                "height": 2
-            },
-            {
-                "code": "#63addc",
-                "height": 2
-            },
-            {
-                "code": "#213555",
-                "height": 2
-            }
+            "#e28b00",
+            "#eaca00",
+            "#ffffff",
+            "#63addc",
+            "#213555"
         ]
     },
     "bi": {
         "stripes": [
-            {
-                "code": "#D60270",
-                "height": 4
-            },
-            {
-                "code": "#9B4F96",
-                "height": 3
-            },
-            {
-                "code": "#0038A8",
-                "height": 4
-            }
+            "#D60270",
+            "#9B4F96",
+            "#0038A8"
+        ],
+        "weights": [
+            4,
+            3,
+            4
         ]
     },
     "bigen": {
         "stripes": [
-            {
-                "code": "#C479A2",
-                "height": 2
-            },
-            {
-                "code": "#EDA5CD",
-                "height": 2
-            },
-            {
-                "code": "#D5C7E8",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#D5C7E8",
-                "height": 2
-            },
-            {
-                "code": "#9AC7E8",
-                "height": 2
-            },
-            {
-                "code": "#6D82D1",
-                "height": 2
-            }
+            "#C479A2",
+            "#EDA5CD",
+            "#D5C7E8",
+            "#FFFFFF",
+            "#D5C7E8",
+            "#9AC7E8",
+            "#6D82D1"
         ]
     },
     "classic": {
         "stripes": [
-            {
-                "code": "#E50000",
-                "height": 2
-            },
-            {
-                "code": "#FF8D00",
-                "height": 2
-            },
-            {
-                "code": "#FFEE00",
-                "height": 2
-            },
-            {
-                "code": "#028121",
-                "height": 2
-            },
-            {
-                "code": "#004CFF",
-                "height": 2
-            },
-            {
-                "code": "#770088",
-                "height": 2
-            }
+            "#E50000",
+            "#FF8D00",
+            "#FFEE00",
+            "#028121",
+            "#004CFF",
+            "#770088"
         ]
     },
     "demiboy": {
         "stripes": [
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#9fd9eb",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#9fd9eb",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            }
+            "#7f7f7f",
+            "#c4c4c4",
+            "#9fd9eb",
+            "#FFFFFF",
+            "#9fd9eb",
+            "#c4c4c4",
+            "#7f7f7f"
         ]
     },
     "demienby": {
         "stripes": [
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#fbff75",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#fbff75",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            }
+            "#7f7f7f",
+            "#c4c4c4",
+            "#fbff75",
+            "#FFFFFF",
+            "#fbff75",
+            "#c4c4c4",
+            "#7f7f7f"
         ]
     },
     "demigender": {
         "stripes": [
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#cdc5dc",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#cdc5dc",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            }
+            "#7f7f7f",
+            "#c4c4c4",
+            "#cdc5dc",
+            "#FFFFFF",
+            "#cdc5dc",
+            "#c4c4c4",
+            "#7f7f7f"
         ]
     },
     "demigirl": {
         "stripes": [
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#fcadc9",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#fcadc9",
-                "height": 2
-            },
-            {
-                "code": "#c4c4c4",
-                "height": 2
-            },
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            }
+            "#7f7f7f",
+            "#c4c4c4",
+            "#fcadc9",
+            "#FFFFFF",
+            "#fcadc9",
+            "#c4c4c4",
+            "#7f7f7f"
         ]
     },
     "enby": {
         "stripes": [
-            {
-                "code": "#FCF431",
-                "height": 2
-            },
-            {
-                "code": "#FCFCFC",
-                "height": 2
-            },
-            {
-                "code": "#9D59D2",
-                "height": 2
-            },
-            {
-                "code": "#282828",
-                "height": 2
-            }
+            "#FCF431",
+            "#FCFCFC",
+            "#9D59D2",
+            "#282828"
         ]
     },
     "fluid": {
         "stripes": [
-            {
-                "code": "#FE76A2",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#BF12D7",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#303CBE",
-                "height": 2
-            }
+            "#FE76A2",
+            "#FFFFFF",
+            "#BF12D7",
+            "#000000",
+            "#303CBE"
         ]
     },
     "gay": {
         "stripes": [
-            {
-                "code": "#238d70",
-                "height": 2
-            },
-            {
-                "code": "#3ecea9",
-                "height": 2
-            },
-            {
-                "code": "#9be8c0",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#7faae0",
-                "height": 2
-            },
-            {
-                "code": "#5643c9",
-                "height": 2
-            },
-            {
-                "code": "#411876",
-                "height": 2
-            }
+            "#238d70",
+            "#3ecea9",
+            "#9be8c0",
+            "#FFFFFF",
+            "#7faae0",
+            "#5643c9",
+            "#411876"
         ]
     },
     "inter": {
         "stripes": [
-            {
-                "code": "#ffd900",
-                "height": 4
-            },
-            {
-                "code": "#7a00ab",
-                "height": 2
-            },
-            {
-                "code": "#ffd900",
-                "height": 4
-            }
+            "#ffd900",
+            "#7a00ab",
+            "#ffd900"
+        ],
+        "weights": [
+            2,
+            1,
+            2
         ]
     },
     "les": {
         "stripes": [
-            {
-                "code": "#D62800",
-                "height": 2
-            },
-            {
-                "code": "#FF9B56",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#D462A6",
-                "height": 2
-            },
-            {
-                "code": "#A40062",
-                "height": 2
-            }
+            "#D62800",
+            "#FF9B56",
+            "#FFFFFF",
+            "#D462A6",
+            "#A40062"
         ]
     },
     "neutrois": {
         "stripes": [
-            {
-                "code": "#FFFFFF",
-                "height": 4
-            },
-            {
-                "code": "#2f9d1d",
-                "height": 4
-            },
-            {
-                "code": "#000000",
-                "height": 4
-            }
+            "#FFFFFF",
+            "#2f9d1d",
+            "#000000"
         ]
     },
     "omni": {
         "stripes": [
-            {
-                "code": "#fc98cb",
-                "height": 3
-            },
-            {
-                "code": "#fb4dbc",
-                "height": 3
-            },
-            {
-                "code": "#2b0047",
-                "height": 3
-            },
-            {
-                "code": "#6c54fd",
-                "height": 3
-            },
-            {
-                "code": "#90a1fe",
-                "height": 3
-            }
+            "#fc98cb",
+            "#fb4dbc",
+            "#2b0047",
+            "#6c54fd",
+            "#90a1fe"
         ]
     },
     "pan": {
         "stripes": [
-            {
-                "code": "#FF1C8D",
-                "height": 4
-            },
-            {
-                "code": "#FFD700",
-                "height": 4
-            },
-            {
-                "code": "#1AB3FF",
-                "height": 4
-            }
+            "#FF1C8D",
+            "#FFD700",
+            "#1AB3FF"
         ]
     },
     "pastel": {
         "stripes": [
-            {
-                "code": "#F59679",
-                "height": 2
-            },
-            {
-                "code": "#F9CE7B",
-                "height": 2
-            },
-            {
-                "code": "#FCF37C",
-                "height": 2
-            },
-            {
-                "code": "#9FFD7C",
-                "height": 2
-            },
-            {
-                "code": "#7BA1FB",
-                "height": 2
-            },
-            {
-                "code": "#AC7CFA",
-                "height": 2
-            }
+            "#F59679",
+            "#F9CE7B",
+            "#FCF37C",
+            "#9FFD7C",
+            "#7BA1FB",
+            "#AC7CFA"
         ]
     },
     "poc": {
         "stripes": [
-            {
-                "code": "#61360d",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#e50000",
-                "height": 2
-            },
-            {
-                "code": "#ff8d00",
-                "height": 2
-            },
-            {
-                "code": "#ffee00",
-                "height": 2
-            },
-            {
-                "code": "#008121",
-                "height": 2
-            },
-            {
-                "code": "#004cff",
-                "height": 2
-            },
-            {
-                "code": "#760188",
-                "height": 2
-            }
+            "#61360d",
+            "#000000",
+            "#e50000",
+            "#ff8d00",
+            "#ffee00",
+            "#008121",
+            "#004cff",
+            "#760188"
         ]
     },
     "poly": {
         "stripes": [
-            {
-                "code": "#0000FF",
-                "height": 4
-            },
-            {
-                "code": "#FF0000",
-                "height": 2
-            },
-            {
-                "code": "#FFFF00",
-                "height": 1
-            },
-            {
-                "code": "#FF0000",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 4
-            }
+            "#0000FF",
+            "#FF0000",
+            "#FFFF00",
+            "#FF0000",
+            "#000000"
+        ],
+        "weights": [
+            4,
+            2,
+            1,
+            2,
+            4
         ]
     },
     "polysex": {
         "stripes": [
-            {
-                "code": "#f200b8",
-                "height": 4
-            },
-            {
-                "code": "#2dd76b",
-                "height": 4
-            },
-            {
-                "code": "#398ef5",
-                "height": 4
-            }
+            "#f200b8",
+            "#2dd76b",
+            "#398ef5"
         ]
     },
-    "pro": {
+    "progress": {
         "stripes": [
-            {
-                "code": "#ffffff",
-                "height": 1
-            },
-            {
-                "code": "#ffb1c9",
-                "height": 1
-            },
-            {
-                "code": "#75d8ef",
-                "height": 1
-            },
-            {
-                "code": "#61360d",
-                "height": 1
-            },
-            {
-                "code": "#000000",
-                "height": 1
-            },
-            {
-                "code": "#e50000",
-                "height": 2
-            },
-            {
-                "code": "#ff8d00",
-                "height": 2
-            },
-            {
-                "code": "#ffee00",
-                "height": 2
-            },
-            {
-                "code": "#008121",
-                "height": 2
-            },
-            {
-                "code": "#004cff",
-                "height": 2
-            },
-            {
-                "code": "#760188",
-                "height": 2
-            }
+            "#ffffff",
+            "#ffb1c9",
+            "#75d8ef",
+            "#61360d",
+            "#000000",
+            "#e50000",
+            "#ff8d00",
+            "#ffee00",
+            "#008121",
+            "#004cff",
+            "#760188"
+        ],
+        "weights": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
         ]
     },
     "pro-inter": {
         "stripes": [
-            {
-                "code": "#ffd900",
-                "height": 2
-            },
-            {
-                "code": "#7a00ab",
-                "height": 1
-            },
-            {
-                "code": "#ffd900",
-                "height": 2
-            },
-            {
-                "code": "#ffffff",
-                "height": 2
-            },
-            {
-                "code": "#ffb1c9",
-                "height": 2
-            },
-            {
-                "code": "#75d8ef",
-                "height": 2
-            },
-            {
-                "code": "#61360d",
-                "height": 2
-            },
-            {
-                "code": "#000000",
-                "height": 2
-            },
-            {
-                "code": "#e50000",
-                "height": 3
-            },
-            {
-                "code": "#ff8d00",
-                "height": 3
-            },
-            {
-                "code": "#ffee00",
-                "height": 3
-            },
-            {
-                "code": "#008121",
-                "height": 3
-            },
-            {
-                "code": "#004cff",
-                "height": 3
-            },
-            {
-                "code": "#760188",
-                "height": 3
-            }
+            "#ffd900",
+            "#7a00ab",
+            "#ffd900",
+            "#ffffff",
+            "#ffb1c9",
+            "#75d8ef",
+            "#61360d",
+            "#000000",
+            "#e50000",
+            "#ff8d00",
+            "#ffee00",
+            "#008121",
+            "#004cff",
+            "#760188"
+        ],
+        "weights": [
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
         ]
     },
     "queer": {
         "stripes": [
-            {
-                "code": "#B57FDD",
-                "height": 4
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 4
-            },
-            {
-                "code": "#49821E",
-                "height": 4
-            }
+            "#B57FDD",
+            "#FFFFFF",
+            "#49821E"
         ]
     },
     "queerplat": {
         "stripes": [
-            {
-                "code": "#fff87d",
-                "height": 2
-            },
-            {
-                "code": "#ffaede",
-                "height": 2
-            },
-            {
-                "code": "#ffffff",
-                "height": 2
-            },
-            {
-                "code": "#7f7f7f",
-                "height": 2
-            },
-            {
-                "code": "#0f0f0f",
-                "height": 2
-            }
+            "#fff87d",
+            "#ffaede",
+            "#ffffff",
+            "#7f7f7f",
+            "#0f0f0f"
         ]
     },
     "sapph": {
         "stripes": [
-            {
-                "code": "#fa6a6b",
-                "height": 3
-            },
-            {
-                "code": "#fde79b",
-                "height": 3
-            },
-            {
-                "code": "#ffffff",
-                "height": 3
-            },
-            {
-                "code": "#8bd2c8",
-                "height": 3
-            },
-            {
-                "code": "#8b6ecc",
-                "height": 3
-            }
+            "#fa6a6b",
+            "#fde79b",
+            "#ffffff",
+            "#8bd2c8",
+            "#8b6ecc"
         ]
     },
     "trans": {
         "stripes": [
-            {
-                "code": "#5BCFFB",
-                "height": 2
-            },
-            {
-                "code": "#F5ABB9",
-                "height": 2
-            },
-            {
-                "code": "#FFFFFF",
-                "height": 2
-            },
-            {
-                "code": "#F5ABB9",
-                "height": 2
-            },
-            {
-                "code": "#5BCFFB",
-                "height": 2
-            }
+            "#5BCFFB",
+            "#F5ABB9",
+            "#FFFFFF",
+            "#F5ABB9",
+            "#5BCFFB"
         ]
     },
     "transfem": {
         "stripes": [
-            {
-                "code": "#74deff",
-                "height": 2
-            },
-            {
-                "code": "#ffe1ed",
-                "height": 2
-            },
-            {
-                "code": "#ffb5d6",
-                "height": 2
-            },
-            {
-                "code": "#fe8cbf",
-                "height": 2
-            },
-            {
-                "code": "#ffb5d6",
-                "height": 2
-            },
-            {
-                "code": "#ffe1ed",
-                "height": 2
-            },
-            {
-                "code": "#74deff",
-                "height": 2
-            }
+            "#74deff",
+            "#ffe1ed",
+            "#ffb5d6",
+            "#fe8cbf",
+            "#ffb5d6",
+            "#ffe1ed",
+            "#74deff"
         ]
     },
     "transmasc": {
         "stripes": [
-            {
-                "code": "#ff8bbf",
-                "height": 2
-            },
-            {
-                "code": "#cdf5ff",
-                "height": 2
-            },
-            {
-                "code": "#9aedff",
-                "height": 2
-            },
-            {
-                "code": "#76e0ff",
-                "height": 2
-            },
-            {
-                "code": "#9aedff",
-                "height": 2
-            },
-            {
-                "code": "#cdf5ff",
-                "height": 2
-            },
-            {
-                "code": "#ff8bbf",
-                "height": 2
-            }
+            "#ff8bbf",
+            "#cdf5ff",
+            "#9aedff",
+            "#76e0ff",
+            "#9aedff",
+            "#cdf5ff",
+            "#ff8bbf"
         ]
     },
     "trigen": {
         "stripes": [
-            {
-                "code": "#ff95c4",
-                "height": 2
-            },
-            {
-                "code": "#9581fe",
-                "height": 2
-            },
-            {
-                "code": "#67d965",
-                "height": 2
-            },
-            {
-                "code": "#9581fe",
-                "height": 2
-            },
-            {
-                "code": "#ff95c4",
-                "height": 2
-            }
+            "#ff95c4",
+            "#9581fe",
+            "#67d965",
+            "#9581fe",
+            "#ff95c4"
         ]
     },
     "xeno": {
         "stripes": [
-            {
-                "code": "#ff6690",
-                "height": 2
-            },
-            {
-                "code": "#ff9897",
-                "height": 2
-            },
-            {
-                "code": "#ffb783",
-                "height": 2
-            },
-            {
-                "code": "#fbfea7",
-                "height": 2
-            },
-            {
-                "code": "#84bbff",
-                "height": 2
-            },
-            {
-                "code": "#9d84ff",
-                "height": 2
-            },
-            {
-                "code": "#a316fe",
-                "height": 2
-            }
+            "#ff6690",
+            "#ff9897",
+            "#ffb783",
+            "#fbfea7",
+            "#84bbff",
+            "#9d84ff",
+            "#a316fe"
         ]
     }
 }

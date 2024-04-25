@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+/////
 // import deps
+/////
 const chalk = require('chalk')
 const columns = require('cli-columns')
-// import local files
+/// import local files
 const flags = require('./flags.json')
 const { name, version } = require('../package.json')
 const { randNum, interpolateColor, FlagColors, ArgParser } = require('./util')
@@ -65,7 +67,7 @@ function help() {
         let flagLine = `${flagName}` // indent the line...
         flagLine = flagLine.padEnd(flagLine.length + spaces, ' ') // ...add calculated spaces...
         for (const color of flags[flagName].stripes) {
-            flagLine += chalk.hex(color.code)(CHAR) // ..and then add the miniflag
+            flagLine += chalk.hex(color)(CHAR) // ..and then add the miniflag
         }
         flagList.push(flagLine)
     }
