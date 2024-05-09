@@ -1,6 +1,6 @@
 {
     "name": "cli-pride-flags",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "description": "Displays pride flags in your terminal~",
     "main": "src/main.js",
     "bin": {
@@ -24,6 +24,7 @@
     "homepage": "https://github.com/ExperiBass/cli-pride-flags#readme",
     "dependencies": {
         "chalk": "^4.1.2",
-        "cli-columns": "^4.0.0"
+        "cli-columns": "^4.0.0",
+        "unified-pride-flags": "^1.0.0"
     }
 }

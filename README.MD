@@ -10,7 +10,10 @@ Displays pride flags in your terminal~
 There's also a package in the AUR, maintained by `u/rhysperry111`! Install it with your favorite AUR helper: `cli-pride-flags`
 
 ## From cloned repo
-`npm link --global`
+```sh
+npm i
+npm link --global
+```
 
 # Usage
 

@@ -6,7 +6,7 @@
 const chalk = require('chalk')
 const columns = require('cli-columns')
 /// import local files
-const flags = require('./flags.json')
+const flags = require('unified-pride-flags')
 const { name, version } = require('../package.json')
 const { randNum, interpolateColor, FlagColors, ArgParser } = require('./util')
 

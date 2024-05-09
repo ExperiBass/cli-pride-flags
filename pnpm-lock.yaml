@@ -14,6 +14,9 @@ importers:
       cli-columns:
         specifier: ^4.0.0
         version: 4.0.0
+      unified-pride-flags:
+        specifier: ^1.0.0
+        version: 1.0.0
 
 packages:
 
@@ -63,6 +66,9 @@ packages:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
 
+  unified-pride-flags@1.0.0:
+    resolution: {integrity: sha512-thi8lUVmhoVp2lDi2WZIIlPAQFh8Bf/G9od+X1locBOYx2xqcNw3GjDSSkfwH2ohofFnyq1FPExw4i3cQzAa2w==}
+
 snapshots:
 
   ansi-regex@5.0.1: {}
@@ -106,3 +112,5 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  unified-pride-flags@1.0.0: {}
