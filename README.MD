@@ -4,7 +4,9 @@ Displays pride flags in your terminal~
 
 # Install
 ## NPM
-`npm i -g cli-pride-flags`
+```sh
+npm i -g cli-pride-flags
+```
 
 ## AUR
 There's also a package in the AUR, maintained by `u/rhysperry111`! Install it with your favorite AUR helper: `cli-pride-flags`
