@@ -44,7 +44,7 @@ Some screenshots are below!
 
 # Issues
 
-- passing a invalid flag to `--blend` when `--live` is active results in your terminal cursor disappearing
+- none :3
 
 # TODO
 - commit more crimes, but queerly
