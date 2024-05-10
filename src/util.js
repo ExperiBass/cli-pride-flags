@@ -143,17 +143,21 @@ class ArgParser {
             let str = `  --${name}`
             if (value.short) {
                 str += `, -${value.short}`
-                str = chalk.blueBright(str) // make the options blue before continuing
-                if (value.type !== 'boolean') {
-                    str += chalk.yellow(` ${value.argName}`)
-                }
-                str = str.padEnd(
-                    str.length + (SPACES - (name.length + (value.argName ? value.argName.length + 1 : 0))),
-                    ' '
-                )
-                str += `${value.description}`
-                output.push(str)
+            } else {
+                str += ' '.repeat(4) /// bruh
+                /// so it doesnt like when a option doesnt have a short flag
+                /// give it spacing of the same amount so its happy
             }
+            str = chalk.blueBright(str) // make the options blue before continuing
+            if (value.type !== 'boolean') {
+                str += chalk.yellow(` ${value.argName}`)
+            }
+            str = str.padEnd(
+                str.length + (SPACES - (name.length + (value.argName ? value.argName.length + 1 : 0))),
+                ' '
+            )
+            str += `${value.description}`
+            output.push(str)
         }
         return output.sort().join('\n').trim()
     }
