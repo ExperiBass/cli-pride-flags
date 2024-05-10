@@ -101,6 +101,13 @@ function completion(env = {}) {
                 .map((v) => `-${v}`)
         })
 
+
+    /// if theres more args than options, and theres not an arg mid-typing,
+    /// we assume the user has selected a flag and dont bother completing
+    if (activeOptions.length < args.length && !env.last) {
+        return
+    }
+
     /// long option completion
     if (env.last.startsWith('--')) {
         /// filter out options already in use
@@ -142,13 +149,6 @@ function completion(env = {}) {
             .filter((v) => v.name && !activeOptions.includes(v.name) && !activeOptions.includes(v.long))
 
         return tabtab.log(availableOptions)
-    }
-
-    /// if theres more args than options, we assume the user has selected a flag
-    /// and dont bother completing
-    /// this happens down here to allow for option completion
-    if (activeOptions.length < args.length) {
-        return
     }
 
     return tabtab.log(Object.keys(flags))
