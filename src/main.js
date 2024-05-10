@@ -58,27 +58,24 @@ const argparser = new ArgParser(cliOptions)
 
 const { args, options } = argparser.parse()
 const CHAR = options.character?.trim().substring(0, 1) || '█'
-const CHOSEN_FLAG = args[0]?.toLowerCase()
+const CHOSEN_FLAG = args[0]?.trim().toLowerCase()
 
 function help() {
     let flagList = []
-    const flagNames = Object.keys(flags).sort()
-    const MINI_FLAG_DISTANCE = 12
-    for (const flagName of flagNames) {
+    const MINI_FLAG_DISTANCE = 16
+    for (const [name, flag] of Object.entries(flags)) {
         // we want all the mini-flags to be at the same starting distance from the left,
         // so figure out how many spaces we need to add after the flags name
-        const spaces = MINI_FLAG_DISTANCE - flagName.length
-        let flagLine = `${flagName}` // indent the line...
+        const spaces = MINI_FLAG_DISTANCE - name.length
+        let flagLine = `${name}` // indent the line...
         flagLine = flagLine.padEnd(flagLine.length + spaces, ' ') // ...add calculated spaces...
-        for (const color of flags[flagName].stripes) {
-            flagLine += chalk.hex(color)(CHAR) // ..and then add the miniflag
-        }
+        flagLine += flag.stripes.map((color) => chalk.hex(color)(CHAR)).join('') // ..and then add the miniflag
         flagList.push(flagLine)
     }
 
     console.log(`Usage: ${chalk.green(name)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
     console.log(`Options:\n${argparser.listOptions()}`)
-    console.log(`Flags:\n${chalk.greenBright(columns(flagList))}`)
+    console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 0 }))}`)
     console.log(chalk.green(`${name} ${chalk.blueBright(`v${version}`)}`))
 }
 
@@ -100,7 +97,6 @@ function completion(env = {}) {
                 .split('')
                 .map((v) => `-${v}`)
         })
-
 
     /// if theres more args than options, and theres not an arg mid-typing,
     /// we assume the user has selected a flag and dont bother completing
