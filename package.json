@@ -25,6 +25,7 @@
     "dependencies": {
         "chalk": "^4.1.2",
         "cli-columns": "^4.0.0",
+        "tabtab": "^3.0.2",
         "unified-pride-flags": "^1.0.0"
     }
 }

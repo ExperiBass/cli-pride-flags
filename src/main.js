@@ -5,16 +5,13 @@
 /////
 const chalk = require('chalk')
 const columns = require('cli-columns')
+const tabtab = require('tabtab')
 /// import local files
 const flags = require('unified-pride-flags')
 const { name, version } = require('../package.json')
 const { randNum, interpolateColor, FlagColors, ArgParser } = require('./util')
 
-/////
-// setup
-/////
-
-const argparser = new ArgParser({
+const cliOptions = {
     help: { type: 'boolean', short: 'h', description: 'Display this help text' },
     gradient: {
         type: 'boolean',
@@ -48,7 +45,12 @@ const argparser = new ArgParser({
         short: 'r',
         description: 'Displays a random flag! This ignores any passed flags.',
     },
-})
+}
+/////
+// setup
+/////
+
+const argparser = new ArgParser(cliOptions)
 
 const { args, options } = argparser.parse()
 const CHAR = options.character?.trim().substring(0, 1) || '█'
@@ -76,6 +78,63 @@ function help() {
     console.log(`Options:\n${argparser.listOptions()}`)
     console.log(`Flags:\n${chalk.greenBright(columns(flagList))}`)
     console.log(chalk.green(`${name} ${chalk.blueBright(`v${version}`)}`))
+}
+
+function completion(env = {}) {
+    if (!env?.complete) {
+        return
+    }
+    const args = env.partial.split(' ').slice(1).filter(Boolean)
+    const activeOptions = args
+        .filter((v) => v.startsWith('-'))
+        /// splitting grouped args, like `-gb` into `-g -b`
+        .flatMap((v) => {
+            if (v.startsWith('--')) {
+                return v
+            }
+            /// skipping the furst `-`, grab the remaining `gb` and split into `['-g', '-b']`
+            return v
+                .slice(1)
+                .split('')
+                .map((v) => `-${v}`)
+        })
+
+    /// short option completion
+    if (env.last === '-') {
+        const availableOptions = Object.entries(cliOptions)
+            .map((v) => {
+                const [name, body] = v
+
+                const completionObj = {
+                    name: `-${body.short}`,
+                    description: body.description,
+                    long: `--${name}`,
+                }
+
+                return completionObj
+            })
+            .filter((v) => !activeOptions.includes(v.name) && !activeOptions.includes(v.long))
+        return tabtab.log(availableOptions)
+    }
+    /// long option completion
+    if (env.last === '--') {
+        /// filter out options already in use
+        const availableOptions = Object.entries(cliOptions)
+            .map((v) => {
+                const [name, body] = v
+
+                const completionObj = {
+                    name: `--${name}`,
+                    description: body.description,
+                    short: `-${body.short}`,
+                }
+
+                return completionObj
+            })
+            .filter((v) => !activeOptions.includes(v.name) && !activeOptions.includes(v.short))
+        return tabtab.log(availableOptions)
+    }
+    return tabtab.log(Object.keys(flags))
 }
 
 function createFlag(availableWidth, availableHeight, options) {
@@ -148,16 +207,33 @@ function draw() {
     }
 }
 
+/////
+// run
+/////
+
+/// install completion
+if (CHOSEN_FLAG === 'install-completion') {
+    tabtab
+        .install({
+            name: name,
+            completer: name,
+        })
+        .catch((err) => console.error('INSTALL ERROR', err))
+    return
+}
+
+/// jank to allow for tabtab
+if (CHOSEN_FLAG === 'completion') {
+    const env = tabtab.parseEnv(process.env)
+    return completion(env)
+}
+
 // Check terminal environment
 if (!chalk.supportsColor) {
     console.log("Your terminal doesn't support color!")
     process.exit(1)
 }
 chalk.level = 3 // try to use truecolor
-
-/////
-// run
-/////
 
 if (options.help || (!options.random && (CHOSEN_FLAG === undefined || !Object.keys(flags).includes(CHOSEN_FLAG)))) {
     // this is cursed lol
