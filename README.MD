@@ -47,6 +47,5 @@ Some screenshots are below!
 none, hopefully uwu
 
 # TODO
-- `tabtab` completion? it seems overly complex for such a little program...
 - commit more crimes, but queerly
 - conquer the world with the queer agenda

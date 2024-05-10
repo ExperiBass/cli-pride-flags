@@ -45,6 +45,10 @@ const cliOptions = {
         short: 'r',
         description: 'Displays a random flag! This ignores any passed flags.',
     },
+    'install-completion': {
+        type: 'boolean',
+        description: 'Install tabtab shell completion',
+    },
 }
 /////
 // setup
@@ -99,25 +103,8 @@ function completion(env = {}) {
                 .map((v) => `-${v}`)
         })
 
-    /// short option completion
-    if (env.last === '-') {
-        const availableOptions = Object.entries(cliOptions)
-            .map((v) => {
-                const [name, body] = v
-
-                const completionObj = {
-                    name: `-${body.short}`,
-                    description: body.description,
-                    long: `--${name}`,
-                }
-
-                return completionObj
-            })
-            .filter((v) => !activeOptions.includes(v.name) && !activeOptions.includes(v.long))
-        return tabtab.log(availableOptions)
-    }
     /// long option completion
-    if (env.last === '--') {
+    if (env.last.startsWith('--')) {
         /// filter out options already in use
         const availableOptions = Object.entries(cliOptions)
             .map((v) => {
@@ -132,6 +119,30 @@ function completion(env = {}) {
                 return completionObj
             })
             .filter((v) => !activeOptions.includes(v.name) && !activeOptions.includes(v.short))
+
+        return tabtab.log(availableOptions)
+    }
+
+    /// short option completion
+    if (env.last.startsWith('-')) {
+        const availableOptions = Object.entries(cliOptions)
+            .map((v) => {
+                const [name, body] = v
+                // ignore if theres no short name set
+                if (!body.short) {
+                    return {}
+                }
+
+                const completionObj = {
+                    name: `-${body.short}`,
+                    description: body.description,
+                    long: `--${name}`,
+                }
+
+                return completionObj
+            })
+            .filter((v) => v.name && !activeOptions.includes(v.name) && !activeOptions.includes(v.long))
+
         return tabtab.log(availableOptions)
     }
     return tabtab.log(Object.keys(flags))
@@ -211,23 +222,31 @@ function draw() {
 // run
 /////
 
+
+///// completion
 /// install completion
-if (CHOSEN_FLAG === 'install-completion') {
+if (options['install-completion']) {
     tabtab
         .install({
             name: name,
             completer: name,
         })
-        .catch((err) => console.error('INSTALL ERROR', err))
+        .then(() => {
+            process.exit(0)
+        })
+        .catch((err) => {
+            console.log('Completion install error: ', err)
+            process.exit(1)
+        })
     return
 }
-
 /// jank to allow for tabtab
 if (CHOSEN_FLAG === 'completion') {
     const env = tabtab.parseEnv(process.env)
     return completion(env)
 }
 
+///// tool
 // Check terminal environment
 if (!chalk.supportsColor) {
     console.log("Your terminal doesn't support color!")
