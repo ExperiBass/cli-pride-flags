@@ -59,8 +59,6 @@ const argparser = new ArgParser(cliOptions)
 const { args, options } = argparser.parse()
 const CHAR = options.character?.trim().substring(0, 1) || '█'
 const CHOSEN_FLAG = args[0]?.toLowerCase()
-const availableHeight = process.stdout.rows
-const availableWidth = process.stdout.columns
 
 function help() {
     let flagList = []
@@ -218,6 +216,8 @@ function draw() {
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
     try {
+        const availableHeight = process.stdout.rows
+        const availableWidth = process.stdout.columns
         const builtFlag = createFlag(availableWidth, availableHeight, options)
         process.stdout.write(builtFlag)
     } catch (err) {
