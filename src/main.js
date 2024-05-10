@@ -103,7 +103,6 @@ function completion(env = {}) {
                 .map((v) => `-${v}`)
         })
 
-
     /// long option completion
     if (env.last.startsWith('--')) {
         /// filter out options already in use
@@ -111,7 +110,7 @@ function completion(env = {}) {
             .map((v) => {
                 const [name, body] = v
 
-                const completionObj = {
+                let completionObj = {
                     name: `--${name}`,
                     description: body.description,
                     short: `-${body.short}`,
@@ -169,8 +168,7 @@ function createFlag(availableWidth, availableHeight, options) {
         blendFlag = blendFlag.toLowerCase()
 
         if (!Object.keys(flags).includes(blendFlag)) {
-            console.log(`The flag "${blendFlag}" doesn't exist!`)
-            process.exit(1)
+            throw new Error(`The flag "${blendFlag}" doesn't exist!`)
         }
 
         blendFactor = parseFloat(factor)
@@ -219,9 +217,16 @@ function draw() {
         // Go to (0,0), clear screen, and hide cursor
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
-    const builtFlag = createFlag(availableWidth, availableHeight, options)
-    process.stdout.write(builtFlag)
-
+    try {
+        const builtFlag = createFlag(availableWidth, availableHeight, options)
+        process.stdout.write(builtFlag)
+    } catch (err) {
+        console.log(err)
+        if (options.live) {
+            process.stdout.write('\x1b[?25h')
+            process.exit(1)
+        }
+    }
     if (!options.live) {
         process.stdout.write('\n')
     }
@@ -230,7 +235,6 @@ function draw() {
 /////
 // run
 /////
-
 
 ///// completion
 /// install completion

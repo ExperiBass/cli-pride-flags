@@ -44,7 +44,7 @@ Some screenshots are below!
 
 # Issues
 
-none, hopefully uwu
+- passing a invalid flag to `--blend` when `--live` is active results in your terminal cursor disappearing
 
 # TODO
 - commit more crimes, but queerly
