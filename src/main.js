@@ -98,9 +98,9 @@ function completion(env = {}) {
                 .map((v) => `-${v}`)
         })
 
-    /// if theres more args than options, and theres not an arg mid-typing,
+    /// if theres more args than options, and theres not an option mid-typing,
     /// we assume the user has selected a flag and dont bother completing
-    if (activeOptions.length < args.length && !env.last) {
+    if (args.length > activeOptions.length && !env.last.startsWith('-')) {
         return
     }
 
