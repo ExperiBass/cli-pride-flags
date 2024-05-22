@@ -18,12 +18,13 @@ function toCumulativeWeights(inputArray, mode = null) {
 
     for (const x of input) {
         /// likewise, order matters here for block and gradient modes
+        /// precision of 3 is needed for smaller flags
         if (mode === 'block') {
-            result.push((accumulator / sum).toFixed(2))
+            result.push((accumulator / sum).toFixed(3))
             accumulator += x
         } else {
             accumulator += x
-            result.push((accumulator / sum).toFixed(2))
+            result.push((accumulator / sum).toFixed(3))
         }
     }
     return result
