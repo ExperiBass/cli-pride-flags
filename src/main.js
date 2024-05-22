@@ -206,7 +206,7 @@ function createFlag(availableWidth, availableHeight, options) {
         if (options.width) {
             finishedFlag += '\n'
         }
-        return finishedFlag.repeat(availableHeight)
+        return finishedFlag.repeat(availableHeight).trim()
     }
 
     // clearly its not a vertical flag, proceed with horizontal
@@ -222,7 +222,7 @@ function createFlag(availableWidth, availableHeight, options) {
         finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width ? '\n' : '')
         currLine++
     }
-    return finishedFlag
+    return finishedFlag.trim()
 }
 
 function draw() {
@@ -233,6 +233,7 @@ function draw() {
     try {
         const availableHeight = options.height ? options.height : process.stdout.rows
         const availableWidth = options.width ? options.width : process.stdout.columns
+        if (availableWidth<=0 || availableHeight<=0) {throw "Width and height must be greater than 0"}
         const builtFlag = createFlag(availableWidth, availableHeight, options)
         process.stdout.write(builtFlag)
     } catch (err) {
