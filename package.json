@@ -11,9 +11,10 @@
         "url": "git+https://github.com/ExperiBass/cli-pride-flags.git"
     },
     "keywords": [
+        "cli",
+        "lgbtqia",
         "pride",
         "pride-flags",
-        "cli",
         "terminal"
     ],
     "author": "ExperiBass",
