@@ -12,7 +12,7 @@ const { name, version } = require('../package.json')
 const { randNum, interpolateColor, FlagColors, ArgParser } = require('./util')
 
 const cliOptions = {
-    help: { type: 'boolean', short: 'h', description: 'Display this help text' },
+    help: { type: 'boolean', short: '?', description: 'Display this help text' },
     gradient: {
         type: 'boolean',
         short: 'g',
@@ -44,6 +44,19 @@ const cliOptions = {
         type: 'boolean',
         short: 'r',
         description: 'Displays a random flag! This ignores any passed flags.',
+    },
+    height: {
+        type: 'string',
+        short: 'h',
+        description:
+            'The height of the flag, in characters. May not generate the exact specified height',
+        argName: 'int',
+    },
+    width: {
+        type: 'string',
+        short: 'w',
+        description: 'The width of the flag, in characters',
+        argName: 'int',
     },
     'install-completion': {
         type: 'boolean',
@@ -187,7 +200,10 @@ function createFlag(availableWidth, availableHeight, options) {
             }
             finishedFlag += chalk.hex(color)(CHAR)
         }
-        return finishedFlag.repeat(availableHeight)
+        if (options.width) {
+            finishedFlag += '\n'
+        }
+        return finishedFlag.repeat(availableHeight).trim()
     }
 
     // clearly its not a vertical flag, proceed with horizontal
@@ -200,10 +216,12 @@ function createFlag(availableWidth, availableHeight, options) {
             const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
-        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth))
+        finishedFlag +=
+            chalk.hex(color)(CHAR.repeat(availableWidth)) +
+            (options.width ? '\n' : '')
         currLine++
     }
-    return finishedFlag
+    return finishedFlag.trim()
 }
 
 function draw() {
@@ -212,8 +230,15 @@ function draw() {
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
     try {
-        const availableHeight = process.stdout.rows
-        const availableWidth = process.stdout.columns
+        const availableHeight = options.height
+            ? options.height
+            : process.stdout.rows
+        const availableWidth = options.width
+            ? options.width
+            : process.stdout.columns
+        if (availableWidth <= 0 || availableHeight <= 0) {
+            throw new Error('Width and height must be greater than 0')
+        }
         const builtFlag = createFlag(availableWidth, availableHeight, options)
         process.stdout.write(builtFlag)
     } catch (err) {
