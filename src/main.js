@@ -48,8 +48,7 @@ const cliOptions = {
     height: {
         type: 'string',
         short: 'h',
-        description:
-            'The height of the flag, in characters. May not generate the exact specified height',
+        description: 'The height of the flag, in characters',
         argName: 'int',
     },
     width: {
@@ -231,12 +230,14 @@ function draw() {
     }
     try {
         const availableHeight = options.height
-            ? options.height
+            ? options.vertical
+                ? options.height
+                : options.height - 1
             : process.stdout.rows
         const availableWidth = options.width
             ? options.width
             : process.stdout.columns
-        if (availableWidth <= 0 || availableHeight <= 0) {
+        if (availableWidth < 0 || availableHeight <= 0) {
             throw new Error('Width and height must be greater than 0')
         }
         const builtFlag = createFlag(availableWidth, availableHeight, options)
