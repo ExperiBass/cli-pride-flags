@@ -18,8 +18,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       unified-pride-flags:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.0.1
+        version: 1.0.1
 
 packages:
 
@@ -220,8 +220,8 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
-  unified-pride-flags@1.0.0:
-    resolution: {integrity: sha512-thi8lUVmhoVp2lDi2WZIIlPAQFh8Bf/G9od+X1locBOYx2xqcNw3GjDSSkfwH2ohofFnyq1FPExw4i3cQzAa2w==}
+  unified-pride-flags@1.0.1:
+    resolution: {integrity: sha512-SQmg43ZA7KPqm5vWDjdFvGllE8m0YWS8sI3bU1F2OrWScwIdjukaid9CDMXqlOxYpRwBnhOaAW3Z07VNh0ZiQQ==}
 
   untildify@3.0.3:
     resolution: {integrity: sha512-iSk/J8efr8uPT/Z4eSUywnqyrQU7DSdMfdqK4iWEaUVVmcP5JcnpRqmVMwcwcnmI1ATFNgC5V90u09tBynNFKA==}
@@ -414,6 +414,6 @@ snapshots:
 
   tslib@1.14.1: {}
 
-  unified-pride-flags@1.0.0: {}
+  unified-pride-flags@1.0.1: {}
 
   untildify@3.0.3: {}
