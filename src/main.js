@@ -237,7 +237,7 @@ function draw() {
         const availableWidth = options.width
             ? options.width
             : process.stdout.columns
-        if (availableWidth < 0 || availableHeight <= 0) {
+        if (availableWidth <= 0 || availableHeight < 0) {
             throw new Error('Width and height must be greater than 0')
         }
         const builtFlag = createFlag(availableWidth, availableHeight, options)
