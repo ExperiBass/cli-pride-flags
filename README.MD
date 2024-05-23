@@ -25,11 +25,13 @@ Options:
   --blend, -b flag[,factor]   Blend two flags together, with an optional decimal factor
   --character, -c char        Character to use to draw the flag
   --gradient, -g              Make the flag a smooth gradient
-  --help, -h                  Display this help text
+  --height, -h int            The height of the flag, in characters. May not generate the exact specified height
+  --help, -?                  Display this help text
   --install-completion        Install tabtab shell completion
   --live, -l                  Hold the terminal and redraw the flag upon resize, closing when any key is pressed
   --random, -r                Displays a random flag! This ignores any passed flags.
   --vertical, -v              Display the flag, but vertically
+  --width, -w int             The width of the flag, in characters
 ```
 Example: `cli-pride-flags -l trans` would display the trans flag and hold the terminal.
 
