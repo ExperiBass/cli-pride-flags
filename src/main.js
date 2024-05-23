@@ -48,7 +48,8 @@ const cliOptions = {
     height: {
         type: 'string',
         short: 'h',
-        description: 'The height of the flag, in characters. May not generate the exact specified height',
+        description:
+            'The height of the flag, in characters. May not generate the exact specified height',
         argName: 'int',
     },
     width: {
@@ -219,7 +220,9 @@ function createFlag(availableWidth, availableHeight, options) {
             const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
-        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width ? '\n' : '')
+        finishedFlag +=
+            chalk.hex(color)(CHAR.repeat(availableWidth)) +
+            (options.width ? '\n' : '')
         currLine++
     }
     return finishedFlag.trim()
@@ -231,9 +234,15 @@ function draw() {
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
     try {
-        const availableHeight = options.height ? options.height : process.stdout.rows
-        const availableWidth = options.width ? options.width : process.stdout.columns
-        if (availableWidth<=0 || availableHeight<=0) {throw "Width and height must be greater than 0"}
+        const availableHeight = options.height
+            ? options.height
+            : process.stdout.rows
+        const availableWidth = options.width
+            ? options.width
+            : process.stdout.columns
+        if (availableWidth <= 0 || availableHeight <= 0) {
+            throw new Error('Width and height must be greater than 0')
+        }
         const builtFlag = createFlag(availableWidth, availableHeight, options)
         process.stdout.write(builtFlag)
     } catch (err) {
