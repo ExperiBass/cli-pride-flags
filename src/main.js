@@ -48,8 +48,7 @@ const cliOptions = {
     height: {
         type: 'string',
         short: 'h',
-        description:
-            'The height of the flag, in characters. May not generate the exact specified height',
+        description: 'The height of the flag, in characters. May not generate the exact specified height',
         argName: 'int',
     },
     width: {
@@ -75,14 +74,18 @@ const CHOSEN_FLAG = args[0]?.trim().toLowerCase()
 
 function help() {
     let flagList = []
-    const MINI_FLAG_DISTANCE = 16
-    for (const [name, flag] of Object.entries(flags)) {
-        // we want all the mini-flags to be at the same starting distance from the left,
-        // so figure out how many spaces we need to add after the flags name
+    const flagEntries = Object.entries(flags)
+    /// im not hardcoding this anymore
+    /// grab the flag names, sort by length (descending), grab the longest,
+    /// and add 2 to its length to offset the flags
+    const MINI_FLAG_DISTANCE = flagEntries.map(v => v[0]).sort((a,b) => b.length - a.length)[0].length + 2
+
+    for (const [name, flag] of flagEntries) {
+        /// we want all the mini-flags to be at the same starting distance from the left,
+        /// so figure out how many spaces we need to add after the flags name
         const spaces = MINI_FLAG_DISTANCE - name.length
-        let flagLine = `${name}` // indent the line...
-        flagLine = flagLine.padEnd(flagLine.length + spaces, ' ') // ...add calculated spaces...
-        flagLine += flag.stripes.map((color) => chalk.hex(color)(CHAR)).join('') // ..and then add the miniflag
+        let flagLine = name.padEnd(name.length + spaces, ' ') /// add calculated spaces...
+        flagLine += flag.stripes.map((color) => chalk.hex(color)(CHAR)).join('') /// ..and then add the miniflag
         flagList.push(flagLine)
     }
 
@@ -105,6 +108,8 @@ function completion(env = {}) {
                 return v
             }
             /// skipping the furst `-`, grab the remaining `gb` and split into `['-g', '-b']`
+            /// this doesnt work for options with args, like `-h3`,
+            /// but that doesnt matter for us; we only care about the ones we know of
             return v
                 .slice(1)
                 .split('')
@@ -113,6 +118,9 @@ function completion(env = {}) {
 
     /// if theres more args than options, and theres not an option mid-typing,
     /// we assume the user has selected a flag and dont bother completing
+    /// TODO: figure out how to deal with option arguments as well;
+    /// `cli-pride-flags --blend bi <TAB>` doesnt complete because it sees
+    /// the flag passed to `--blend` as an arg
     if (args.length > activeOptions.length && !env.last.startsWith('-')) {
         return
     }
@@ -142,7 +150,7 @@ function completion(env = {}) {
         const availableOptions = Object.entries(cliOptions)
             .map((v) => {
                 const [name, body] = v
-                // ignore if theres no short name set
+                /// ignore if theres no short name set
                 if (!body.short) {
                     return {}
                 }
@@ -188,7 +196,7 @@ function createFlag(availableWidth, availableHeight, options) {
     }
 
     if (options.vertical) {
-        // building a single row :3
+        /// building a single row :3
         while (position < 1) {
             currLine++
             position = (currLine / availableWidth).toFixed(3)
@@ -206,7 +214,7 @@ function createFlag(availableWidth, availableHeight, options) {
         return finishedFlag.repeat(availableHeight).trim()
     }
 
-    // clearly its not a vertical flag, proceed with horizontal
+    /// clearly its not a vertical flag, proceed with horizontal
     while (position < 1) {
         currLine++
         position = (currLine / availableHeight).toFixed(3)
@@ -216,9 +224,7 @@ function createFlag(availableWidth, availableHeight, options) {
             const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
-        finishedFlag +=
-            chalk.hex(color)(CHAR.repeat(availableWidth)) +
-            (options.width ? '\n' : '')
+        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width ? '\n' : '')
     }
     return finishedFlag.trim()
 }
@@ -229,12 +235,8 @@ function draw() {
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
     try {
-        const availableHeight = options.height
-            ? options.height
-            : process.stdout.rows
-        const availableWidth = options.width
-            ? options.width
-            : process.stdout.columns
+        const availableHeight = options.height ? options.height : process.stdout.rows
+        const availableWidth = options.width ? options.width : process.stdout.columns
         if (availableWidth <= 0 || availableHeight <= 0) {
             throw new Error('Width and height must be greater than 0')
         }
