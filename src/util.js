@@ -51,13 +51,7 @@ function interpolateColor(color1, color2, percentage) {
     return RGBToHex(
         ...[r, g, b].map((v) => {
             /// clamp dem numbers!
-            v = Math.max(0, Math.min(255, v))
-            /*if (v > 255) {
-                v = 255
-            }
-            if (v < 0) {
-                v = 0
-            }*/
+            v = Math.max(0, Math.min(v, 255))
             return v
         })
     )
