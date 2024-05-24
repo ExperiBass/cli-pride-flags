@@ -1,6 +1,6 @@
 {
     "name": "cli-pride-flags",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "description": "Displays pride flags in your terminal~",
     "main": "src/main.js",
     "bin": {
