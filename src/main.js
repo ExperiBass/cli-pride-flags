@@ -78,7 +78,7 @@ function help() {
     /// im not hardcoding this anymore
     /// grab the flag names, sort by length (descending), grab the longest,
     /// and add 2 to its length to offset the flags
-    const MINI_FLAG_DISTANCE = flagEntries.map(v => v[0]).sort((a,b) => b.length - a.length)[0].length + 2
+    const MINI_FLAG_DISTANCE = flagEntries.map((v) => v[0]).sort((a, b) => b.length - a.length)[0].length + 2
 
     for (const [name, flag] of flagEntries) {
         /// we want all the mini-flags to be at the same starting distance from the left,
@@ -115,15 +115,6 @@ function completion(env = {}) {
                 .split('')
                 .map((v) => `-${v}`)
         })
-
-    /// if theres more args than options, and theres not an option mid-typing,
-    /// we assume the user has selected a flag and dont bother completing
-    /// TODO: figure out how to deal with option arguments as well;
-    /// `cli-pride-flags --blend bi <TAB>` doesnt complete because it sees
-    /// the flag passed to `--blend` as an arg
-    if (args.length > activeOptions.length && !env.last.startsWith('-')) {
-        return
-    }
 
     /// long option completion
     if (env.last.startsWith('--')) {
