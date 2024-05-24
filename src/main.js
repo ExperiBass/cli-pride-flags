@@ -190,7 +190,7 @@ function createFlag(availableWidth, availableHeight, options) {
     if (options.vertical) {
         // building a single row :3
         while (position < 1) {
-            currLine++ // need to increment first for vertical flags, ig the offset is wonky?
+            currLine++
             position = (currLine / availableWidth).toFixed(3)
             let color = colors.getColor(position, options.gradient ? 'gradient' : null)
 
