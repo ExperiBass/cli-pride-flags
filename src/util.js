@@ -123,7 +123,7 @@ class FlagColors {
         }
         // not a gradient, default to blocc
         for (const stop of this.blockColors) {
-            if (pos >= stop.pos) {
+            if (pos > stop.pos) {
                 return stop.colorCode
             }
         }
