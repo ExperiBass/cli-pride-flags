@@ -91,7 +91,7 @@ function help() {
 
     console.log(`Usage: ${chalk.green(name)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
     console.log(`Options:\n${argparser.listOptions()}`)
-    console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 0 }))}`)
+    console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 1 }))}`)
     console.log(chalk.green(`${name} ${chalk.blueBright(`v${version}`)}`))
 }
 
