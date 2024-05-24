@@ -168,7 +168,8 @@ function createFlag(availableWidth, availableHeight, options) {
     let blendColors = null
     let blendFactor = 0
     let finishedFlag = ''
-    let position = 0
+    let position = 0 /// position in flag
+    let currLine = 0 /// position in term
 
     if (options.blend) {
         let [blendFlag, factor] = options.blend.split(',')
@@ -188,10 +189,9 @@ function createFlag(availableWidth, availableHeight, options) {
 
     if (options.vertical) {
         // building a single row :3
-        let currPos = 0 // position in line
         while (position < 1) {
-            currPos++ // need to increment first for vertical flags, ig the offset is wonky?
-            position = (currPos / availableWidth).toFixed(3)
+            currLine++ // need to increment first for vertical flags, ig the offset is wonky?
+            position = (currLine / availableWidth).toFixed(3)
             let color = colors.getColor(position, options.gradient ? 'gradient' : null)
 
             if (blendColors) {
@@ -207,8 +207,8 @@ function createFlag(availableWidth, availableHeight, options) {
     }
 
     // clearly its not a vertical flag, proceed with horizontal
-    let currLine = 0
     while (position < 1) {
+        currLine++
         position = (currLine / availableHeight).toFixed(3)
         let color = colors.getColor(position, options.gradient ? 'gradient' : null)
 
@@ -219,7 +219,6 @@ function createFlag(availableWidth, availableHeight, options) {
         finishedFlag +=
             chalk.hex(color)(CHAR.repeat(availableWidth)) +
             (options.width ? '\n' : '')
-        currLine++
     }
     return finishedFlag.trim()
 }
