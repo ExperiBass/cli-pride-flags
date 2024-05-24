@@ -47,7 +47,7 @@ Some screenshots are below!
 
 # Issues
 
-- none :3
+- minor: `cli-pride-flags --blend bi <TAB>` doesnt complete because it sees the flag passed to `--blend` as an arg; either figure out how to complete flags without tripping up on option args, or just dont bother ignoring completion once a flag is selected, as we ignore any others anyways
 
 # TODO
 - commit more crimes, but queerly

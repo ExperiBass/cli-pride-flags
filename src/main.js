@@ -48,7 +48,11 @@ const cliOptions = {
     height: {
         type: 'string',
         short: 'h',
+<<<<<<< master
         description: 'The height of the flag, in characters',
+=======
+        description: 'The height of the flag, in characters. May not generate the exact specified height',
+>>>>>>> master
         argName: 'int',
     },
     width: {
