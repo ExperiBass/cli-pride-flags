@@ -57,6 +57,14 @@ const cliOptions = {
         description: 'The width of the flag, in characters',
         argName: 'int',
     },
+    'use-flag-height': {
+        type: 'boolean',
+        description: 'Uses the number of stripes the flag has as its height. Incompatible with --height',
+    },
+    'use-flag-width': {
+        type: 'boolean',
+        description: 'Uses the number of stripes the flag has as its width. Incompatible with --width',
+    },
     'install-completion': {
         type: 'boolean',
         description: 'Install tabtab shell completion',
@@ -199,7 +207,7 @@ function createFlag(availableWidth, availableHeight, options) {
             }
             finishedFlag += chalk.hex(color)(CHAR)
         }
-        if (options.width) {
+        if (options.width || options['use-flag-width']) {
             finishedFlag += '\n'
         }
         return finishedFlag.repeat(availableHeight).trim()
@@ -215,7 +223,7 @@ function createFlag(availableWidth, availableHeight, options) {
             const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
-        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width ? '\n' : '')
+        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width || options['use-flag-width'] ? '\n' : '')
     }
     return finishedFlag.trim()
 }
@@ -226,8 +234,16 @@ function draw() {
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
     try {
-        const availableHeight = options.height ? options.height : process.stdout.rows
-        const availableWidth = options.width ? options.width : process.stdout.columns
+        if (options.width && options['use-flag-width']) {
+            throw new Error('Cannot use both --width and --use-flag-width')
+        }
+        if (options.height && options['use-flag-height']) {
+            throw new Error('Cannot use both --height and --use-flag-height')
+        }
+        // if --use-flag-height, use number of stripes, else if --height, use that, else use terminal height
+        const availableHeight = options['use-flag-height'] ? flag.stripes.length : options.height ? options.height : process.stdout.rows
+        // same thing but with width
+        const availableWidth = options['use-flag-width'] ? flag.stripes.length : options.width ? options.width : process.stdout.columns
         if (availableWidth <= 0 || availableHeight <= 0) {
             throw new Error('Width and height must be greater than 0')
         }
@@ -275,7 +291,7 @@ if (CHOSEN_FLAG === 'completion') {
 ///// tool
 // Check terminal environment
 if (!chalk.supportsColor) {
-    console.log("Your terminal doesn't support color!")
+    console.log('Your terminal doesn\'t support color!')
     process.exit(1)
 }
 chalk.level = 3 // try to use truecolor
