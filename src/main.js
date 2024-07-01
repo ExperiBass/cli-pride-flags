@@ -223,7 +223,8 @@ function createFlag(availableWidth, availableHeight, options) {
             const color2 = blendColors.getColor(position, options.gradient ? 'gradient' : null)
             color = interpolateColor(color, color2, blendFactor)
         }
-        finishedFlag += chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width || options['use-flag-width'] ? '\n' : '')
+        finishedFlag +=
+            chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width || options['use-flag-width'] ? '\n' : '')
     }
     return finishedFlag.trim()
 }
@@ -241,16 +242,22 @@ function draw() {
             throw new Error('Cannot use both --height and --use-flag-height')
         }
         // if --use-flag-height: if flag has weights, use the sum of those, otherwise its number of stripes, else if --height, use that, else use terminal height
-        const availableHeight = options['use-flag-height'] ?
-            flag.weights ? flag.weights.reduce((a, b) => a + b, 0) : flag.stripes.length
-            : options.height ? options.height
-                : process.stdout.rows
+        const availableHeight = options['use-flag-height']
+            ? flag.weights
+                ? flag.weights.reduce((a, b) => a + b, 0)
+                : flag.stripes.length
+            : options.height
+              ? options.height
+              : process.stdout.rows
         // same thing but with width
-        const availableWidth = options['use-flag-width'] ?
-            flag.weights ? flag.weights.reduce((a, b) => a + b, 0) : flag.stripes.length
-            : options.width ? options.width
-                : process.stdout.columns
-        
+        const availableWidth = options['use-flag-width']
+            ? flag.weights
+                ? flag.weights.reduce((a, b) => a + b, 0)
+                : flag.stripes.length
+            : options.width
+              ? options.width
+              : process.stdout.columns
+
         if (availableWidth <= 0 || availableHeight <= 0) {
             throw new Error('Width and height must be greater than 0')
         }
@@ -298,7 +305,7 @@ if (CHOSEN_FLAG === 'completion') {
 ///// tool
 // Check terminal environment
 if (!chalk.supportsColor) {
-    console.log('Your terminal doesn\'t support color!')
+    console.log("Your terminal doesn't support color!")
     process.exit(1)
 }
 chalk.level = 3 // try to use truecolor
