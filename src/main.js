@@ -240,10 +240,17 @@ function draw() {
         if (options.height && options['use-flag-height']) {
             throw new Error('Cannot use both --height and --use-flag-height')
         }
-        // if --use-flag-height, use number of stripes, else if --height, use that, else use terminal height
-        const availableHeight = options['use-flag-height'] ? flag.stripes.length : options.height ? options.height : process.stdout.rows
+        // if --use-flag-height: if flag has weights, use the sum of those, otherwise its number of stripes, else if --height, use that, else use terminal height
+        const availableHeight = options['use-flag-height'] ?
+            flag.weights ? flag.weights.reduce((a, b) => a + b, 0) : flag.stripes.length
+            : options.height ? options.height
+                : process.stdout.rows
         // same thing but with width
-        const availableWidth = options['use-flag-width'] ? flag.stripes.length : options.width ? options.width : process.stdout.columns
+        const availableWidth = options['use-flag-width'] ?
+            flag.weights ? flag.weights.reduce((a, b) => a + b, 0) : flag.stripes.length
+            : options.width ? options.width
+                : process.stdout.columns
+        
         if (availableWidth <= 0 || availableHeight <= 0) {
             throw new Error('Width and height must be greater than 0')
         }
