@@ -85,7 +85,13 @@ function help() {
         /// so figure out how many spaces we need to add after the flags name
         const spaces = MINI_FLAG_DISTANCE - name.length
         let flagLine = name.padEnd(name.length + spaces, ' ') /// add calculated spaces...
-        flagLine += flag.stripes.map((color) => chalk.hex(color)(CHAR)).join('') /// ..and then add the miniflag
+        if (flag.weights) {
+            for (let i = 0; i < flag.stripes.length; i++) {
+                flagLine += Array(flag.weights[i]).fill(chalk.hex(flag.stripes[i])(CHAR)).join('')
+            }
+        } else {
+            flagLine += flag.stripes.map((color) => chalk.hex(color)(CHAR)).join('') /// ..and then add the miniflag
+        }
         flagList.push(flagLine)
     }
 
