@@ -45,6 +45,11 @@ const cliOptions = {
         short: 'r',
         description: 'Displays a random flag! This ignores any passed flags.',
     },
+    printname: {
+        type: 'boolean',
+        short: 'p',
+        description: 'Prints name of the randomly chosen flag before the flag. Only works with --random',
+    },
     height: {
         type: 'string',
         short: 'h',
@@ -319,7 +324,11 @@ if (options.help || (!options.random && (CHOSEN_FLAG === undefined || !Object.ke
 let flag
 if (options.random) {
     const flagKeys = Object.keys(flags)
-    flag = flags[flagKeys[randNum(flagKeys.length - 1)]]
+    flagName = flagKeys[randNum(flagKeys.length - 1)]
+    flag = flags[flagName]
+    if (options.printname) {
+        process.stdout.write(flagName + '\n')
+    }
 } else {
     flag = flags[CHOSEN_FLAG]
 }
