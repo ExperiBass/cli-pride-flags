@@ -29,6 +29,7 @@ Options:
   --help, -?                  Display this help text
   --install-completion        Install tabtab shell completion
   --live, -l                  Hold the terminal and redraw the flag upon resize, closing when any key is pressed
+  --newline, -n               Prints a newline at the end of each line
   --printname, -p             Prints name of the randomly chosen flag before the flag. Only works with --random
   --random, -r                Displays a random flag! This ignores any passed flags.
   --use-flag-height           Uses the number of stripes the flag has as its height. Incompatible with --height

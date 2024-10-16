@@ -234,7 +234,8 @@ function createFlag(availableWidth, availableHeight, options) {
             color = interpolateColor(color, color2, blendFactor)
         }
         finishedFlag +=
-            chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width || options['use-flag-width'] || options.newline ? '\n' : '')
+            chalk.hex(color)(CHAR.repeat(availableWidth)) +
+            (options.width || options['use-flag-width'] || options.newline ? '\n' : '')
     }
     return finishedFlag.trim()
 }
