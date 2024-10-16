@@ -40,6 +40,11 @@ const cliOptions = {
         description: 'Character to use to draw the flag',
         argName: 'char',
     },
+    newline: {
+        type: 'boolean',
+        short: 'n',
+        description: 'Prints a newline at the end of each line',
+    },
     random: {
         type: 'boolean',
         short: 'r',
@@ -212,7 +217,7 @@ function createFlag(availableWidth, availableHeight, options) {
             }
             finishedFlag += chalk.hex(color)(CHAR)
         }
-        if (options.width || options['use-flag-width']) {
+        if (options.width || options['use-flag-width'] || options.newline) {
             finishedFlag += '\n'
         }
         return finishedFlag.repeat(availableHeight).trim()
@@ -229,7 +234,8 @@ function createFlag(availableWidth, availableHeight, options) {
             color = interpolateColor(color, color2, blendFactor)
         }
         finishedFlag +=
-            chalk.hex(color)(CHAR.repeat(availableWidth)) + (options.width || options['use-flag-width'] ? '\n' : '')
+            chalk.hex(color)(CHAR.repeat(availableWidth)) +
+            (options.width || options['use-flag-width'] || options.newline ? '\n' : '')
     }
     return finishedFlag.trim()
 }
