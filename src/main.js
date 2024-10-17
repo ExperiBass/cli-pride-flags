@@ -8,11 +8,12 @@ const columns = require('cli-columns')
 const tabtab = require('tabtab')
 /// import local files
 const flags = require('unified-pride-flags')
-const { name: packageName, version } = require('../package.json')
+const { name: programName, version } = require('../package.json')
 const { randNum, interpolateColor, FlagColors, ArgParser } = require('./util')
 
 const cliOptions = {
     help: { type: 'boolean', short: '?', description: 'Display this help text' },
+    version: {type: 'boolean', description: 'Print installed version'},
     gradient: {
         type: 'boolean',
         short: 'g',
@@ -107,10 +108,9 @@ function help() {
         flagList.push(flagLine)
     }
 
-    console.log(`Usage:\n  ${chalk.green(packageName)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
-    console.log(`Options:\n${argparser.listOptions()}`)
-    console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 1 }))}`)
-    console.log(chalk.green(`${packageName} ${chalk.blueBright(`v${version}`)}`))
+    console.log(`Usage:\n  ${chalk.green(programName)} ${chalk.blueBright('[options...]')} ${chalk.yellow('[flag]')}\n`)
+    console.log(`Options:\n${argparser.listOptions()}\n`)
+    console.log(`Flags:\n${chalk.green(columns(flagList, { padding: 1 }))}`)
 }
 
 function completion(env = {}) {
@@ -281,8 +281,8 @@ function draw() {
 if (options['install-completion']) {
     tabtab
         .install({
-            name: packageName,
-            completer: packageName,
+            name: programName,
+            completer: programName,
         })
         .then(() => {
             process.exit(0)
@@ -306,6 +306,11 @@ if (!chalk.supportsColor) {
     process.exit(1)
 }
 chalk.level = 3 // try to use truecolor
+
+if (options.version) {
+    console.log(`${chalk.green(`${programName}`)} v${chalk.blueBright(`${version}`)}`)
+    process.exit()
+}
 
 if (options.help || (!options.random && !Object.keys(flags).includes(CHOSEN_FLAG))) {
     /// this is less cursed lol

@@ -136,8 +136,7 @@ class ArgParser {
         const SPACES = 20 /// option starting distance from the left
                           /// keep this
         for (const [long, info] of Object.entries(this.#options).sort((a,b) => a[0].localeCompare(b[0]))) {
-            let optionHelpString = '  '
-            console.log(long)
+            let optionHelpString = '  ' /// prepend 2 spaces
             if (info.short) {
                 optionHelpString += `-${info.short}, `
             }
