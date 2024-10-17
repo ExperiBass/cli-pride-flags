@@ -254,20 +254,12 @@ function draw() {
         }
         // if --use-flag-height: if flag has weights, use the sum of those, otherwise its number of stripes, else if --height, use that, else use terminal height
         const availableHeight = options['use-flag-height']
-            ? flag.weights
-                ? flag.weights.reduce((a, b) => a + b, 0)
-                : flag.stripes.length
-            : options.height
-              ? options.height
-              : process.stdout.rows
+            ? flag.weights?.reduce((a, b) => a + b, 0) ?? flag.stripes.length
+            : options.height ?? process.stdout.rows
         // same thing but with width
         const availableWidth = options['use-flag-width']
-            ? flag.weights
-                ? flag.weights.reduce((a, b) => a + b, 0)
-                : flag.stripes.length
-            : options.width
-              ? options.width
-              : process.stdout.columns
+            ? flag.weights?.reduce((a, b) => a + b, 0) ?? flag.stripes.length
+            : options.width ?? process.stdout.columns
 
         if (availableWidth <= 0 || availableHeight <= 0) {
             throw new Error('Width and height must be greater than 0')
@@ -321,13 +313,13 @@ if (!chalk.supportsColor) {
 }
 chalk.level = 3 // try to use truecolor
 
-if (options.help || (!options.random && (CHOSEN_FLAG === undefined || !Object.keys(flags).includes(CHOSEN_FLAG)))) {
-    // this is cursed lol
+if (options.help || (!options.random && !Object.keys(flags).includes(CHOSEN_FLAG))) {
+    /// this is less cursed lol
     help()
     process.exit()
 }
 
-let flag
+let flag = flags[CHOSEN_FLAG]
 if (options.random) {
     const flagKeys = Object.keys(flags)
     flagName = flagKeys[randNum(flagKeys.length - 1)]
@@ -335,8 +327,6 @@ if (options.random) {
     if (options.printname) {
         process.stdout.write(flagName + '\n')
     }
-} else {
-    flag = flags[CHOSEN_FLAG]
 }
 
 if (options.live) {
