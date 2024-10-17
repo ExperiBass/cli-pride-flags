@@ -135,15 +135,18 @@ class ArgParser {
         let output = []
         const SPACES = 20 /// option starting distance from the left
                           /// keep this
-        for (const [long, info] of Object.entries(this.#options)) {
-            let optionHelpString = `  --${long}`
+        for (const [long, info] of Object.entries(this.#options).sort((a,b) => a[0].localeCompare(b[0]))) {
+            let optionHelpString = '  '
+            console.log(long)
             if (info.short) {
-                optionHelpString += `, -${info.short}`
-            } else {
+                optionHelpString += `-${info.short}, `
+            }
+            else {
                 optionHelpString += ' '.repeat(4) /// bruh
                 /// so it doesnt like when a option doesnt have a short flag
                 /// give it spacing of the same amount so its happy
             }
+            optionHelpString += `--${long}`
             optionHelpString = chalk.blueBright(optionHelpString) // make the options blue before continuing
             if (info.type !== 'boolean') {
                 optionHelpString += chalk.yellow(` ${info.argName}`)
@@ -156,7 +159,7 @@ class ArgParser {
             optionHelpString += `${info.description}`
             output.push(optionHelpString)
         }
-        return output.sort().join('\n').trim()
+        return output.join('\n').trim()
     }
     parse() {
         const inputArgs = process.argv.slice(2)

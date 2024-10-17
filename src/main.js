@@ -107,7 +107,7 @@ function help() {
         flagList.push(flagLine)
     }
 
-    console.log(`Usage: ${chalk.green(packageName)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
+    console.log(`Usage:\n  ${chalk.green(packageName)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
     console.log(`Options:\n${argparser.listOptions()}`)
     console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 1 }))}`)
     console.log(chalk.green(`${packageName} ${chalk.blueBright(`v${version}`)}`))
