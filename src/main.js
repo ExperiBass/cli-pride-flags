@@ -8,7 +8,7 @@ const columns = require('cli-columns')
 const tabtab = require('tabtab')
 /// import local files
 const flags = require('unified-pride-flags')
-const { name, version } = require('../package.json')
+const { name: packageName, version } = require('../package.json')
 const { randNum, interpolateColor, FlagColors, ArgParser } = require('./util')
 
 const cliOptions = {
@@ -69,11 +69,11 @@ const cliOptions = {
     },
     'use-flag-height': {
         type: 'boolean',
-        description: 'Uses the number of stripes the flag has as its height. Incompatible with --height',
+        description: 'Uses the number of stripes the flag has as its height. Overrides --height',
     },
     'use-flag-width': {
         type: 'boolean',
-        description: 'Uses the number of stripes the flag has as its width. Incompatible with --width',
+        description: 'Uses the number of stripes the flag has as its width. Overrides --width',
     },
     'install-completion': {
         type: 'boolean',
@@ -107,10 +107,10 @@ function help() {
         flagList.push(flagLine)
     }
 
-    console.log(`Usage: ${chalk.green(name)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
+    console.log(`Usage: ${chalk.green(packageName)} ${chalk.blueBright('[options...]')} ${chalk.yellow('flag')}`)
     console.log(`Options:\n${argparser.listOptions()}`)
     console.log(`Flags:\n${chalk.greenBright(columns(flagList, { padding: 1 }))}`)
-    console.log(chalk.green(`${name} ${chalk.blueBright(`v${version}`)}`))
+    console.log(chalk.green(`${packageName} ${chalk.blueBright(`v${version}`)}`))
 }
 
 function completion(env = {}) {
@@ -246,12 +246,6 @@ function draw() {
         process.stdout.write('\x1b[0;0f\x1b[2J\x1b[?25l')
     }
     try {
-        if (options.width && options['use-flag-width']) {
-            throw new Error('Cannot use both --width and --use-flag-width')
-        }
-        if (options.height && options['use-flag-height']) {
-            throw new Error('Cannot use both --height and --use-flag-height')
-        }
         // if --use-flag-height: if flag has weights, use the sum of those, otherwise its number of stripes, else if --height, use that, else use terminal height
         const availableHeight = options['use-flag-height']
             ? flag.weights?.reduce((a, b) => a + b, 0) ?? flag.stripes.length
@@ -287,8 +281,8 @@ function draw() {
 if (options['install-completion']) {
     tabtab
         .install({
-            name: name,
-            completer: name,
+            name: packageName,
+            completer: packageName,
         })
         .then(() => {
             process.exit(0)
